@@ -650,6 +650,24 @@ button.contact:hover {
   box-shadow: 0 4px 15px rgba(245, 87, 108, 0.4);
 }
 
+/* شريط التقدم */
+.progress-bar {
+  width: 100%;
+  height: 6px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 3px;
+  margin: 15px 0;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: var(--success-gradient);
+  border-radius: 3px;
+  transition: width 0.3s ease;
+  width: 0%;
+}
+
 /* التنبيهات */
 .custom-alert {
   position: fixed;
@@ -1249,14 +1267,11 @@ window.addEventListener('DOMContentLoaded', () => {
   setTimeout(() => document.querySelector('footer').classList.add('show'), 500);
 });
 
-// دالة التحميل الرئيسية - معدلة للتحميل المباشر
+// 🔥 دالة التحميل المحسنة - تعمل بدون سيرفر
 async function downloadContent(type) {
   const url = document.getElementById("videoUrl").value.trim();
-  const btnVideo = document.getElementById('btn-video');
-  const btnStory = document.getElementById('btn-story');
-  const btnMp3 = document.getElementById('btn-mp3');
   const resultDiv = document.getElementById("result");
- 
+  
   if (!url) {
     showAlert("أدخل الرابط أولا");
     return;
@@ -1266,130 +1281,112 @@ async function downloadContent(type) {
     showAlert("الرجاء إدخال رابط تيك توك صحيح");
     return;
   }
- 
-  let activeBtn;
-  if (type === 'video') activeBtn = btnVideo;
-  else if (type === 'story') activeBtn = btnStory;
-  else if (type === 'mp3') activeBtn = btnMp3;
- 
-  // إظهار حالة التحميل فقط
+
+  // إظهار حالة التحميل مع شريط التقدم
   resultDiv.innerHTML = `
     <div class="loading-state">
       <div class="spinner"></div>
-      <p>جاري تجهيز ${type === 'video' ? 'الفيديو' : type === 'mp3' ? 'الصوت' : 'القصة'} للتحميل...</p>
-      <p style="font-size: 14px; color: var(--text-secondary); margin-top: 10px;">قد يستغرق هذا بضع ثوانٍ</p>
+      <p>جاري تجهيز ${type === 'video' ? 'الفيديو' : type === 'mp3' ? 'الصوت' : 'القصة'}...</p>
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+      <p style="font-size: 14px; color: var(--text-secondary); margin-top: 10px;">
+        قد يستغرق هذا من 10-30 ثانية حسب سرعة الإنترنت
+      </p>
     </div>
   `;
-  
-  activeBtn.classList.add('loading');
-  activeBtn.disabled = true;
- 
+
+  // محاكاة شريط التقدم
+  let progress = 0;
+  const progressInterval = setInterval(() => {
+    progress += Math.random() * 15;
+    if (progress > 90) progress = 90;
+    if (document.getElementById('progressFill')) {
+      document.getElementById('progressFill').style.width = progress + '%';
+    }
+  }, 500);
+
   try {
-    // استخدام API مباشر مع إضافة headers للتحميل
-    const apiUrl = `https://www.tikwm.com/api/?url=${encodeURIComponent(url)}`;
-    console.log('🔄 جاري الاتصال بالـ API...');
-    
-    const response = await fetch(apiUrl);
-    const data = await response.json();
-    
-    if (data.code === 0 && data.data) {
-      let downloadUrl, filename;
+    // 🔥 استخدام عدة APIs بالتوازي لأسرع نتيجة
+    const apiPromises = [
+      fetch(`https://www.tikwm.com/api/?url=${encodeURIComponent(url)}`).then(r => r.json()),
+      fetch(`https://api.tiklydown.eu.org/api/download?url=${encodeURIComponent(url)}`).then(r => r.json()),
+      fetch(`https://tikdown.io/api?url=${encodeURIComponent(url)}`).then(r => r.json())
+    ];
+
+    // خذ أول استجابة ناجحة
+    const data = await Promise.any(apiPromises);
+    clearInterval(progressInterval);
+
+    let downloadUrl, filename;
+
+    // معالجة البيانات من مختلف APIs
+    if (data.videos && data.videos.download) {
+      // API: tiklydown
+      downloadUrl = data.videos.download;
+      filename = `tiktok_video_${Date.now()}.mp4`;
+    } else if (data.data && data.data.play) {
+      // API: tikwm
+      downloadUrl = data.data.play;
+      filename = `tiktok_video_${Date.now()}.mp4`;
       
-      if (type === 'video') {
-        downloadUrl = data.data.play;
-        filename = `tiktok_video_${Date.now()}.mp4`;
-      } else if (type === 'mp3') {
+      if (type === 'mp3' && data.data.music) {
         downloadUrl = data.data.music;
         filename = `tiktok_audio_${Date.now()}.mp3`;
-      } else if (type === 'story') {
-        throw new Error('تحميل القصص غير متاح حالياً');
       }
-      
-      // طريقة محسنة للتحميل المباشر
-      const downloadFile = async (fileUrl, fileName) => {
-        try {
-          // جلب الملف كـ blob
-          const fileResponse = await fetch(fileUrl);
-          const fileBlob = await fileResponse.blob();
-          
-          // إنشاء رابط تحميل
-          const blobUrl = URL.createObjectURL(fileBlob);
-          const link = document.createElement('a');
-          link.href = blobUrl;
-          link.download = fileName;
-          link.style.display = 'none';
-          
-          document.body.appendChild(link);
-          link.click();
-          document.body.removeChild(link);
-          
-          // تحرير الذاكرة
-          setTimeout(() => URL.revokeObjectURL(blobUrl), 1000);
-          
-          return true;
-        } catch (error) {
-          console.error('خطأ في التحميل المباشر:', error);
-          // طريقة بديلة: فتح في نافذة جديدة مع إجبار التحميل
-          window.open(fileUrl, '_blank');
-          return false;
-        }
-      };
-      
-      // محاولة التحميل المباشر
-      const downloadSuccess = await downloadFile(downloadUrl, filename);
-      
-      // عرض النتيجة
+    } else if (data.downloadUrl) {
+      // API: tikdown
+      downloadUrl = data.downloadUrl;
+      filename = `tiktok_video_${Date.now()}.mp4`;
+    }
+
+    if (downloadUrl) {
+      // إكمال شريط التقدم
+      if (document.getElementById('progressFill')) {
+        document.getElementById('progressFill').style.width = '100%';
+      }
+
+      // عرض رابط التحميل
       resultDiv.innerHTML = `
         <div class="success-result">
           <div class="result-header">
             <i class="fa-solid fa-circle-check"></i>
-            <h3>${downloadSuccess ? 'تم البدء في التحميل!' : 'تم فتح الفيديو'}</h3>
+            <h3>✅ تم تجهيز التحميل!</h3>
           </div>
-          <p>${downloadSuccess ? 
-            'جاري تحميل الملف إلى جهازك...' : 
-            'تم فتح الفيديو في نافذة جديدة. استخدم "حفظ باسم" لتنزيله.'
-          }</p>
+          <p>اضغط على الزر لبدء التحميل</p>
           <div style="margin-top: 20px;">
-            <p style="font-size: 14px; color: var(--text-secondary); margin-bottom: 10px;">
-              ${downloadSuccess ? 
-                'إذا لم يبدأ التحميل تلقائياً:' : 
-                'لتحميل الفيديو يدوياً:'
-              }
-            </p>
-            <a href="${downloadUrl}" download="${filename}" class="download-link">
-              <i class="fa-solid fa-download"></i> 
-              ${downloadSuccess ? 'اضغط هنا للتحميل المباشر' : 'حفظ الفيديو'}
+            <a href="${downloadUrl}" download="${filename}" class="download-link" target="_blank">
+              <i class="fa-solid fa-download"></i> تحميل مباشر
             </a>
           </div>
           <p style="font-size: 12px; color: var(--text-secondary); margin-top: 15px;">
-            ${downloadSuccess ? 
-              'سيتم حفظ الملف في مجلد التنزيلات' : 
-              'في المتصفح: انقر بزر الماوس الأيمن → حفظ الفيديو باسم'
-            }
+            قد يظهر التحميل في نافذة جديدة
           </p>
         </div>
       `;
       
-      showAlert(downloadSuccess ? 'بدأ التحميل! تحقق من مجلد التنزيلات' : 'تم فتح الفيديو');
+      // فتح التحميل تلقائياً بعد ثانيتين
+      setTimeout(() => {
+        window.open(downloadUrl, '_blank');
+      }, 2000);
       
     } else {
-      throw new Error(data.msg || 'فشل في تحميل الفيديو');
+      throw new Error('لم نتمكن من استخراج رابط التحميل');
     }
+    
   } catch (err) {
+    clearInterval(progressInterval);
     resultDiv.innerHTML = `
       <div class="error-result">
         <i class="fa-solid fa-circle-xmark"></i>
-        <h3>خطأ في التحميل</h3>
-        <p>${err.message}</p>
+        <h3>⏳ التحميل يأخذ وقتاً طويلاً</h3>
+        <p>${err.message || 'جرب رابط آخر أو حاول لاحقاً'}</p>
         <button class="retry-btn" onclick="downloadContent('${type}')">
           <i class="fa-solid fa-rotate"></i>
           إعادة المحاولة
         </button>
       </div>
     `;
-  } finally {
-    activeBtn.classList.remove('loading');
-    activeBtn.disabled = false;
   }
 }
 
@@ -1420,7 +1417,9 @@ function showAlert(message) {
 
 // إضافة Event Listeners للأزرار
 document.getElementById('btn-video').addEventListener('click', () => downloadContent('video'));
-document.getElementById('btn-story').addEventListener('click', () => downloadContent('story'));
+document.getElementById('btn-story').addEventListener('click', () => {
+  showAlert('تحميل القصص غير متاح حالياً. جاري العمل على هذه الميزة.');
+});
 document.getElementById('btn-mp3').addEventListener('click', () => downloadContent('mp3'));
 
 const langBtn = document.getElementById('langBtn');
