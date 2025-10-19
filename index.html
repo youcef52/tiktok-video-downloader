@@ -1241,15 +1241,7 @@ footer.show {
 </div>
 
 <script>
-window.addEventListener('DOMContentLoaded', () => {
-  setTimeout(() => document.querySelector('nav').classList.add('show'), 100);
-  setTimeout(() => document.querySelector('.container').classList.add('show'), 200);
-  setTimeout(() => document.querySelector('.features-container').classList.add('show'), 300);
-  setTimeout(() => document.querySelector('.info-section').classList.add('show'), 400);
-  setTimeout(() => document.querySelector('footer').classList.add('show'), 500);
-});
-
-// دالة التحميل السريعة والمباشرة
+// ⚡ دالة التحميل السريعة جداً - تعمل مباشرة بدون سيرفر
 async function downloadContent(type) {
   const url = document.getElementById("videoUrl").value.trim();
   const resultDiv = document.getElementById("result");
@@ -1264,16 +1256,16 @@ async function downloadContent(type) {
     return;
   }
 
-  // إظهار حالة التحميل فوراً
+  // إظهار تحميل فوري
   resultDiv.innerHTML = `
     <div class="loading-state">
       <div class="spinner"></div>
-      <p>جاري تجهيز ${type === 'video' ? 'الفيديو' : type === 'mp3' ? 'الصوت' : 'القصة'}...</p>
+      <p>جاري التحميل... أقل من ثانية ⚡</p>
     </div>
   `;
 
   try {
-    // استخدام API سريع
+    // ⚡ استخدام API سريع مباشر
     const apiUrl = `https://www.tikwm.com/api/?url=${encodeURIComponent(url)}`;
     
     const response = await fetch(apiUrl);
@@ -1291,32 +1283,22 @@ async function downloadContent(type) {
       } else if (type === 'story') {
         throw new Error('تحميل القصص غير متاح حالياً');
       }
+
+      // ⚡ تحميل فوري مباشر
+      forceDownload(downloadUrl, filename);
       
-      // تحميل مباشر وسريع بدون فتح نافذة جديدة
-      const link = document.createElement('a');
-      link.href = downloadUrl;
-      link.download = filename;
-      
-      // إضافة الرابط للصفحة ونقره برمجياً
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      
-      // عرض رسالة النجاح
       resultDiv.innerHTML = `
         <div class="success-result">
           <div class="result-header">
             <i class="fa-solid fa-circle-check"></i>
-            <h3>تم التحميل بنجاح!</h3>
+            <h3>✅ تم البدء في التحميل!</h3>
           </div>
-          <p>بدأ تحميل ${type === 'video' ? 'الفيديو' : 'الصوت'} تلقائياً</p>
-          <p style="font-size: 14px; color: var(--text-secondary); margin-top: 15px;">
-            إذا لم يبدأ التحميل، <a href="${downloadUrl}" download="${filename}" style="color: #4facfe; text-decoration: underline;">اضغط هنا</a>
+          <p>بدأ التحميل تلقائياً ⚡</p>
+          <p style="font-size: 14px; color: var(--text-secondary); margin-top: 10px;">
+            إذا لم يبدأ التحميل، <a href="${downloadUrl}" download="${filename}" style="color: #4facfe;">اضغط هنا</a>
           </p>
         </div>
       `;
-      
-      showAlert('بدأ التحميل بنجاح!');
       
     } else {
       throw new Error(data.msg || 'فشل في تحميل الفيديو');
@@ -1326,7 +1308,7 @@ async function downloadContent(type) {
     resultDiv.innerHTML = `
       <div class="error-result">
         <i class="fa-solid fa-circle-xmark"></i>
-        <h3>خطأ في التحميل</h3>
+        <h3>❌ خطأ في التحميل</h3>
         <p>${err.message}</p>
         <button class="retry-btn" onclick="downloadContent('${type}')">
           <i class="fa-solid fa-rotate"></i>
@@ -1335,6 +1317,20 @@ async function downloadContent(type) {
       </div>
     `;
   }
+}
+
+// ⚡ دالة التحميل المباشر الفوري
+function forceDownload(url, filename) {
+  // أنشئ رابط تحميل مخفي
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = filename;
+  link.style.display = 'none';
+  
+  // أضفه للصفحة وشغله
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
 }
 
 // دالة عرض التنبيهات
@@ -1359,7 +1355,7 @@ function showAlert(message) {
     setTimeout(() => {
       document.body.removeChild(alertDiv);
     }, 300);
-  }, 4000);
+  }, 3000);
 }
 
 // إضافة Event Listeners للأزرار
@@ -1367,6 +1363,7 @@ document.getElementById('btn-video').addEventListener('click', () => downloadCon
 document.getElementById('btn-story').addEventListener('click', () => downloadContent('story'));
 document.getElementById('btn-mp3').addEventListener('click', () => downloadContent('mp3'));
 
+// إعدادات اللغة
 const langBtn = document.getElementById('langBtn');
 const langMenu = document.getElementById('langMenu');
 
@@ -1384,203 +1381,42 @@ window.addEventListener('click', e => {
   }
 });
 
+// إعدادات النموذج
 document.getElementById('contactModal').addEventListener('click', (e) => {
   if (e.target.id === 'contactModal') {
     document.getElementById('contactModal').style.display = 'none';
   }
 });
 
-const translations = {
-  AR: {
-    langLabel: 'AR',
-    mainTitle: '🚀 تنزيل فيديوهات تيك توك',
-    mainDesc: 'ألصق رابط الفيديو أو القصة واضغط التحميل — سريع، آمن، وبدون علامة مائية.',
-    btnVideo: 'تحميل فيديو',
-    btnStory: 'تحميل قصة',
-    btnMp3: 'تحميل MP3',
-    feature1Title: 'تحميل سريع',
-    feature1Text: 'خادمنا يوفر تنزيل أسرع من أي وقت مضى.',
-    feature1Extra: 'يمكنك تنزيل أي فيديو أو قصة خلال ثوانٍ فقط.',
-    feature2Title: 'آمن',
-    feature2Text: 'لا نحفظ بياناتك أو روابطك إطلاقًا.',
-    feature2Extra: 'خصوصيتك مضمونة؛ الموقع لا يخزن أي بيانات عن الفيديوهات.',
-    feature3Title: 'بدون علامة مائية',
-    feature3Text: 'استمتع بفيديوهات نظيفة وجاهزة للمشاركة.',
-    feature3Extra: 'تحميل الفيديو بدون أي شعار أو علامة مائية.',
-    feature4Title: 'تحميل MP3',
-    feature4Text: 'استخرج الصوت من أي فيديو بصيغة MP3.',
-    feature4Extra: 'حول أي فيديو تيك توك إلى ملف صوتي MP3 بجودة عالية.',
-    faq1: 'هل التحميل سريع؟',
-    faq1Ans: 'نعم، التحميل سريع جدًا حتى للفيديوهات الطويلة.',
-    faq2: 'هل الموقع آمن؟',
-    faq2Ans: 'نعم، نضمن خصوصية بياناتك وعدم حفظ أي روابط.',
-    faq3: 'هل الفيديو بدون علامة مائية؟',
-    faq3Ans: 'نعم، جميع الفيديوهات يتم تحميلها بدون أي علامة مائية.',
-    faq4: 'هل يمكنني تحميل الصوت فقط؟',
-    faq4Ans: 'نعم، يمكنك تحميل الصوت فقط بصيغة MP3 بجودة عالية.',
-    infoTitle: 'بدون علامة مائية • غير محدود • مجاني',
-    infoDesc: 'TikTok Saver واحد من أشهر برامج تنزيل الفيديو عبر الإنترنت يمكنك من حفظ مقاطع الفيديو عالية الدقة HD من TikTok بأعلى جودة ممكنة دون علامة مائية. قم بتنزيل مقاطع فيديو TikTok ومقاطع الفيديو الموسيقية على أي جهاز تريده: الهاتف المحمول، الكمبيوتر الشخصي، أو الجهاز اللوحي.',
-    infoBrowserTitle: 'التنزيل باستخدام المتصفح فقط',
-    infoBrowserDesc: 'نريد أن نجعل الأمور بسيطة بالنسبة لك. لا حاجة لتنزيل أو تثبيت أي برنامج. كل شيء يتم مباشرة من المتصفح الخاص بك.',
-    faqAndroidSummary: 'على هواتف Android',
-    faqAndroidText: 'انسخ رابط الفيديو من تطبيق TikTok، ثم الصقه في خانة الإدخال واضغط زر التحميل.',
-    faqIosSummary: 'على أجهزة iPhone / iPad / iPod',
-    faqIosText: 'نظرًا لسياسات أمان Apple، استخدم متصفح Safari أو تطبيق Documents by Readdle.',
-    faqPcSummary: 'على الكمبيوتر',
-    faqPcText: 'انسخ رابط الفيديو من TikTok ثم الصقه في الموقع.',
-    infoSecurityTitle: 'الخصوصية والأمان',
-    infoSecurityText: 'TikTok Saver لا يحتفظ بأي نسخة من الفيديوهات أو سجل البحث الخاص بك.',
-    footer: '© 2025 جميع الحقوق محفوظة — موقعك',
-    placeholder: 'ضع رابط الفيديو أو القصة هنا',
-    contactTitle: 'اتصل بنا',
-    contactName: 'الاسم الكامل',
-    contactEmail: 'البريد الإلكتروني',
-    contactMessage: 'رسالتك',
-    send: 'إرسال',
-    cancel: 'إلغاء',
-    alertEnterUrl: 'أدخل الرابط أولا',
-    alertError: 'حدث خطأ، حاول مرة أخرى'
-  },
-  EN: {
-    langLabel: 'EN',
-    mainTitle: '🚀 Download TikTok Videos',
-    mainDesc: 'Paste the video link and click download — fast, safe, and watermark-free.',
-    btnVideo: 'Download Video',
-    btnStory: 'Download Story',
-    btnMp3: 'Download MP3',
-    feature1Title: 'Fast Download',
-    feature1Text: 'Our server provides super fast downloads.',
-    feature1Extra: 'You can download any video or story in seconds.',
-    feature2Title: 'Safe',
-    feature2Text: 'We never save your data or links.',
-    feature2Extra: 'Your privacy is guaranteed.',
-    feature3Title: 'No Watermark',
-    feature3Text: 'Enjoy clean videos ready to share.',
-    feature3Extra: 'Download videos without any watermark.',
-    feature4Title: 'MP3 Download',
-    feature4Text: 'Extract audio from any video as MP3.',
-    feature4Extra: 'Convert any TikTok video to high-quality MP3.',
-    faq1: 'Is the download fast?',
-    faq1Ans: 'Yes, very fast even for long videos.',
-    faq2: 'Is the site safe?',
-    faq2Ans: 'Yes, we guarantee your privacy.',
-    faq3: 'Is the video watermark-free?',
-    faq3Ans: 'Yes, all videos are downloaded without watermark.',
-    faq4: 'Can I download audio only?',
-    faq4Ans: 'Yes, you can download audio only as high-quality MP3.',
-    infoTitle: 'No Watermark • Unlimited • Free',
-    infoDesc: 'TikTok Saver is one of the most popular online video downloaders.',
-    infoBrowserTitle: 'Download Using Browser Only',
-    infoBrowserDesc: 'We want to make things simple. No software needed.',
-    faqAndroidSummary: 'On Android phones',
-    faqAndroidText: 'Copy the link from TikTok app and paste it here.',
-    faqIosSummary: 'On iPhone / iPad / iPod',
-    faqIosText: 'Use Safari or Documents by Readdle.',
-    faqPcSummary: 'On PC',
-    faqPcText: 'Copy the link from TikTok and paste it here.',
-    infoSecurityTitle: 'Privacy & Security',
-    infoSecurityText: 'TikTok Saver does not keep any copy of videos.',
-    footer: '© 2025 All rights reserved',
-    placeholder: 'Paste video or story link here',
-    contactTitle: 'Contact Us',
-    contactName: 'Full Name',
-    contactEmail: 'Email',
-    contactMessage: 'Your Message',
-    send: 'Send',
-    cancel: 'Cancel',
-    alertEnterUrl: 'Please enter a URL first',
-    alertError: 'An error occurred, please try again'
-  }
-};
-
-let currentTranslations = translations.AR;
-
-function applyTranslations(lang) {
-  const t = translations[lang] || translations.EN;
-  currentTranslations = t;
-
-  document.getElementById('main-title').textContent = t.mainTitle;
-  document.getElementById('main-desc').textContent = t.mainDesc;
-  document.getElementById('btn-video').innerHTML = `<i class="fa-solid fa-download"></i><span>${t.btnVideo}</span>`;
-  document.getElementById('btn-story').innerHTML = `<i class="fa-solid fa-images"></i><span>${t.btnStory}</span>`;
-  document.getElementById('btn-mp3').innerHTML = `<i class="fa-solid fa-music"></i><span>${t.btnMp3}</span>`;
-
-  document.getElementById('feature1-title').textContent = t.feature1Title;
-  document.getElementById('feature1-text').textContent = t.feature1Text;
-  document.getElementById('feature1-extra').textContent = t.feature1Extra;
-  document.getElementById('feature2-title').textContent = t.feature2Title;
-  document.getElementById('feature2-text').textContent = t.feature2Text;
-  document.getElementById('feature2-extra').textContent = t.feature2Extra;
-  document.getElementById('feature3-title').textContent = t.feature3Title;
-  document.getElementById('feature3-text').textContent = t.feature3Text;
-  document.getElementById('feature3-extra').textContent = t.feature3Extra;
-  document.getElementById('feature4-title').textContent = t.feature4Title;
-  document.getElementById('feature4-text').textContent = t.feature4Text;
-  document.getElementById('feature4-extra').textContent = t.feature4Extra;
-
-  document.getElementById('faq1-summary').textContent = t.faq1;
-  document.getElementById('faq1-text').textContent = t.faq1Ans;
-  document.getElementById('faq2-summary').textContent = t.faq2;
-  document.getElementById('faq2-text').textContent = t.faq2Ans;
-  document.getElementById('faq3-summary').textContent = t.faq3;
-  document.getElementById('faq3-text').textContent = t.faq3Ans;
-  document.getElementById('faq4-summary').textContent = t.faq4;
-  document.getElementById('faq4-text').textContent = t.faq4Ans;
-
-  document.getElementById('info-title').textContent = t.infoTitle;
-  document.getElementById('info-desc').textContent = t.infoDesc;
-  document.getElementById('info-browser-title').textContent = t.infoBrowserTitle;
-  document.getElementById('info-browser-desc').textContent = t.infoBrowserDesc;
-  document.getElementById('faq-android-title').textContent = t.faqAndroidSummary;
-  document.getElementById('faq-android-text').textContent = t.faqAndroidText;
-  document.getElementById('faq-ios-title').textContent = t.faqIosSummary;
-  document.getElementById('faq-ios-text').textContent = t.faqIosText;
-  document.getElementById('faq-pc-title').textContent = t.faqPcSummary;
-  document.getElementById('faq-pc-text').textContent = t.faqPcText;
-  document.getElementById('info-security-title').textContent = t.infoSecurityTitle;
-  document.getElementById('info-security-text').textContent = t.infoSecurityText;
-
-  document.getElementById('footer-text').textContent = t.footer;
-  document.getElementById('videoUrl').placeholder = t.placeholder;
-  document.getElementById('contact-title').textContent = t.contactTitle;
-
-  const nameInput = document.querySelector('#contact-form input[name="from_name"]');
-  const emailInput = document.querySelector('#contact-form input[name="from_email"]');
-  const msgTextarea = document.querySelector('#contact-form textarea[name="message"]');
-  const sendBtn = document.querySelector('#contact-form button.send span');
-  const cancelBtn = document.querySelector('#contact-form button.cancel span');
-
-  if (nameInput) nameInput.placeholder = t.contactName;
-  if (emailInput) emailInput.placeholder = t.contactEmail;
-  if (msgTextarea) msgTextarea.placeholder = t.contactMessage;
-  if (sendBtn) sendBtn.textContent = t.send;
-  if (cancelBtn) cancelBtn.textContent = t.cancel;
-
-  document.getElementById('langBtn').textContent = `🌐 ${t.langLabel}`;
- 
-  document.documentElement.lang = lang.toLowerCase();
-  document.documentElement.dir = lang === 'AR' ? 'rtl' : 'ltr';
-}
-
-document.querySelectorAll('#langMenu div[data-lang]').forEach(el => {
-  el.addEventListener('click', () => {
-    const lang = el.getAttribute('data-lang');
-    applyTranslations(lang);
-    langMenu.style.display = 'none';
-  });
+// تحميل الصفحة
+window.addEventListener('DOMContentLoaded', () => {
+  setTimeout(() => document.querySelector('nav').classList.add('show'), 100);
+  setTimeout(() => document.querySelector('.container').classList.add('show'), 200);
+  setTimeout(() => document.querySelector('.features-container').classList.add('show'), 300);
+  setTimeout(() => document.querySelector('.info-section').classList.add('show'), 400);
+  setTimeout(() => document.querySelector('footer').classList.add('show'), 500);
 });
 
+// إعدادات النموذج
 document.getElementById('contact-form').addEventListener('submit', function(e) {
   e.preventDefault();
-  alert(currentTranslations.send ? `${currentTranslations.contactTitle} — ${currentTranslations.send}!` : 'Message sent!');
+  showAlert('تم إرسال رسالتك بنجاح!');
   document.getElementById('contactModal').style.display = 'none';
   this.reset();
 });
 
+// إعدادات لوحة المفاتيح
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape' && document.getElementById('contactModal').style.display === 'flex') {
     document.getElementById('contactModal').style.display = 'none';
   }
+});
+
+// السماح بإدخال الرابط باللصق
+document.getElementById('videoUrl').addEventListener('paste', function(e) {
+  setTimeout(() => {
+    showAlert('تم نسخ الرابط! اضغط على زر التحميل');
+  }, 100);
 });
 </script>
 
