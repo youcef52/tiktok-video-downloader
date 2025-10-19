@@ -1249,59 +1249,179 @@ window.addEventListener('DOMContentLoaded', () => {
   setTimeout(() => document.querySelector('footer').classList.add('show'), 500);
 });
 
-// دالة التحميل الجديدة - سريعة ومباشرة
+// دالة التحميل المحسنة مع عدة APIs
 async function downloadContent(type) {
-    const url = document.getElementById("videoUrl").value.trim();
-    const resultDiv = document.getElementById("result");
-    
-    if (!url) {
-        showAlert("أدخل الرابط أولا");
-        return;
-    }
+  const url = document.getElementById("videoUrl").value.trim();
+  const resultDiv = document.getElementById("result");
+  
+  if (!url) {
+    showAlert("أدخل الرابط أولا");
+    return;
+  }
 
-    resultDiv.innerHTML = `<div class="loading-state"><div class="spinner"></div><p>جاري التحميل...</p></div>`;
+  if (!url.includes('tiktok.com')) {
+    showAlert("الرجاء إدخال رابط تيك توك صحيح");
+    return;
+  }
 
-    try {
-        const apiUrl = `https://api.tiklydown.eu.org/api/download?url=${encodeURIComponent(url)}`;
-        const response = await fetch(apiUrl);
-        const data = await response.json();
-        
-        if (data.videos && data.videos.download) {
-            const downloadUrl = data.videos.download;
-            
-            // تحميل مباشر بدون فتح صفحة جديدة
-            const a = document.createElement('a');
-            a.href = downloadUrl;
-            a.download = `tiktok_${Date.now()}.mp4`;
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            
-            resultDiv.innerHTML = `
-                <div class="success-result">
-                    <div class="result-header">
-                        <i class="fa-solid fa-circle-check"></i>
-                        <h3>تم التحميل بنجاح!</h3>
-                    </div>
-                    <p>بدأ التحميل تلقائياً</p>
-                </div>
-            `;
-        } else {
-            throw new Error('فشل في تحميل الفيديو');
+  resultDiv.innerHTML = `
+    <div class="loading-state">
+      <div class="spinner"></div>
+      <p>جاري تجهيز ${type === 'video' ? 'الفيديو' : type === 'mp3' ? 'الصوت' : 'القصة'}...</p>
+      <p style="font-size: 14px; color: var(--text-secondary); margin-top: 10px;">جاري تجربة عدة خوادم...</p>
+    </div>
+  `;
+
+  try {
+    // قائمة بـ APIs مختلفة
+    const apis = [
+      {
+        name: 'tikwm',
+        url: `https://www.tikwm.com/api/?url=${encodeURIComponent(url)}`,
+        processor: (data) => {
+          if (data.data && data.data.play) {
+            return {
+              video: data.data.play,
+              audio: data.data.music,
+              title: data.data.title
+            };
+          }
+          return null;
         }
-    } catch (err) {
-        resultDiv.innerHTML = `
-            <div class="error-result">
-                <i class="fa-solid fa-circle-xmark"></i>
-                <h3>خطأ في التحميل</h3>
-                <p>${err.message}</p>
-                <button class="retry-btn" onclick="downloadContent('${type}')">
-                    <i class="fa-solid fa-rotate"></i>
-                    إعادة المحاولة
-                </button>
-            </div>
-        `;
+      },
+      {
+        name: 'tikdown',
+        url: `https://api.tikdown.org/api/download?url=${encodeURIComponent(url)}`,
+        processor: (data) => {
+          if (data.videoUrl) {
+            return {
+              video: data.videoUrl,
+              audio: data.musicUrl,
+              title: data.title
+            };
+          }
+          return null;
+        }
+      },
+      {
+        name: 'snaptik',
+        url: `https://snaptik.app/action.php?url=${encodeURIComponent(url)}`,
+        processor: (data) => {
+          if (data.url) {
+            return {
+              video: data.url,
+              audio: null,
+              title: 'TikTok Video'
+            };
+          }
+          return null;
+        }
+      }
+    ];
+
+    let downloadData = null;
+    let apiName = '';
+
+    // جرب جميع الـ APIs
+    for (const api of apis) {
+      try {
+        console.log(`🔄 جرب ${api.name}...`);
+        
+        const response = await fetch(api.url, {
+          headers: {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+            'Accept': 'application/json',
+          },
+          timeout: 10000
+        });
+        
+        if (!response.ok) {
+          console.log(`❌ ${api.name} فشل: ${response.status}`);
+          continue;
+        }
+        
+        const data = await response.json();
+        console.log(`✅ ${api.name} نجح:`, data);
+        
+        downloadData = api.processor(data);
+        if (downloadData) {
+          apiName = api.name;
+          break;
+        }
+      } catch (apiError) {
+        console.log(`❌ ${api.name} خطأ:`, apiError.message);
+        continue;
+      }
     }
+
+    if (!downloadData) {
+      throw new Error('جميع الخوادم مشغولة، حاول مرة أخرى لاحقاً');
+    }
+
+    let downloadUrl, filename;
+
+    if (type === 'video') {
+      downloadUrl = downloadData.video;
+      filename = `tiktok_video_${Date.now()}.mp4`;
+    } else if (type === 'mp3') {
+      downloadUrl = downloadData.audio || downloadData.video;
+      filename = `tiktok_audio_${Date.now()}.mp3`;
+      
+      if (!downloadData.audio) {
+        showAlert('لم يتم العثور على رابط صوت منفصل، سيتم تحميل الفيديو كاملاً');
+      }
+    } else if (type === 'story') {
+      throw new Error('تحميل القصص غير متاح حالياً');
+    }
+
+    if (!downloadUrl) {
+      throw new Error('لم نتمكن من استخراج رابط التحميل');
+    }
+
+    // إنشاء رابط تحميل
+    resultDiv.innerHTML = `
+      <div class="success-result">
+        <div class="result-header">
+          <i class="fa-solid fa-circle-check"></i>
+          <h3>تم تجهيز التحميل!</h3>
+        </div>
+        <p>تم العثور على الفيديو عبر ${apiName}</p>
+        <p>جاري تحميل ${type === 'video' ? 'الفيديو' : 'الصوت'}...</p>
+        <div style="margin-top: 20px;">
+          <a href="${downloadUrl}" download="${filename}" class="download-link" target="_blank">
+            <i class="fa-solid fa-download"></i> اضغط هنا للتحميل المباشر
+          </a>
+        </div>
+        <p style="font-size: 12px; color: var(--text-secondary); margin-top: 15px;">
+          إذا لم يبدأ التحميل تلقائياً، اضغط على الرابط أعلاه
+        </p>
+      </div>
+    `;
+    
+    // فتح التحميل تلقائياً
+    setTimeout(() => {
+      window.open(downloadUrl, '_blank');
+    }, 1000);
+    
+  } catch (err) {
+    console.error('❌ خطأ في التحميل:', err);
+    resultDiv.innerHTML = `
+      <div class="error-result">
+        <div class="result-header">
+          <i class="fa-solid fa-circle-xmark"></i>
+          <h3>خطأ في التحميل</h3>
+        </div>
+        <p>${err.message}</p>
+        <p style="font-size: 14px; color: var(--text-secondary); margin-top: 10px;">
+          جرب رابط فيديو مختلف أو حاول مرة أخرى لاحقاً
+        </p>
+        <button class="retry-btn" onclick="downloadContent('${type}')">
+          <i class="fa-solid fa-rotate"></i>
+          إعادة المحاولة
+        </button>
+      </div>
+    `;
+  }
 }
 
 // دالة عرض التنبيهات
@@ -1331,7 +1451,9 @@ function showAlert(message) {
 
 // إضافة Event Listeners للأزرار
 document.getElementById('btn-video').addEventListener('click', () => downloadContent('video'));
-document.getElementById('btn-story').addEventListener('click', () => downloadContent('story'));
+document.getElementById('btn-story').addEventListener('click', () => {
+  showAlert('تحميل القصص غير متاح حالياً. جاري العمل على هذه الميزة.');
+});
 document.getElementById('btn-mp3').addEventListener('click', () => downloadContent('mp3'));
 
 const langBtn = document.getElementById('langBtn');
