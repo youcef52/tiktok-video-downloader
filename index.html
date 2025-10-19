@@ -1249,13 +1249,16 @@ window.addEventListener('DOMContentLoaded', () => {
   setTimeout(() => document.querySelector('footer').classList.add('show'), 500);
 });
 
-// دالة التحميل الرئيسية - تستخدم API مباشر
+// دالة التحميل الرئيسية - تحميل مباشر بدون فتح صفحة جديدة
 async function downloadContent(type) {
   const url = document.getElementById("videoUrl").value.trim();
+  const btnVideo = document.getElementById('btn-video');
+  const btnStory = document.getElementById('btn-story');
+  const btnMp3 = document.getElementById('btn-mp3');
   const resultDiv = document.getElementById("result");
-  
+ 
   if (!url) {
-    showAlert("أدخل الرابط أولا");
+    showAlert(currentTranslations.alertEnterUrl || "أدخل الرابط أولا");
     return;
   }
 
@@ -1263,15 +1266,24 @@ async function downloadContent(type) {
     showAlert("الرجاء إدخال رابط تيك توك صحيح");
     return;
   }
-
-  // إظهار حالة التحميل
+ 
+  let activeBtn;
+  if (type === 'video') activeBtn = btnVideo;
+  else if (type === 'story') activeBtn = btnStory;
+  else if (type === 'mp3') activeBtn = btnMp3;
+ 
+  // إظهار حالة التحميل فقط
   resultDiv.innerHTML = `
     <div class="loading-state">
       <div class="spinner"></div>
-      <p>جاري تجهيز ${type === 'video' ? 'الفيديو' : type === 'mp3' ? 'الصوت' : 'القصة'}...</p>
+      <p>جاري تجهيز ${type === 'video' ? 'الفيديو' : type === 'mp3' ? 'الصوت' : 'القصة'} للتحميل...</p>
+      <p style="font-size: 14px; color: var(--text-secondary); margin-top: 10px;">قد يستغرق هذا بضع ثوانٍ</p>
     </div>
   `;
-
+  
+  activeBtn.classList.add('loading');
+  activeBtn.disabled = true;
+ 
   try {
     // استخدام API مباشر بدون الحاجة لسيرفر
     const apiUrl = `https://www.tikwm.com/api/?url=${encodeURIComponent(url)}`;
@@ -1293,29 +1305,50 @@ async function downloadContent(type) {
         throw new Error('تحميل القصص غير متاح حالياً');
       }
       
-      // إنشاء رابط تحميل
+      // إنشاء رابط تحميل مباشر مع إجبار التحميل
+      const link = document.createElement('a');
+      link.href = downloadUrl;
+      link.download = filename;
+      link.style.display = 'none';
+      
+      // إضافة الرابط للصفحة
+      document.body.appendChild(link);
+      
+      // بدء التحميل مباشرة
+      link.click();
+      
+      // إزالة الرابط بعد التحميل
+      setTimeout(() => {
+        document.body.removeChild(link);
+      }, 1000);
+      
+      // عرض رابط بديل للمستخدم
       resultDiv.innerHTML = `
         <div class="success-result">
           <div class="result-header">
             <i class="fa-solid fa-circle-check"></i>
-            <h3>تم تجهيز التحميل!</h3>
+            <h3>تم البدء في التحميل!</h3>
           </div>
-          <p>جاري تحميل ${type === 'video' ? 'الفيديو' : 'الصوت'}...</p>
+          <p>جاري تحميل ${type === 'video' ? 'الفيديو' : 'الصوت'} إلى جهازك...</p>
           <div style="margin-top: 20px;">
-            <a href="${downloadUrl}" download="${filename}" class="download-link" target="_blank">
+            <p style="font-size: 14px; color: var(--text-secondary); margin-bottom: 10px;">
+              إذا لم يبدأ التحميل تلقائياً:
+            </p>
+            <a href="${downloadUrl}" download="${filename}" class="download-link">
               <i class="fa-solid fa-download"></i> اضغط هنا للتحميل المباشر
             </a>
           </div>
+          <p style="font-size: 12px; color: var(--text-secondary); margin-top: 15px;">
+            سيتم حفظ الملف في مجلد التنزيلات
+          </p>
         </div>
       `;
       
-      // فتح التحميل تلقائياً
-      window.open(downloadUrl, '_blank');
+      showAlert('بدأ التحميل! تحقق من مجلد التنزيلات');
       
     } else {
       throw new Error(data.msg || 'فشل في تحميل الفيديو');
     }
-    
   } catch (err) {
     resultDiv.innerHTML = `
       <div class="error-result">
@@ -1328,6 +1361,9 @@ async function downloadContent(type) {
         </button>
       </div>
     `;
+  } finally {
+    activeBtn.classList.remove('loading');
+    activeBtn.disabled = false;
   }
 }
 
