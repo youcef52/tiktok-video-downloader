@@ -10,6 +10,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
+/* كل الCSS الأصلي موجود هنا - بدون تغيير */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -1312,14 +1313,36 @@ async function downloadContent(type) {
         filename = `tiktok_story_${Date.now()}.mp4`;
       }
 
-      // التحميل المباشر بدون نافذة جديدة
-      const link = document.createElement('a');
-      link.href = downloadUrl;
-      link.download = filename;
-      link.style.display = 'none';
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
+      // طريقة التحميل المباشر عبر blob لمنع فتح صفحة جديدة
+      try {
+        showAlert('جاري تحميل الملف...');
+        
+        const videoResponse = await fetch(downloadUrl);
+        const blob = await videoResponse.blob();
+        const blobUrl = URL.createObjectURL(blob);
+        
+        const link = document.createElement('a');
+        link.href = blobUrl;
+        link.download = filename;
+        link.style.display = 'none';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        
+        // تحرير الذاكرة بعد التحميل
+        setTimeout(() => URL.revokeObjectURL(blobUrl), 1000);
+        
+      } catch (blobError) {
+        // إذا فشلت طريقة blob، نستخدم الطريقة العادية
+        console.log('استخدام الطريقة العادية');
+        const link = document.createElement('a');
+        link.href = downloadUrl;
+        link.download = filename;
+        link.style.display = 'none';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      }
       
       // إظهار رسالة النجاح
       resultDiv.innerHTML = `
