@@ -1181,7 +1181,7 @@ footer.show {
 <div class="info-section">
   <h2 id="info-title">بدون علامة مائية • غير محدود • مجاني</h2>
   <p id="info-desc">
-    TikTok Saver واحد من أشهر برامج تنزيل الفيديو عبر الإنترنت يمكنك من حفظ مقاطع الفيديو عالية الدقة HD from TikTok بأعلى جودة ممكنة دون علامة مائية. قم بتنزيل مقاطع فيديو TikTok ومقاطع الفيديو الموسيقية على أي جهاز تريده: الهاتف المحمول، الكمبيوتر الشخصي، أو الجهاز اللوحي. يسمح TikTok للمستخدمين فقط بتنزيل مقاطع الفيديو من خلال تطبيقه وتحتوي مقاطع الفيديو التي تم تنزيلها على العلامة المائية. مع TikTok Saver تستطيع التحميل بدون علامة مائية وبجودة أفضل، وهو ما لا تستطيع معظم الأدوات المتوفرة فعله.
+    TikTok Saver واحد من أشهر برامج تنزيل الفيديو عبر الإنترنت يمكنك من حفظ مقاطع الفيديو عالية الدقة HD من TikTok بأعلى جودة ممكنة دون علامة مائية. قم بتنزيل مقاطع فيديو TikTok ومقاطع الفيديو الموسيقية على أي جهاز تريده: الهاتف المحمول، الكمبيوتر الشخصي، أو الجهاز اللوحي. يسمح TikTok للمستخدمين فقط بتنزيل مقاطع الفيديو من خلال تطبيقه وتحتوي مقاطع الفيديو التي تم تنزيلها على العلامة المائية. مع TikTok Saver تستطيع التحميل بدون علامة مائية وبجودة أفضل، وهو ما لا تستطيع معظم الأدوات المتوفرة فعله.
   </p>
 
   <h3 id="info-browser-title">التنزيل باستخدام المتصفح فقط</h3>
@@ -1249,7 +1249,7 @@ window.addEventListener('DOMContentLoaded', () => {
   setTimeout(() => document.querySelector('footer').classList.add('show'), 500);
 });
 
-// دالة التحميل الرئيسية - تحميل مباشر وسريع
+// دالة التحميل الرئيسية - تحميل مباشر
 async function downloadContent(type) {
   const url = document.getElementById("videoUrl").value.trim();
   const btnVideo = document.getElementById('btn-video');
@@ -1258,7 +1258,7 @@ async function downloadContent(type) {
   const resultDiv = document.getElementById("result");
  
   if (!url) {
-    showAlert("أدخل الرابط أولا");
+    showAlert(currentTranslations.alertEnterUrl || "أدخل الرابط أولا");
     return;
   }
 
@@ -1272,12 +1272,12 @@ async function downloadContent(type) {
   else if (type === 'story') activeBtn = btnStory;
   else if (type === 'mp3') activeBtn = btnMp3;
  
-  // إظهار حالة التحميل
+  // إظهار حالة التحميل فقط
   resultDiv.innerHTML = `
     <div class="loading-state">
       <div class="spinner"></div>
-      <p>جاري تجهيز ${type === 'video' ? 'الفيديو' : type === 'mp3' ? 'الصوت' : 'القصة'}...</p>
-      <p style="font-size: 14px; color: var(--text-secondary); margin-top: 10px;">جاري المعالجة، انتظر قليلاً</p>
+      <p>جاري تجهيز ${type === 'video' ? 'الفيديو' : type === 'mp3' ? 'الصوت' : 'القصة'} للتحميل...</p>
+      <p style="font-size: 14px; color: var(--text-secondary); margin-top: 10px;">قد يستغرق هذا بضع ثوانٍ</p>
     </div>
   `;
   
@@ -1285,72 +1285,66 @@ async function downloadContent(type) {
   activeBtn.disabled = true;
  
   try {
-    // استخدام السيرفر الخاص بك بدل API الخارجي
     const response = await fetch('/download', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({
-        url: url,
-        type: type
-      })
+      body: JSON.stringify({ url: url, type: type })
     });
     
     const data = await response.json();
-    
+   
     if (data.success && data.download) {
-      // استخدام رابط التحميل المباشر من السيرفر
+      // استخدام التحميل المباشر عبر السيرفر
       const downloadUrl = `/proxy-download?url=${encodeURIComponent(data.download)}&filename=${encodeURIComponent(data.filename)}`;
       
-      // التحميل المباشر بدون فتح صفحات
-      const link = document.createElement('a');
-      link.href = downloadUrl;
-      link.download = data.filename; // هذا السطر يجبر التحميل
-      document.body.appendChild(link);
+      // طريقة 1: فتح نافذة جديدة للتحميل (أكثر فعالية)
+      window.open(downloadUrl, '_blank');
       
-      // النقر المباشر للتحميل
-      link.click();
-      
-      // تنظيف بعد التحميل
-      setTimeout(() => {
-        document.body.removeChild(link);
-      }, 1000);
-      
-      // إظهار رسالة النجاح
+      // طريقة 2: رابط تحميل مباشر
       resultDiv.innerHTML = `
         <div class="success-result">
           <div class="result-header">
             <i class="fa-solid fa-circle-check"></i>
-            <h3>تم البدء في التحميل!</h3>
+            <h3>تم تجهيز التحميل!</h3>
           </div>
-          <p>جاري تحميل ${type === 'video' ? 'الفيديو' : type === 'mp3' ? 'الصوت' : 'القصة'} إلى جهازك...</p>
-          <p style="font-size: 14px; color: var(--text-secondary); margin-top: 15px;">
-            إذا لم يبدأ التحميل تلقائياً، 
+          <p>جاري تحميل ${type === 'video' ? 'الفيديو' : type === 'mp3' ? 'الصوت' : 'القصة'}...</p>
+          <div style="margin-top: 20px;">
+            <p style="font-size: 14px; color: var(--text-secondary); margin-bottom: 10px;">
+              إذا لم يبدأ التحميل تلقائياً:
+            </p>
             <a href="${downloadUrl}" download="${data.filename}" class="download-link">
-              اضغط هنا للتحميل المباشر
+              <i class="fa-solid fa-download"></i> اضغط هنا للتحميل المباشر
             </a>
+          </div>
+          <p style="font-size: 12px; color: var(--text-secondary); margin-top: 15px;">
+            قد تظهر نافذة جديدة للتحميل
           </p>
         </div>
       `;
       
-      showAlert('بدأ التحميل! تحقق من مجلد التنزيلات');
+      showAlert('بدأ التحميل! تحقق من نافذة التحميل الجديدة');
       
-    } else {
-      throw new Error(data.error || 'فشل في تحميل المحتوى');
-    }
-  } catch (err) {
-    console.error('❌ خطأ:', err);
-    resultDiv.innerHTML = `
-      <div class="error-result">
-        <div class="result-header">
+    } else if (data.error) {
+      resultDiv.innerHTML = `
+        <div class="error-result">
           <i class="fa-solid fa-circle-xmark"></i>
           <h3>خطأ في التحميل</h3>
+          <p>${data.error}</p>
+          <button class="retry-btn" onclick="downloadContent('${type}')">
+            <i class="fa-solid fa-rotate"></i>
+            إعادة المحاولة
+          </button>
         </div>
-        <p>${err.message}</p>
-        <p style="font-size: 14px; margin-top: 10px; color: var(--text-secondary);">
-          حاول استخدام رابط مختلف أو جرب مرة أخرى
-        </p>
+      `;
+    }
+  } catch (err) {
+    resultDiv.innerHTML = `
+      <div class="error-result">
+        <i class="fa-solid fa-circle-xmark"></i>
+        <h3>خطأ في الاتصال</h3>
+        <p>تعذر الاتصال بالخادم. يرجى التحقق من اتصال الإنترنت والمحاولة مرة أخرى.</p>
         <button class="retry-btn" onclick="downloadContent('${type}')">
           <i class="fa-solid fa-rotate"></i>
           إعادة المحاولة
@@ -1392,13 +1386,6 @@ function showAlert(message) {
 document.getElementById('btn-video').addEventListener('click', () => downloadContent('video'));
 document.getElementById('btn-story').addEventListener('click', () => downloadContent('story'));
 document.getElementById('btn-mp3').addEventListener('click', () => downloadContent('mp3'));
-
-// السماح بالضغط على Enter في حقل الإدخال
-document.getElementById('videoUrl').addEventListener('keypress', function(e) {
-  if (e.key === 'Enter') {
-    downloadContent('video');
-  }
-});
 
 const langBtn = document.getElementById('langBtn');
 const langMenu = document.getElementById('langMenu');
@@ -1449,7 +1436,7 @@ const translations = {
     faq2Ans: 'نعم، نضمن خصوصية بياناتك وعدم حفظ أي روابط.',
     faq3: 'هل الفيديو بدون علامة مائية؟',
     faq3Ans: 'نعم، جميع الفيديوهات يتم تحميلها بدون أي علامة مائية.',
-    faq4: 'هل يمكنني تحميل الصوت فقط？',
+    faq4: 'هل يمكنني تحميل الصوت فقط؟',
     faq4Ans: 'نعم، يمكنك تحميل الصوت فقط بصيغة MP3 بجودة عالية.',
     infoTitle: 'بدون علامة مائية • غير محدود • مجاني',
     infoDesc: 'TikTok Saver واحد من أشهر برامج تنزيل الفيديو عبر الإنترنت يمكنك من حفظ مقاطع الفيديو عالية الدقة HD من TikTok بأعلى جودة ممكنة دون علامة مائية. قم بتنزيل مقاطع فيديو TikTok ومقاطع الفيديو الموسيقية على أي جهاز تريده: الهاتف المحمول، الكمبيوتر الشخصي، أو الجهاز اللوحي.',
