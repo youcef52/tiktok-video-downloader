@@ -1171,7 +1171,7 @@ footer.show {
     <div class="feature-extra" id="feature4-extra">حول أي فيديو تيك توك إلى ملف صوتي MP3 بجودة عالية.</div>
     <div class="feature-faqs">
       <details>
-        <summary id="faq4-summary">هل يمكنني تحميل الصوت فقط؟</summary>
+        <summary id="faq4-summary">هل يمكنني تحميل الصوت فقط?</summary>
         <p id="faq4-text">نعم، يمكنك تحميل الصوت فقط بصيغة MP3 بجودة عالية.</p>
       </details>
     </div>
@@ -1249,7 +1249,7 @@ window.addEventListener('DOMContentLoaded', () => {
   setTimeout(() => document.querySelector('footer').classList.add('show'), 500);
 });
 
-// دالة التحميل الرئيسية - تستخدم السيرفر الخاص بك
+// دالة التحميل الرئيسية - تستخدم APIs موثوقة
 async function downloadContent(type) {
   const url = document.getElementById("videoUrl").value.trim();
   const btnVideo = document.getElementById('btn-video');
@@ -1285,57 +1285,106 @@ async function downloadContent(type) {
   activeBtn.disabled = true;
  
   try {
-    // استخدام السيرفر الخاص بك مباشرة
-    const response = await fetch('/download', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        url: url,
-        type: type
-      })
-    });
-    
-    const data = await response.json();
-    
-    if (data.success && data.download) {
-      // استخدام رابط التحميل المباشر من السيرفر الخاص بك
-      const downloadUrl = `/proxy-download?url=${encodeURIComponent(data.download)}&filename=${encodeURIComponent(data.filename)}`;
-      
-      // إنشاء رابط تحميل مخفي للتحميل المباشر
-      const link = document.createElement('a');
-      link.href = downloadUrl;
-      link.download = data.filename;
-      link.style.display = 'none';
-      
-      // إضافة الرابط للصفحة والنقر عليه مباشرة
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      
-      // إظهار رسالة النجاح
-      resultDiv.innerHTML = `
-        <div class="success-result">
-          <div class="result-header">
-            <i class="fa-solid fa-circle-check"></i>
-            <h3>تم البدء في التحميل!</h3>
-          </div>
-          <p>جاري تحميل ${type === 'video' ? 'الفيديو' : type === 'mp3' ? 'الصوت' : 'القصة'} إلى جهازك...</p>
-          <p style="font-size: 14px; color: var(--text-secondary); margin-top: 15px;">
-            إذا لم يبدأ التحميل تلقائياً، 
-            <a href="${downloadUrl}" download="${data.filename}" class="download-link">
-              اضغط هنا للتحميل المباشر
-            </a>
-          </p>
-        </div>
-      `;
-      
-      showAlert('بدأ التحميل! تحقق من مجلد التنزيلات');
-      
-    } else {
-      throw new Error(data.error || 'فشل في تحميل المحتوى');
+    // استخدام APIs موثوقة مباشرة من المتصفح
+    const apis = [
+      `https://www.tikwm.com/api/?url=${encodeURIComponent(url)}`,
+      `https://api.tokdownloader.com/api/video?url=${encodeURIComponent(url)}`,
+      `https://tikdown.org/api/v1/getVideo?url=${encodeURIComponent(url)}`
+    ];
+
+    let data = null;
+    let lastError = null;
+
+    // تجربة جميع الـ APIs حتى ينجح أحدها
+    for (const apiUrl of apis) {
+      try {
+        console.log(`🔄 جرب API: ${apiUrl}`);
+        const response = await fetch(apiUrl, {
+          method: 'GET',
+          headers: {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+            'Accept': 'application/json',
+            'Referer': 'https://www.tiktok.com/'
+          },
+          mode: 'cors'
+        });
+        
+        if (response.ok) {
+          data = await response.json();
+          console.log('✅ نجح API:', data);
+          break;
+        }
+      } catch (err) {
+        lastError = err;
+        console.log(`❌ فشل API: ${err.message}`);
+        continue;
+      }
     }
+
+    if (!data) {
+      throw new Error('جميع الخوادم مشغولة، حاول مرة أخرى لاحقاً');
+    }
+    
+    // معالجة البيانات من مختلف APIs
+    let downloadUrl, filename;
+
+    if (data.code === 0 && data.data) {
+      // API tikwm
+      if (type === 'video') {
+        downloadUrl = data.data.play || data.data.wmplay || data.data.hdplay;
+        filename = `tiktok_video_${Date.now()}.mp4`;
+      } else if (type === 'mp3') {
+        downloadUrl = data.data.music;
+        filename = `tiktok_audio_${Date.now()}.mp3`;
+      } else if (type === 'story') {
+        downloadUrl = data.data.play;
+        filename = `tiktok_story_${Date.now()}.mp4`;
+      }
+    } else if (data.video_url || data.video) {
+      // APIs أخرى
+      downloadUrl = data.video_url || data.video;
+      filename = `tiktok_video_${Date.now()}.mp4`;
+    } else {
+      throw new Error(data.msg || 'لم نتمكن من استخراج رابط التحميل');
+    }
+
+    if (!downloadUrl) {
+      throw new Error('لم نتمكن من العثور على رابط التحميل');
+    }
+
+    // إضافة timestamp لتفادي الكاش
+    downloadUrl += (downloadUrl.includes('?') ? '&' : '?') + `t=${Date.now()}`;
+    
+    // إنشاء رابط تحميل مخفي للتحميل المباشر
+    const link = document.createElement('a');
+    link.href = downloadUrl;
+    link.download = filename;
+    link.style.display = 'none';
+    
+    // إضافة الرابط للصفحة والنقر عليه مباشرة
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    
+    // إظهار رسالة النجاح
+    resultDiv.innerHTML = `
+      <div class="success-result">
+        <div class="result-header">
+          <i class="fa-solid fa-circle-check"></i>
+          <h3>تم البدء في التحميل!</h3>
+        </div>
+        <p>جاري تحميل ${type === 'video' ? 'الفيديو' : type === 'mp3' ? 'الصوت' : 'القصة'} إلى جهازك...</p>
+        <p style="font-size: 14px; color: var(--text-secondary); margin-top: 15px;">
+          إذا لم يبدأ التحميل تلقائياً، 
+          <a href="${downloadUrl}" download="${filename}" class="download-link" target="_blank">
+            اضغط هنا للتحميل المباشر
+          </a>
+        </p>
+      </div>
+    `;
+    
+    showAlert('بدأ التحميل! تحقق من مجلد التنزيلات');
+    
   } catch (err) {
     console.error('❌ خطأ:', err);
     resultDiv.innerHTML = `
