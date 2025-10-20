@@ -9,8 +9,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+
 <style>
-/* كل الCSS الأصلي موجود هنا - بدون تغيير */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -28,8 +28,6 @@
   --card-hover: rgba(255, 255, 255, 0.12);
   --text-primary: #ffffff;
   --text-secondary: #b8c5d6;
-  --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.5);
-  --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.3);
   --border-radius: 16px;
   --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -37,18 +35,93 @@
 body {
   font-family: 'Cairo', 'Segoe UI', Tahoma, sans-serif;
   background: linear-gradient(135deg, var(--dark-bg) 0%, var(--darker-bg) 100%);
-  background-attachment: fixed;
   color: var(--text-primary);
   display: flex;
   flex-direction: column;
   min-height: 100vh;
   overflow-x: hidden;
-  position: relative;
 }
 
-/* باقي الCSS زيك بالضبط... */
-/* ... كل الCSS الأصلي موجود ... */
+/* تنسيق بسيط للعناصر */
+nav, footer, .container {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: var(--transition);
+}
+nav.show, footer.show, .container.show, .features-container.show, .info-section.show {
+  opacity: 1;
+  transform: translateY(0);
+}
 
+.container {
+  text-align: center;
+  padding: 80px 20px;
+}
+
+input {
+  width: 80%;
+  max-width: 500px;
+  padding: 12px;
+  border-radius: var(--border-radius);
+  border: none;
+  outline: none;
+  margin: 10px 0;
+}
+
+button {
+  border: none;
+  cursor: pointer;
+  border-radius: var(--border-radius);
+  padding: 12px 20px;
+  font-weight: 600;
+  margin: 5px;
+  color: white;
+}
+
+button.download { background: var(--primary-gradient); }
+button.story { background: var(--secondary-gradient); }
+button.mp3 { background: var(--accent-gradient); }
+
+.loading-state {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.spinner {
+  border: 4px solid rgba(255,255,255,0.2);
+  border-top: 4px solid #fff;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  margin: auto;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin { 100% { transform: rotate(360deg); } }
+
+.custom-alert {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: var(--card-bg);
+  color: white;
+  padding: 12px 20px;
+  border-radius: var(--border-radius);
+  box-shadow: 0 0 20px rgba(0,0,0,0.4);
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: var(--transition);
+  z-index: 9999;
+}
+.custom-alert.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+.video-preview video {
+  max-width: 100%;
+  border-radius: 16px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.3);
+}
 </style>
 </head>
 <body>
@@ -58,327 +131,126 @@ body {
     <i class="fa-brands fa-tiktok"></i>
     <span>TikTok Saver</span>
   </div>
-  <div class="lang-dropdown" aria-haspopup="true">
-    <button class="lang-btn" id="langBtn" aria-label="تغيير اللغة">🌐 AR</button>
-    <div class="lang-menu" id="langMenu" role="menu" aria-hidden="true">
-      <div data-lang="AR">العربية</div>
-      <div data-lang="EN">English</div>
-      <div data-lang="FR">Français</div>
-      <div data-lang="ES">Español</div>
-      <div data-lang="DE">Deutsch</div>
-      <div data-lang="IT">Italiano</div>
-      <div data-lang="PT">Português</div>
-      <div data-lang="RU">Русский</div>
-      <div data-lang="ZH">中文</div>
-      <div data-lang="JA">日本語</div>
-    </div>
-  </div>
 </nav>
 
 <div class="container">
-  <h1 id="main-title">🚀 تنزيل فيديوهات تيك توك</h1>
-  <p class="subtitle" id="main-desc">ألصق رابط الفيديو أو القصة واضغط التحميل — سريع، آمن، وبدون علامة مائية.</p>
+  <h1>🚀 تنزيل فيديوهات تيك توك</h1>
+  <p class="subtitle">ألصق رابط الفيديو أو القصة واضغط التحميل — سريع، آمن، وبدون علامة مائية.</p>
   <div class="input-group">
     <input type="url" id="videoUrl" placeholder="ضع رابط الفيديو أو القصة هنا" aria-label="رابط الفيديو">
-    <button class="download" id="btn-video" aria-label="تحميل فيديو">
-      <i class="fa-solid fa-download"></i>
-      <span>تحميل فيديو</span>
-    </button>
-    <button class="story" id="btn-story" aria-label="تحميل قصة">
-      <i class="fa-solid fa-images"></i>
-      <span>تحميل قصة</span>
-    </button>
-    <button class="mp3" id="btn-mp3" aria-label="تحميل صوت MP3">
-      <i class="fa-solid fa-music"></i>
-      <span>تحميل MP3</span>
-    </button>
+    <div>
+      <button class="download" id="btn-video"><i class="fa-solid fa-download"></i> تحميل فيديو</button>
+      <button class="story" id="btn-story"><i class="fa-solid fa-images"></i> تحميل قصة</button>
+      <button class="mp3" id="btn-mp3"><i class="fa-solid fa-music"></i> تحميل MP3</button>
+    </div>
   </div>
 </div>
 
 <div id="result"></div>
 
-<!-- باقي الHTML زيك بالضبط -->
-<div class="features-container">
-  <!-- ... -->
-</div>
-
-<div class="info-section">
-  <!-- ... -->
-</div>
-
 <footer>
-  <span id="footer-text">© 2025 جميع الحقوق محفوظة — موقعك</span>
-  <button class="contact" onclick="document.getElementById('contactModal').style.display='flex'" aria-label="اتصل بنا">
-    <i class="fa-solid fa-envelope"></i>
-    <span>اتصل بنا</span>
-  </button>
+  <span>© 2025 جميع الحقوق محفوظة — موقعك</span>
 </footer>
-
-<div id="contactModal" role="dialog" aria-labelledby="contact-title" aria-modal="true">
-  <div class="modal-content">
-    <h3 id="contact-title">اتصل بنا</h3>
-    <form id="contact-form">
-      <input type="text" name="from_name" placeholder="الاسم الكامل" required aria-label="الاسم الكامل">
-      <input type="email" name="from_email" placeholder="البريد الإلكتروني" required aria-label="البريد الإلكتروني">
-      <textarea name="message" placeholder="رسالتك" rows="4" required aria-label="رسالتك"></textarea>
-      <div class="button-group">
-        <button type="submit" class="send">
-          <i class="fa-solid fa-paper-plane"></i>
-          <span>إرسال</span>
-        </button>
-        <button type="button" class="cancel" onclick="document.getElementById('contactModal').style.display='none'">
-          <span>إلغاء</span>
-        </button>
-      </div>
-    </form>
-  </div>
-</div>
 
 <script>
 window.addEventListener('DOMContentLoaded', () => {
   setTimeout(() => document.querySelector('nav').classList.add('show'), 100);
   setTimeout(() => document.querySelector('.container').classList.add('show'), 200);
-  setTimeout(() => document.querySelector('.features-container').classList.add('show'), 300);
-  setTimeout(() => document.querySelector('.info-section').classList.add('show'), 400);
-  setTimeout(() => document.querySelector('footer').classList.add('show'), 500);
+  setTimeout(() => document.querySelector('footer').classList.add('show'), 400);
 });
 
-// دالة التحميل الرئيسية - معدلة للتحميل المباشر
+// دالة التحميل وعرض الفيديو مباشرة
 async function downloadContent(type) {
   const url = document.getElementById("videoUrl").value.trim();
   const resultDiv = document.getElementById("result");
   
-  if (!url) {
-    showAlert("أدخل الرابط أولا");
-    return;
-  }
+  if (!url) return showAlert("أدخل الرابط أولاً");
+  if (!url.includes('tiktok.com')) return showAlert("الرجاء إدخال رابط تيك توك صحيح");
 
-  if (!url.includes('tiktok.com')) {
-    showAlert("الرجاء إدخال رابط تيك توك صحيح");
-    return;
-  }
-
-  // إظهار حالة التحميل
   resultDiv.innerHTML = `
     <div class="loading-state">
       <div class="spinner"></div>
-      <p>جاري تجهيز ${type === 'video' ? 'الفيديو' : type === 'mp3' ? 'الصوت' : 'القصة'}...</p>
-      <p style="font-size: 14px; color: var(--text-secondary); margin-top: 10px;">جاري المعالجة، انتظر قليلاً</p>
+      <p>جاري تجهيز المحتوى...</p>
     </div>
   `;
 
   try {
-    // استخدام API مباشر
     const apiUrl = `https://www.tikwm.com/api/?url=${encodeURIComponent(url)}`;
-    
-    const response = await fetch(apiUrl, {
-      method: 'GET',
-      headers: {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
-        'Accept': 'application/json',
-      }
-    });
-    
+    const response = await fetch(apiUrl);
     const data = await response.json();
-    
+
     if (data.code === 0 && data.data) {
-      let downloadUrl, filename;
+      let downloadUrl, filename, label;
       
       if (type === 'video') {
         downloadUrl = data.data.play;
         filename = `tiktok_video_${Date.now()}.mp4`;
+        label = "الفيديو";
       } else if (type === 'mp3') {
         downloadUrl = data.data.music;
         filename = `tiktok_audio_${Date.now()}.mp3`;
-      } else if (type === 'story') {
+        label = "الصوت";
+      } else {
         downloadUrl = data.data.play;
         filename = `tiktok_story_${Date.now()}.mp4`;
+        label = "القصة";
       }
 
-      // طريقة التحميل المباشر بدون فتح صفحة جديدة
-      forceDownload(downloadUrl, filename);
-      
-      // إظهار رسالة النجاح
+      // عرض المحتوى في الصفحة
       resultDiv.innerHTML = `
-        <div class="success-result">
-          <div class="result-header">
-            <i class="fa-solid fa-circle-check"></i>
-            <h3>تم البدء في التحميل!</h3>
+        <div class="video-preview" style="text-align:center; margin-top:25px;">
+          ${type === 'mp3' ? `
+            <audio controls style="width:90%;"><source src="${downloadUrl}" type="audio/mpeg"></audio>
+          ` : `
+            <video controls autoplay playsinline>
+              <source src="${downloadUrl}" type="video/mp4">
+              متصفحك لا يدعم تشغيل الفيديو.
+            </video>
+          `}
+          <div style="margin-top:15px;">
+            <button onclick="forceDownload('${downloadUrl}', '${filename}')" style="background: var(--success-gradient); padding:10px 25px; border:none; border-radius:12px; color:white; font-weight:600;">
+              <i class="fa-solid fa-download"></i> تحميل ${label}
+            </button>
           </div>
-          <p>جاري تحميل ${type === 'video' ? 'الفيديو' : type === 'mp3' ? 'الصوت' : 'القصة'} إلى جهازك...</p>
-          <p style="font-size: 14px; color: var(--text-secondary); margin-top: 15px;">
-            إذا لم يبدأ التحميل تلقائياً، 
-            <a href="#" onclick="forceDownload('${downloadUrl}', '${filename}'); return false;" style="color: #4facfe; text-decoration: underline; font-weight: bold;">
-              اضغط هنا للتحميل المباشر
-            </a>
-          </p>
         </div>
       `;
-      
-      showAlert('✅ بدأ التحميل! تحقق من مجلد التنزيلات');
-      
+      showAlert(`✅ تم تجهيز ${label}! يمكنك مشاهدته أو تحميله الآن.`);
     } else {
       throw new Error(data.msg || 'فشل في تحميل المحتوى');
     }
-    
+
   } catch (error) {
-    console.error('Error:', error);
-    resultDiv.innerHTML = `
-      <div class="error-result">
-        <div class="result-header">
-          <i class="fa-solid fa-circle-xmark"></i>
-          <h3>خطأ في التحميل</h3>
-        </div>
-        <p>${error.message || 'حدث خطأ غير متوقع'}</p>
-        <button class="retry-btn" onclick="downloadContent('${type}')">
-          <i class="fa-solid fa-rotate"></i>
-          إعادة المحاولة
-        </button>
-      </div>
-    `;
+    resultDiv.innerHTML = `<div style="text-align:center;color:#f88;">❌ حدث خطأ: ${error.message}</div>`;
   }
 }
 
-// دالة جديدة للتحميل المباشر القسري
+// تحميل مباشر
 function forceDownload(url, filename) {
-  // إنشاء iframe مخفي للتحميل المباشر
-  const iframe = document.createElement('iframe');
-  iframe.style.display = 'none';
-  iframe.src = url;
-  document.body.appendChild(iframe);
-  
-  // بعد ثانية نزيل الiframe
-  setTimeout(() => {
-    document.body.removeChild(iframe);
-  }, 1000);
-  
-  // محاولة بديلة باستخدام XMLHttpRequest
-  try {
-    const xhr = new XMLHttpRequest();
-    xhr.open('GET', url, true);
-    xhr.responseType = 'blob';
-    xhr.onload = function() {
-      if (this.status === 200) {
-        const blob = this.response;
-        const downloadUrl = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = downloadUrl;
-        a.download = filename;
-        a.style.display = 'none';
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        URL.revokeObjectURL(downloadUrl);
-      }
-    };
-    xhr.send();
-  } catch (e) {
-    console.log('استخدام الطريقة البديلة');
-  }
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
 }
 
-// دالة عرض التنبيهات
+// تنبيه بسيط
 function showAlert(message) {
   const alertDiv = document.createElement('div');
   alertDiv.className = 'custom-alert';
-  alertDiv.innerHTML = `
-    <div class="alert-content">
-      <i class="fa-solid fa-circle-info"></i>
-      <span>${message}</span>
-    </div>
-  `;
-  
+  alertDiv.innerHTML = `<div class="alert-content"><i class="fa-solid fa-circle-info"></i> ${message}</div>`;
   document.body.appendChild(alertDiv);
-  
-  setTimeout(() => {
-    alertDiv.classList.add('show');
-  }, 100);
-  
+  setTimeout(() => alertDiv.classList.add('show'), 100);
   setTimeout(() => {
     alertDiv.classList.remove('show');
-    setTimeout(() => {
-      document.body.removeChild(alertDiv);
-    }, 300);
+    setTimeout(() => alertDiv.remove(), 300);
   }, 4000);
 }
 
-// إضافة Event Listeners للأزرار
 document.getElementById('btn-video').addEventListener('click', () => downloadContent('video'));
 document.getElementById('btn-story').addEventListener('click', () => downloadContent('story'));
 document.getElementById('btn-mp3').addEventListener('click', () => downloadContent('mp3'));
-
-// السماح بالضغط على Enter
-document.getElementById('videoUrl').addEventListener('keypress', function(e) {
-  if (e.key === 'Enter') {
-    downloadContent('video');
-  }
-});
-
-// التركيز على حقل الإدخال عند تحميل الصفحة
-window.addEventListener('load', function() {
-  document.getElementById('videoUrl').focus();
-});
-
-// باقي الكود الخاص باللغة والقوائم زيك بالضبط
-const langBtn = document.getElementById('langBtn');
-const langMenu = document.getElementById('langMenu');
-
-langBtn.addEventListener('click', (e) => {
-  e.stopPropagation();
-  const isOpen = langMenu.style.display === 'block';
-  langMenu.style.display = isOpen ? 'none' : 'block';
-  langMenu.setAttribute('aria-hidden', isOpen);
-});
-
-window.addEventListener('click', e => {
-  if (!e.target.closest('.lang-dropdown')) {
-    langMenu.style.display = 'none';
-    langMenu.setAttribute('aria-hidden', 'true');
-  }
-});
-
-document.getElementById('contactModal').addEventListener('click', (e) => {
-  if (e.target.id === 'contactModal') {
-    document.getElementById('contactModal').style.display = 'none';
-  }
-});
-
-// الكود الخاص بالترجمة زيك بالضبط
-const translations = {
-  AR: {
-    // ... كل الترجمات زيك ...
-  },
-  EN: {
-    // ... كل الترجمات زيك ...
-  }
-};
-
-let currentTranslations = translations.AR;
-
-function applyTranslations(lang) {
-  // ... كود الترجمة زيك بالضبط ...
-}
-
-document.querySelectorAll('#langMenu div[data-lang]').forEach(el => {
-  el.addEventListener('click', () => {
-    const lang = el.getAttribute('data-lang');
-    applyTranslations(lang);
-    langMenu.style.display = 'none';
-  });
-});
-
-document.getElementById('contact-form').addEventListener('submit', function(e) {
-  e.preventDefault();
-  alert('تم إرسال رسالتك!');
-  document.getElementById('contactModal').style.display = 'none';
-  this.reset();
-});
-
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape' && document.getElementById('contactModal').style.display === 'flex') {
-    document.getElementById('contactModal').style.display = 'none';
-  }
-});
 </script>
+
 </body>
 </html>
