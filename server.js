@@ -242,6 +242,73 @@ app.get('/proxy-download', async (req, res) => {
     }
 });
 
+// 🔒 راوت التحميل المباشر بدون فتح نافذة جديدة
+app.get('/direct-download', async (req, res) => {
+    const clientIP = req.ip || req.connection.remoteAddress;
+    
+    try {
+        let { url, filename, type = 'video' } = req.query;
+        
+        // 🔒 تنظيف المدخلات
+        url = sanitizeInput(url);
+        filename = sanitizeInput(filename);
+        type = sanitizeInput(type);
+        
+        if (!url) {
+            console.log('❌ تحميل مباشر بدون رابط من IP:', clientIP);
+            return res.status(400).send('رابط غير صالح');
+        }
+
+        console.log('📥 تحميل مباشر من IP:', clientIP, 'النوع:', type);
+
+        // جلب الملف من الرابط
+        const response = await axios({
+            method: 'GET',
+            url: url,
+            responseType: 'stream',
+            timeout: 30000,
+            headers: {
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+                'Referer': 'https://www.tiktok.com/',
+            }
+        });
+
+        // تحديد نوع الملف بناءً على النوع
+        let contentType = 'video/mp4';
+        let fileExtension = '.mp4';
+        
+        if (type === 'mp3') {
+            contentType = 'audio/mpeg';
+            fileExtension = '.mp3';
+        }
+
+        // اسم الملف الآمن
+        const safeFilename = filename || `tiktok_${type}_${Date.now()}${fileExtension}`;
+
+        // إعداد headers للتحميل المباشر
+        res.setHeader('Content-Disposition', `attachment; filename="${safeFilename}"`);
+        res.setHeader('Content-Type', contentType);
+        res.setHeader('Content-Length', response.headers['content-length']);
+        res.setHeader('Cache-Control', 'no-cache');
+
+        // إرسال الملف كتحميل مباشر
+        response.data.pipe(res);
+
+        response.data.on('error', (error) => {
+            console.error('❌ خطأ في Stream لـ IP:', clientIP, ':', error);
+            if (!res.headersSent) {
+                res.status(500).send('خطأ في التحميل');
+            }
+        });
+
+    } catch (error) {
+        console.error('❌ خطأ في التحميل المباشر من IP:', clientIP, ':', error.message);
+        if (!res.headersSent) {
+            res.status(500).json({ error: 'فشل التحميل' });
+        }
+    }
+});
+
 // 🔒 معالجة الأخطاء غير المتوقعة
 app.use((err, req, res, next) => {
     console.error('🛑 خطأ غير متوقع:', err);
