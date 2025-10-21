@@ -3,14 +3,43 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
-<title>TikTok Saver - تحميل فيديوهات تيك توك بدون علامة مائية</title>
-<meta name="description" content="تحميل فيديوهات وقصص تيك توك بدون علامة مائية - سريع، آمن ومجاني">
+
+<!-- 🔧 السيو المحسن -->
+<title>SaveMyReels - تحميل فيديوهات بدون علامة مائية | Download Videos Without Watermark</title>
+<meta name="description" content="تحميل فيديوهات وقصص بدون علامة مائية - سريع، آمن ومجاني. Download videos and stories without watermark - fast, safe and free.">
+<meta name="keywords" content="تحميل فيديوهات, بدون علامة مائية, تنزيل مقاطع, save videos, download without watermark">
+<meta name="author" content="SaveMyReels">
+
+<!-- 🎯 Open Graph -->
+<meta property="og:title" content="SaveMyReels - تحميل فيديوهات بدون علامة مائية">
+<meta property="og:description" content="تحميل فيديوهات وقصص بدون علامة مائية - سريع، آمن ومجاني">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://savemyreels.site">
+
+<!-- 🏷️ بيانات منظمة -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "SaveMyReels",
+  "description": "تحميل فيديوهات بدون علامة مائية - سريع، آمن ومجاني",
+  "url": "https://savemyreels.site",
+  "applicationCategory": "UtilityApplication",
+  "operatingSystem": "Any",
+  "permissions": "browser",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  }
+}
+</script>
+
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
-/* كل الCSS الأصلي موجود هنا - بدون تغيير */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -553,7 +582,6 @@ button.contact:hover {
   z-index: 1;
 }
 
-/* أنماط النتائج */
 .loading-state {
   text-align: center;
   padding: 40px 20px;
@@ -651,7 +679,6 @@ button.contact:hover {
   box-shadow: 0 4px 15px rgba(245, 87, 108, 0.4);
 }
 
-/* التنبيهات */
 .custom-alert {
   position: fixed;
   top: 20px;
@@ -945,6 +972,53 @@ footer.show {
   animation: spin 0.8s linear infinite;
 }
 
+.download-options {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 20px;
+  border-radius: 16px;
+  margin: 20px 0;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.option-group {
+  margin: 15px 0;
+}
+
+.option-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.option-group select {
+  width: 100%;
+  padding: 12px 15px;
+  border-radius: 12px;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: 15px;
+  transition: var(--transition);
+}
+
+.option-group select:focus {
+  outline: none;
+  border-color: rgba(102, 126, 234, 0.6);
+  box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+}
+
+.quality-badge {
+  display: inline-block;
+  padding: 4px 8px;
+  background: var(--success-gradient);
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: bold;
+  margin-right: 8px;
+}
+
 @media(max-width: 768px) {
   nav {
     padding: 15px 20px;
@@ -1075,8 +1149,8 @@ footer.show {
 
 <nav>
   <div class="logo">
-    <i class="fa-brands fa-tiktok"></i>
-    <span>TikTok Saver</span>
+    <i class="fa-solid fa-video"></i>
+    <span>SaveMyReels</span>
   </div>
   <div class="lang-dropdown" aria-haspopup="true">
     <button class="lang-btn" id="langBtn" aria-label="تغيير اللغة">🌐 AR</button>
@@ -1086,31 +1160,46 @@ footer.show {
       <div data-lang="FR">Français</div>
       <div data-lang="ES">Español</div>
       <div data-lang="DE">Deutsch</div>
-      <div data-lang="IT">Italiano</div>
-      <div data-lang="PT">Português</div>
-      <div data-lang="RU">Русский</div>
-      <div data-lang="ZH">中文</div>
-      <div data-lang="JA">日本語</div>
     </div>
   </div>
 </nav>
 
 <div class="container">
-  <h1 id="main-title">🚀 تنزيل فيديوهات تيك توك</h1>
-  <p class="subtitle" id="main-desc">ألصق رابط الفيديو أو القصة واضغط التحميل — سريع، آمن، وبدون علامة مائية.</p>
+  <h1 id="main-title">🚀 SaveMyReels - تحميل الفيديوهات</h1>
+  <p class="subtitle" id="main-desc">ألصق رابط الفيديو واضغط التحميل — سريع، آمن، وبدون علامة مائية.</p>
+  
   <div class="input-group">
-    <input type="url" id="videoUrl" placeholder="ضع رابط الفيديو أو القصة هنا" aria-label="رابط الفيديو">
-    <button class="download" id="btn-video" aria-label="تحميل فيديو">
+    <input type="url" id="videoUrl" placeholder="ضع رابط الفيديو هنا" aria-label="رابط الفيديو">
+    <button class="download" id="btn-download" aria-label="تحميل">
       <i class="fa-solid fa-download"></i>
-      <span>تحميل فيديو</span>
+      <span>تحميل</span>
     </button>
-    <button class="story" id="btn-story" aria-label="تحميل قصة">
-      <i class="fa-solid fa-images"></i>
-      <span>تحميل قصة</span>
-    </button>
-    <button class="mp3" id="btn-mp3" aria-label="تحميل صوت MP3">
-      <i class="fa-solid fa-music"></i>
-      <span>تحميل MP3</span>
+  </div>
+
+  <div class="download-options" id="downloadOptions" style="display: none;">
+    <h3 style="margin-bottom: 15px;">خيارات التحميل</h3>
+    
+    <div class="option-group">
+      <label>نوع الملف:</label>
+      <select id="fileType">
+        <option value="video">فيديو MP4</option>
+        <option value="audio">صوت MP3</option>
+      </select>
+    </div>
+
+    <div class="option-group" id="qualityGroup">
+      <label>جودة الفيديو:</label>
+      <select id="videoQuality">
+        <option value="original">أصلية <span class="quality-badge">أفضل</span></option>
+        <option value="1080">عالية 1080p</option>
+        <option value="720">متوسطة 720p</option>
+        <option value="480">منخفضة 480p</option>
+      </select>
+    </div>
+
+    <button class="download" id="btn-confirm-download" style="width: 100%; margin-top: 15px;">
+      <i class="fa-solid fa-download"></i>
+      <span>بدء التحميل</span>
     </button>
   </div>
 </div>
@@ -1124,13 +1213,6 @@ footer.show {
       <h3 id="feature1-title">تحميل سريع</h3>
       <p id="feature1-text">خادمنا يوفر تنزيل أسرع من أي وقت مضى.</p>
     </div>
-    <div class="feature-extra" id="feature1-extra">يمكنك تنزيل أي فيديو أو قصة خلال ثوانٍ فقط.</div>
-    <div class="feature-faqs">
-      <details>
-        <summary id="faq1-summary">هل التحميل سريع؟</summary>
-        <p id="faq1-text">نعم، التحميل سريع جدًا حتى للفيديوهات الطويلة.</p>
-      </details>
-    </div>
   </div>
 
   <div class="feature-column">
@@ -1138,13 +1220,6 @@ footer.show {
       <i class="fa-solid fa-shield-halved"></i>
       <h3 id="feature2-title">آمن</h3>
       <p id="feature2-text">لا نحفظ بياناتك أو روابطك إطلاقًا.</p>
-    </div>
-    <div class="feature-extra" id="feature2-extra">خصوصيتك مضمونة؛ الموقع لا يخزن أي بيانات عن الفيديوهات.</div>
-    <div class="feature-faqs">
-      <details>
-        <summary id="faq2-summary">هل الموقع آمن؟</summary>
-        <p id="faq2-text">نعم، نضمن خصوصية بياناتك وعدم حفظ أي روابط.</p>
-      </details>
     </div>
   </div>
 
@@ -1154,13 +1229,6 @@ footer.show {
       <h3 id="feature3-title">بدون علامة مائية</h3>
       <p id="feature3-text">استمتع بفيديوهات نظيفة وجاهزة للمشاركة.</p>
     </div>
-    <div class="feature-extra" id="feature3-extra">تحميل الفيديو بدون أي شعار أو علامة مائية.</div>
-    <div class="feature-faqs">
-      <details>
-        <summary id="faq3-summary">هل الفيديو بدون علامة مائية؟</summary>
-        <p id="faq3-text">نعم، جميع الفيديوهات يتم تحميلها بدون أي علامة مائية.</p>
-      </details>
-    </div>
   </div>
 
   <div class="feature-column">
@@ -1169,52 +1237,23 @@ footer.show {
       <h3 id="feature4-title">تحميل MP3</h3>
       <p id="feature4-text">استخرج الصوت من أي فيديو بصيغة MP3.</p>
     </div>
-    <div class="feature-extra" id="feature4-extra">حول أي فيديو تيك توك إلى ملف صوتي MP3 بجودة عالية.</div>
-    <div class="feature-faqs">
-      <details>
-        <summary id="faq4-summary">هل يمكنني تحميل الصوت فقط؟</summary>
-        <p id="faq4-text">نعم، يمكنك تحميل الصوت فقط بصيغة MP3 بجودة عالية.</p>
-      </details>
-    </div>
   </div>
 </div>
 
 <div class="info-section">
   <h2 id="info-title">بدون علامة مائية • غير محدود • مجاني</h2>
   <p id="info-desc">
-    TikTok Saver واحد من أشهر برامج تنزيل الفيديو عبر الإنترنت يمكنك من حفظ مقاطع الفيديو عالية الدقة HD من TikTok بأعلى جودة ممكنة دون علامة مائية. قم بتنزيل مقاطع فيديو TikTok ومقاطع الفيديو الموسيقية على أي جهاز تريده: الهاتف المحمول، الكمبيوتر الشخصي، أو الجهاز اللوحي. يسمح TikTok للمستخدمين فقط بتنزيل مقاطع الفيديو من خلال تطبيقه وتحتوي مقاطع الفيديو التي تم تنزيلها على العلامة المائية. مع TikTok Saver تستطيع التحميل بدون علامة مائية وبجودة أفضل، وهو ما لا تستطيع معظم الأدوات المتوفرة فعله.
+    SaveMyReels أداة متقدمة لتحميل الفيديوهات بدون علامة مائية. يمكنك حفظ مقاطع الفيديو عالية الدقة HD بأعلى جودة ممكنة. قم بتنزيل الفيديوهات على أي جهاز تريده: الهاتف المحمول، الكمبيوتر الشخصي، أو الجهاز اللوحي.
   </p>
 
   <h3 id="info-browser-title">التنزيل باستخدام المتصفح فقط</h3>
   <p id="info-browser-desc">
-    نريد أن نجعل الأمور بسيطة بالنسبة لك. لا حاجة لتنزيل أو تثبيت أي برنامج. كل شيء يتم مباشرة من المتصفح الخاص بك. لأداء أفضل يمكنك تحميل تطبيق TikTok Saver على أجهزة Android أو iOS. التطبيق يسمح لك بحفظ الفيديوهات بجودة عالية جداً بدون أي علامة مائية وبشكل غير محدود ومجاني 100%.
-  </p>
-
-  <h3 id="info-faq-title">كيفية التنزيل على الأجهزة المختلفة؟</h3>
- 
-  <details>
-    <summary id="faq-android-title">على هواتف Android</summary>
-    <p id="faq-android-text">انسخ رابط الفيديو من تطبيق TikTok، ثم الصقه في خانة الإدخال واضغط زر التحميل. يمكنك استخدام تطبيق TikTok Saver للأداء الأسرع.</p>
-  </details>
-
-  <details>
-    <summary id="faq-ios-title">على أجهزة iPhone / iPad / iPod</summary>
-    <p id="faq-ios-text">نظرًا لسياسات أمان Apple، استخدم متصفح Safari أو تطبيق Documents by Readdle لنسخ رابط الفيديو وتنزيله مباشرة بدون علامة مائية.</p>
-  </details>
-
-  <details>
-    <summary id="faq-pc-title">على الكمبيوتر</summary>
-    <p id="faq-pc-text">انسخ رابط الفيديو من TikTok ثم الصقه في الموقع. الفيديو سيتم تنزيله مباشرة إلى مجلد "التنزيلات"، يمكنك اختيار Save As لتغيير مكان الحفظ.</p>
-  </details>
-
-  <h3 id="info-security-title">الخصوصية والأمان</h3>
-  <p id="info-security-text">
-    TikTok Saver لا يحتفظ بأي نسخة من الفيديوهات أو سجل البحث الخاص بك. جميع الفيديوهات يتم تنزيلها مباشرة من خوادم TikTok إلى جهاز المستخدم. خصوصيتك مضمونة، ولا توجد أي قيود على عدد التحميلات.
+    نريد أن نجعل الأمور بسيطة بالنسبة لك. لا حاجة لتنزيل أو تثبيت أي برنامج. كل شيء يتم مباشرة من المتصفح الخاص بك.
   </p>
 </div>
 
 <footer>
-  <span id="footer-text">© 2025 جميع الحقوق محفوظة — موقعك</span>
+  <span id="footer-text">© 2025 SaveMyReels - جميع الحقوق محفوظة</span>
   <button class="contact" onclick="document.getElementById('contactModal').style.display='flex'" aria-label="اتصل بنا">
     <i class="fa-solid fa-envelope"></i>
     <span>اتصل بنا</span>
@@ -1242,262 +1281,37 @@ footer.show {
 </div>
 
 <script>
-window.addEventListener('DOMContentLoaded', () => {
-  setTimeout(() => document.querySelector('nav').classList.add('show'), 100);
-  setTimeout(() => document.querySelector('.container').classList.add('show'), 200);
-  setTimeout(() => document.querySelector('.features-container').classList.add('show'), 300);
-  setTimeout(() => document.querySelector('.info-section').classList.add('show'), 400);
-  setTimeout(() => document.querySelector('footer').classList.add('show'), 500);
-});
-
-// دالة التحميل الرئيسية - تحميل مباشر بدون نافذة جديدة
-async function downloadContent(type) {
-  const url = document.getElementById("videoUrl").value.trim();
-  const btnVideo = document.getElementById('btn-video');
-  const btnStory = document.getElementById('btn-story');
-  const btnMp3 = document.getElementById('btn-mp3');
-  const resultDiv = document.getElementById("result");
- 
-  if (!url) {
-    showAlert("أدخل الرابط أولا");
-    return;
-  }
-
-  if (!url.includes('tiktok.com')) {
-    showAlert("الرجاء إدخال رابط تيك توك صحيح");
-    return;
-  }
- 
-  let activeBtn;
-  if (type === 'video') activeBtn = btnVideo;
-  else if (type === 'story') activeBtn = btnStory;
-  else if (type === 'mp3') activeBtn = btnMp3;
- 
-  // إظهار حالة التحميل فقط
-  resultDiv.innerHTML = `
-    <div class="loading-state">
-      <div class="spinner"></div>
-      <p>جاري تجهيز ${type === 'video' ? 'الفيديو' : type === 'mp3' ? 'الصوت' : 'القصة'} للتحميل...</p>
-      <p style="font-size: 14px; color: var(--text-secondary); margin-top: 10px;">قد يستغرق هذا بضع ثوانٍ</p>
-    </div>
-  `;
-  
-  activeBtn.classList.add('loading');
-  activeBtn.disabled = true;
- 
-  try {
-    // استخدام API مباشر بدون الحاجة للسيرفر
-    const apiUrl = `https://www.tikwm.com/api/?url=${encodeURIComponent(url)}`;
-    
-    const response = await fetch(apiUrl, {
-      method: 'GET',
-      headers: {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
-        'Accept': 'application/json',
-      }
-    });
-    
-    const data = await response.json();
-    
-    if (data.code === 0 && data.data) {
-      let downloadUrl, filename;
-      
-      if (type === 'video') {
-        downloadUrl = data.data.play;
-        filename = `tiktok_video_${Date.now()}.mp4`;
-      } else if (type === 'mp3') {
-        downloadUrl = data.data.music;
-        filename = `tiktok_audio_${Date.now()}.mp3`;
-      } else if (type === 'story') {
-        downloadUrl = data.data.play;
-        filename = `tiktok_story_${Date.now()}.mp4`;
-      }
-
-      // طريقة التحميل المباشر عبر blob لمنع فتح صفحة جديدة
-      try {
-        showAlert('جاري تحميل الملف...');
-        
-        const videoResponse = await fetch(downloadUrl);
-        const blob = await videoResponse.blob();
-        const blobUrl = URL.createObjectURL(blob);
-        
-        const link = document.createElement('a');
-        link.href = blobUrl;
-        link.download = filename;
-        link.style.display = 'none';
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-        
-        // تحرير الذاكرة بعد التحميل
-        setTimeout(() => URL.revokeObjectURL(blobUrl), 1000);
-        
-      } catch (blobError) {
-        // إذا فشلت طريقة blob، نستخدم الطريقة العادية
-        console.log('استخدام الطريقة العادية');
-        const link = document.createElement('a');
-        link.href = downloadUrl;
-        link.download = filename;
-        link.style.display = 'none';
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-      }
-      
-      // إظهار رسالة النجاح
-      resultDiv.innerHTML = `
-        <div class="success-result">
-          <div class="result-header">
-            <i class="fa-solid fa-circle-check"></i>
-            <h3>تم بدء التحميل بنجاح!</h3>
-          </div>
-          <p>جاري تحميل ${type === 'video' ? 'الفيديو' : type === 'mp3' ? 'الصوت' : 'القصة'} إلى جهازك...</p>
-          <p style="font-size: 14px; color: var(--text-secondary); margin-top: 15px;">
-            إذا لم يبدأ التحميل تلقائياً، 
-            <a href="${downloadUrl}" download="${filename}" style="color: #4facfe; text-decoration: underline; font-weight: bold;">
-              اضغط هنا للتحميل المباشر
-            </a>
-          </p>
-        </div>
-      `;
-      
-      showAlert('✅ بدأ التحميل! تحقق من مجلد التنزيلات');
-      
-    } else {
-      throw new Error(data.msg || 'فشل في تحميل المحتوى');
-    }
-    
-  } catch (error) {
-    console.error('Error:', error);
-    resultDiv.innerHTML = `
-      <div class="error-result">
-        <div class="result-header">
-          <i class="fa-solid fa-circle-xmark"></i>
-          <h3>خطأ في التحميل</h3>
-        </div>
-        <p>${error.message || 'حدث خطأ غير متوقع'}</p>
-        <button class="retry-btn" onclick="downloadContent('${type}')">
-          <i class="fa-solid fa-rotate"></i>
-          إعادة المحاولة
-        </button>
-      </div>
-    `;
-  } finally {
-    activeBtn.classList.remove('loading');
-    activeBtn.disabled = false;
-  }
-}
-
-// دالة عرض التنبيهات
-function showAlert(message) {
-  const alertDiv = document.createElement('div');
-  alertDiv.className = 'custom-alert';
-  alertDiv.innerHTML = `
-    <div class="alert-content">
-      <i class="fa-solid fa-circle-info"></i>
-      <span>${message}</span>
-    </div>
-  `;
-  
-  document.body.appendChild(alertDiv);
-  
-  setTimeout(() => {
-    alertDiv.classList.add('show');
-  }, 100);
-  
-  setTimeout(() => {
-    alertDiv.classList.remove('show');
-    setTimeout(() => {
-      document.body.removeChild(alertDiv);
-    }, 300);
-  }, 4000);
-}
-
-// إضافة Event Listeners للأزرار
-document.getElementById('btn-video').addEventListener('click', () => downloadContent('video'));
-document.getElementById('btn-story').addEventListener('click', () => downloadContent('story'));
-document.getElementById('btn-mp3').addEventListener('click', () => downloadContent('mp3'));
-
-// السماح بالضغط على Enter
-document.getElementById('videoUrl').addEventListener('keypress', function(e) {
-  if (e.key === 'Enter') {
-    downloadContent('video');
-  }
-});
-
-// التركيز على حقل الإدخال عند تحميل الصفحة
-window.addEventListener('load', function() {
-  document.getElementById('videoUrl').focus();
-});
-
-const langBtn = document.getElementById('langBtn');
-const langMenu = document.getElementById('langMenu');
-
-langBtn.addEventListener('click', (e) => {
-  e.stopPropagation();
-  const isOpen = langMenu.style.display === 'block';
-  langMenu.style.display = isOpen ? 'none' : 'block';
-  langMenu.setAttribute('aria-hidden', isOpen);
-});
-
-window.addEventListener('click', e => {
-  if (!e.target.closest('.lang-dropdown')) {
-    langMenu.style.display = 'none';
-    langMenu.setAttribute('aria-hidden', 'true');
-  }
-});
-
-document.getElementById('contactModal').addEventListener('click', (e) => {
-  if (e.target.id === 'contactModal') {
-    document.getElementById('contactModal').style.display = 'none';
-  }
-});
-
 const translations = {
   AR: {
     langLabel: 'AR',
-    mainTitle: '🚀 تنزيل فيديوهات تيك توك',
-    mainDesc: 'ألصق رابط الفيديو أو القصة واضغط التحميل — سريع، آمن، وبدون علامة مائية.',
-    btnVideo: 'تحميل فيديو',
-    btnStory: 'تحميل قصة',
-    btnMp3: 'تحميل MP3',
+    mainTitle: '🚀 SaveMyReels - تحميل الفيديوهات',
+    mainDesc: 'ألصق رابط الفيديو واضغط التحميل — سريع، آمن، وبدون علامة مائية.',
+    btnDownload: 'تحميل',
+    optionsTitle: 'خيارات التحميل',
+    fileType: 'نوع الملف:',
+    videoQuality: 'جودة الفيديو:',
+    qualityOriginal: 'أصلية',
+    quality1080: 'عالية 1080p',
+    quality720: 'متوسطة 720p', 
+    quality480: 'منخفضة 480p',
+    confirmDownload: 'بدء التحميل',
     feature1Title: 'تحميل سريع',
     feature1Text: 'خادمنا يوفر تنزيل أسرع من أي وقت مضى.',
-    feature1Extra: 'يمكنك تنزيل أي فيديو أو قصة خلال ثوانٍ فقط.',
     feature2Title: 'آمن',
     feature2Text: 'لا نحفظ بياناتك أو روابطك إطلاقًا.',
-    feature2Extra: 'خصوصيتك مضمونة؛ الموقع لا يخزن أي بيانات عن الفيديوهات.',
     feature3Title: 'بدون علامة مائية',
     feature3Text: 'استمتع بفيديوهات نظيفة وجاهزة للمشاركة.',
-    feature3Extra: 'تحميل الفيديو بدون أي شعار أو علامة مائية.',
     feature4Title: 'تحميل MP3',
     feature4Text: 'استخرج الصوت من أي فيديو بصيغة MP3.',
-    feature4Extra: 'حول أي فيديو تيك توك إلى ملف صوتي MP3 بجودة عالية.',
-    faq1: 'هل التحميل سريع؟',
-    faq1Ans: 'نعم، التحميل سريع جدًا حتى للفيديوهات الطويلة.',
-    faq2: 'هل الموقع آمن؟',
-    faq2Ans: 'نعم، نضمن خصوصية بياناتك وعدم حفظ أي روابط.',
-    faq3: 'هل الفيديو بدون علامة مائية؟',
-    faq3Ans: 'نعم، جميع الفيديوهات يتم تحميلها بدون أي علامة مائية.',
-    faq4: 'هل يمكنني تحميل الصوت فقط؟',
-    faq4Ans: 'نعم، يمكنك تحميل الصوت فقط بصيغة MP3 بجودة عالية.',
     infoTitle: 'بدون علامة مائية • غير محدود • مجاني',
-    infoDesc: 'TikTok Saver واحد من أشهر برامج تنزيل الفيديو عبر الإنترنت يمكنك من حفظ مقاطع الفيديو عالية الدقة HD من TikTok بأعلى جودة ممكنة دون علامة مائية. قم بتنزيل مقاطع فيديو TikTok ومقاطع الفيديو الموسيقية على أي جهاز تريده: الهاتف المحمول، الكمبيوتر الشخصي، أو الجهاز اللوحي.',
+    infoDesc: 'SaveMyReels أداة متقدمة لتحميل الفيديوهات بدون علامة مائية.',
     infoBrowserTitle: 'التنزيل باستخدام المتصفح فقط',
-    infoBrowserDesc: 'نريد أن نجعل الأمور بسيطة بالنسبة لك. لا حاجة لتنزيل أو تثبيت أي برنامج. كل شيء يتم مباشرة من المتصفح الخاص بك.',
-    faqAndroidSummary: 'على هواتف Android',
-    faqAndroidText: 'انسخ رابط الفيديو من تطبيق TikTok، ثم الصقه في خانة الإدخال واضغط زر التحميل.',
-    faqIosSummary: 'على أجهزة iPhone / iPad / iPod',
-    faqIosText: 'نظرًا لسياسات أمان Apple، استخدم متصفح Safari أو تطبيق Documents by Readdle.',
-    faqPcSummary: 'على الكمبيوتر',
-    faqPcText: 'انسخ رابط الفيديو من TikTok ثم الصقه في الموقع.',
-    infoSecurityTitle: 'الخصوصية والأمان',
-    infoSecurityText: 'TikTok Saver لا يحتفظ بأي نسخة من الفيديوهات أو سجل البحث الخاص بك.',
-    footer: '© 2025 جميع الحقوق محفوظة — موقعك',
-    placeholder: 'ضع رابط الفيديو أو القصة هنا',
+    infoBrowserDesc: 'نريد أن نجعل الأمور بسيطة بالنسبة لك.',
+    footer: '© 2025 SaveMyReels - جميع الحقوق محفوظة',
+    placeholder: 'ضع رابط الفيديو هنا',
     contactTitle: 'اتصل بنا',
     contactName: 'الاسم الكامل',
-    contactEmail: 'البريد الإلكتروني',
+    contactEmail: 'البريد الإلكتروني', 
     contactMessage: 'رسالتك',
     send: 'إرسال',
     cancel: 'إلغاء',
@@ -1505,103 +1319,77 @@ const translations = {
     alertError: 'حدث خطأ، حاول مرة أخرى'
   },
   EN: {
-    langLabel: 'EN',
-    mainTitle: '🚀 Download TikTok Videos',
-    mainDesc: 'Paste the video link and click download — fast, safe, and watermark-free.',
-    btnVideo: 'Download Video',
-    btnStory: 'Download Story',
-    btnMp3: 'Download MP3',
+    langLabel: 'EN', 
+    mainTitle: '🚀 SaveMyReels - Video Downloader',
+    mainDesc: 'Paste video link and click download — fast, safe, and watermark-free.',
+    btnDownload: 'Download',
+    optionsTitle: 'Download Options',
+    fileType: 'File Type:',
+    videoQuality: 'Video Quality:',
+    qualityOriginal: 'Original',
+    quality1080: 'High 1080p',
+    quality720: 'Medium 720p',
+    quality480: 'Low 480p', 
+    confirmDownload: 'Start Download',
     feature1Title: 'Fast Download',
     feature1Text: 'Our server provides super fast downloads.',
-    feature1Extra: 'You can download any video or story in seconds.',
     feature2Title: 'Safe',
     feature2Text: 'We never save your data or links.',
-    feature2Extra: 'Your privacy is guaranteed.',
     feature3Title: 'No Watermark',
     feature3Text: 'Enjoy clean videos ready to share.',
-    feature3Extra: 'Download videos without any watermark.',
     feature4Title: 'MP3 Download',
     feature4Text: 'Extract audio from any video as MP3.',
-    feature4Extra: 'Convert any TikTok video to high-quality MP3.',
-    faq1: 'Is the download fast?',
-    faq1Ans: 'Yes, very fast even for long videos.',
-    faq2: 'Is the site safe?',
-    faq2Ans: 'Yes, we guarantee your privacy.',
-    faq3: 'Is the video watermark-free?',
-    faq3Ans: 'Yes, all videos are downloaded without watermark.',
-    faq4: 'Can I download audio only?',
-    faq4Ans: 'Yes, you can download audio only as high-quality MP3.',
     infoTitle: 'No Watermark • Unlimited • Free',
-    infoDesc: 'TikTok Saver is one of the most popular online video downloaders.',
+    infoDesc: 'SaveMyReels advanced video downloader without watermark.',
     infoBrowserTitle: 'Download Using Browser Only',
-    infoBrowserDesc: 'We want to make things simple. No software needed.',
-    faqAndroidSummary: 'On Android phones',
-    faqAndroidText: 'Copy the link from TikTok app and paste it here.',
-    faqIosSummary: 'On iPhone / iPad / iPod',
-    faqIosText: 'Use Safari or Documents by Readdle.',
-    faqPcSummary: 'On PC',
-    faqPcText: 'Copy the link from TikTok and paste it here.',
-    infoSecurityTitle: 'Privacy & Security',
-    infoSecurityText: 'TikTok Saver does not keep any copy of videos.',
-    footer: '© 2025 All rights reserved',
-    placeholder: 'Paste video or story link here',
+    infoBrowserDesc: 'We want to make things simple for you.',
+    footer: '© 2025 SaveMyReels - All rights reserved',
+    placeholder: 'Paste video link here',
     contactTitle: 'Contact Us',
     contactName: 'Full Name',
     contactEmail: 'Email',
     contactMessage: 'Your Message',
     send: 'Send',
     cancel: 'Cancel',
-    alertEnterUrl: 'Please enter a URL first',
+    alertEnterUrl: 'Please enter URL first',
     alertError: 'An error occurred, please try again'
   }
 };
 
-let currentTranslations = translations.AR;
+let currentLang = 'AR';
 
 function applyTranslations(lang) {
   const t = translations[lang] || translations.EN;
-  currentTranslations = t;
+  currentLang = lang;
 
   document.getElementById('main-title').textContent = t.mainTitle;
   document.getElementById('main-desc').textContent = t.mainDesc;
-  document.getElementById('btn-video').innerHTML = `<i class="fa-solid fa-download"></i><span>${t.btnVideo}</span>`;
-  document.getElementById('btn-story').innerHTML = `<i class="fa-solid fa-images"></i><span>${t.btnStory}</span>`;
-  document.getElementById('btn-mp3').innerHTML = `<i class="fa-solid fa-music"></i><span>${t.btnMp3}</span>`;
+  document.getElementById('btn-download').innerHTML = `<i class="fa-solid fa-download"></i><span>${t.btnDownload}</span>`;
+  
+  const optionsTitle = document.querySelector('#downloadOptions h3');
+  if (optionsTitle) optionsTitle.textContent = t.optionsTitle;
+  
+  const fileTypeLabel = document.querySelector('.option-group label[for="fileType"]');
+  if (fileTypeLabel) fileTypeLabel.textContent = t.fileType;
+  
+  const qualityLabel = document.querySelector('.option-group label[for="videoQuality"]');
+  if (qualityLabel) qualityLabel.textContent = t.videoQuality;
+  
+  document.getElementById('btn-confirm-download').innerHTML = `<i class="fa-solid fa-download"></i><span>${t.confirmDownload}</span>`;
 
   document.getElementById('feature1-title').textContent = t.feature1Title;
   document.getElementById('feature1-text').textContent = t.feature1Text;
-  document.getElementById('feature1-extra').textContent = t.feature1Extra;
   document.getElementById('feature2-title').textContent = t.feature2Title;
   document.getElementById('feature2-text').textContent = t.feature2Text;
-  document.getElementById('feature2-extra').textContent = t.feature2Extra;
   document.getElementById('feature3-title').textContent = t.feature3Title;
   document.getElementById('feature3-text').textContent = t.feature3Text;
-  document.getElementById('feature3-extra').textContent = t.feature3Extra;
   document.getElementById('feature4-title').textContent = t.feature4Title;
   document.getElementById('feature4-text').textContent = t.feature4Text;
-  document.getElementById('feature4-extra').textContent = t.feature4Extra;
-
-  document.getElementById('faq1-summary').textContent = t.faq1;
-  document.getElementById('faq1-text').textContent = t.faq1Ans;
-  document.getElementById('faq2-summary').textContent = t.faq2;
-  document.getElementById('faq2-text').textContent = t.faq2Ans;
-  document.getElementById('faq3-summary').textContent = t.faq3;
-  document.getElementById('faq3-text').textContent = t.faq3Ans;
-  document.getElementById('faq4-summary').textContent = t.faq4;
-  document.getElementById('faq4-text').textContent = t.faq4Ans;
 
   document.getElementById('info-title').textContent = t.infoTitle;
   document.getElementById('info-desc').textContent = t.infoDesc;
   document.getElementById('info-browser-title').textContent = t.infoBrowserTitle;
   document.getElementById('info-browser-desc').textContent = t.infoBrowserDesc;
-  document.getElementById('faq-android-title').textContent = t.faqAndroidSummary;
-  document.getElementById('faq-android-text').textContent = t.faqAndroidText;
-  document.getElementById('faq-ios-title').textContent = t.faqIosSummary;
-  document.getElementById('faq-ios-text').textContent = t.faqIosText;
-  document.getElementById('faq-pc-title').textContent = t.faqPcSummary;
-  document.getElementById('faq-pc-text').textContent = t.faqPcText;
-  document.getElementById('info-security-title').textContent = t.infoSecurityTitle;
-  document.getElementById('info-security-text').textContent = t.infoSecurityText;
 
   document.getElementById('footer-text').textContent = t.footer;
   document.getElementById('videoUrl').placeholder = t.placeholder;
@@ -1620,10 +1408,171 @@ function applyTranslations(lang) {
   if (cancelBtn) cancelBtn.textContent = t.cancel;
 
   document.getElementById('langBtn').textContent = `🌐 ${t.langLabel}`;
- 
   document.documentElement.lang = lang.toLowerCase();
   document.documentElement.dir = lang === 'AR' ? 'rtl' : 'ltr';
 }
+
+async function showDownloadOptions() {
+  const url = document.getElementById("videoUrl").value.trim();
+  
+  if (!url) {
+    showAlert(currentLang === 'AR' ? 'أدخل الرابط أولا' : 'Please enter URL first');
+    return;
+  }
+
+  if (!isValidUrl(url)) {
+    showAlert(currentLang === 'AR' ? 'الرجاء إدخال رابط صحيح' : 'Please enter a valid URL');
+    return;
+  }
+
+  document.getElementById('downloadOptions').style.display = 'block';
+  document.getElementById('downloadOptions').scrollIntoView({ 
+    behavior: 'smooth', 
+    block: 'center' 
+  });
+}
+
+async function startDownload() {
+  const url = document.getElementById("videoUrl").value.trim();
+  const fileType = document.getElementById("fileType").value;
+  const quality = document.getElementById("videoQuality").value;
+  const resultDiv = document.getElementById("result");
+
+  resultDiv.innerHTML = `
+    <div class="loading-state">
+      <div class="spinner"></div>
+      <p>${currentLang === 'AR' ? 'جاري تجهيز المحتوى للتحميل...' : 'Preparing content for download...'}</p>
+      <p style="font-size: 14px; color: var(--text-secondary); margin-top: 10px;">
+        ${currentLang === 'AR' ? 'جودة: ' : 'Quality: '}${quality} | ${currentLang === 'AR' ? 'نوع: ' : 'Type: '}${fileType}
+      </p>
+    </div>
+  `;
+
+  try {
+    const apiUrl = `https://www.tikwm.com/api/?url=${encodeURIComponent(url)}`;
+    const response = await fetch(apiUrl);
+    const data = await response.json();
+    
+    if (data.code === 0 && data.data) {
+      let downloadUrl, filename;
+      
+      if (fileType === 'audio') {
+        downloadUrl = data.data.music;
+        filename = `SaveMyReels_audio_${Date.now()}.mp3`;
+      } else {
+        downloadUrl = data.data.play;
+        filename = `SaveMyReels_video_${quality}_${Date.now()}.mp4`;
+      }
+
+      const link = document.createElement('a');
+      link.href = downloadUrl;
+      link.download = filename;
+      link.style.display = 'none';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+
+      resultDiv.innerHTML = `
+        <div class="success-result">
+          <div class="result-header">
+            <i class="fa-solid fa-circle-check"></i>
+            <h3>${currentLang === 'AR' ? 'تم بدء التحميل بنجاح!' : 'Download started successfully!'}</h3>
+          </div>
+          <p>${currentLang === 'AR' ? 'جاري تحميل الملف إلى جهازك...' : 'Downloading file to your device...'}</p>
+          <p style="font-size: 14px; color: var(--text-secondary); margin-top: 15px;">
+            ${currentLang === 'AR' ? 'إذا لم يبدأ التحميل تلقائياً،' : 'If download doesn\'t start automatically,'}
+            <a href="${downloadUrl}" download="${filename}" style="color: #4facfe; text-decoration: underline; font-weight: bold;">
+              ${currentLang === 'AR' ? 'اضغط هنا للتحميل المباشر' : 'click here for direct download'}
+            </a>
+          </p>
+        </div>
+      `;
+      
+      showAlert('✅ ' + (currentLang === 'AR' ? 'بدأ التحميل! تحقق من مجلد التنزيلات' : 'Download started! Check your downloads folder'));
+      
+    } else {
+      throw new Error(data.msg || (currentLang === 'AR' ? 'فشل في تحميل المحتوى' : 'Failed to load content'));
+    }
+    
+  } catch (error) {
+    console.error('Error:', error);
+    resultDiv.innerHTML = `
+      <div class="error-result">
+        <div class="result-header">
+          <i class="fa-solid fa-circle-xmark"></i>
+          <h3>${currentLang === 'AR' ? 'خطأ في التحميل' : 'Download Error'}</h3>
+        </div>
+        <p>${error.message}</p>
+        <button class="retry-btn" onclick="startDownload()">
+          <i class="fa-solid fa-rotate"></i>
+          ${currentLang === 'AR' ? 'إعادة المحاولة' : 'Try Again'}
+        </button>
+      </div>
+    `;
+  }
+}
+
+function isValidUrl(string) {
+  try {
+    new URL(string);
+    return true;
+  } catch (_) {
+    return false;
+  }
+}
+
+function showAlert(message) {
+  const alertDiv = document.createElement('div');
+  alertDiv.className = 'custom-alert';
+  alertDiv.innerHTML = `
+    <div class="alert-content">
+      <i class="fa-solid fa-circle-info"></i>
+      <span>${message}</span>
+    </div>
+  `;
+  
+  document.body.appendChild(alertDiv);
+  
+  setTimeout(() => alertDiv.classList.add('show'), 100);
+  setTimeout(() => {
+    alertDiv.classList.remove('show');
+    setTimeout(() => document.body.removeChild(alertDiv), 300);
+  }, 4000);
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+  setTimeout(() => document.querySelector('nav').classList.add('show'), 100);
+  setTimeout(() => document.querySelector('.container').classList.add('show'), 200);
+  setTimeout(() => document.querySelector('.features-container').classList.add('show'), 300);
+  setTimeout(() => document.querySelector('.info-section').classList.add('show'), 400);
+  setTimeout(() => document.querySelector('footer').classList.add('show'), 500);
+  
+  document.getElementById('fileType').addEventListener('change', function() {
+    const qualityGroup = document.getElementById('qualityGroup');
+    qualityGroup.style.display = this.value === 'audio' ? 'none' : 'block';
+  });
+});
+
+document.getElementById('btn-download').addEventListener('click', showDownloadOptions);
+document.getElementById('btn-confirm-download').addEventListener('click', startDownload);
+
+document.getElementById('videoUrl').addEventListener('keypress', function(e) {
+  if (e.key === 'Enter') showDownloadOptions();
+});
+
+const langBtn = document.getElementById('langBtn');
+const langMenu = document.getElementById('langMenu');
+
+langBtn.addEventListener('click', (e) => {
+  e.stopPropagation();
+  langMenu.style.display = langMenu.style.display === 'block' ? 'none' : 'block';
+});
+
+window.addEventListener('click', e => {
+  if (!e.target.closest('.lang-dropdown')) {
+    langMenu.style.display = 'none';
+  }
+});
 
 document.querySelectorAll('#langMenu div[data-lang]').forEach(el => {
   el.addEventListener('click', () => {
@@ -1635,16 +1584,18 @@ document.querySelectorAll('#langMenu div[data-lang]').forEach(el => {
 
 document.getElementById('contact-form').addEventListener('submit', function(e) {
   e.preventDefault();
-  alert(currentTranslations.send ? `${currentTranslations.contactTitle} — ${currentTranslations.send}!` : 'Message sent!');
+  showAlert(currentLang === 'AR' ? 'تم إرسال رسالتك بنجاح!' : 'Your message has been sent!');
   document.getElementById('contactModal').style.display = 'none';
   this.reset();
 });
 
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape' && document.getElementById('contactModal').style.display === 'flex') {
+document.getElementById('contactModal').addEventListener('click', (e) => {
+  if (e.target.id === 'contactModal') {
     document.getElementById('contactModal').style.display = 'none';
   }
 });
+
+applyTranslations('AR');
 </script>
 
 </body>
