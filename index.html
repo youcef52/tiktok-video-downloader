@@ -4,7 +4,6 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
 
-<!-- 🔧 السيو المحسن -->
 <title>SaveMyReels - تحميل فيديوهات بدون علامة مائية | Download Videos Without Watermark</title>
 <meta name="description" content="تحميل فيديوهات وقصص بدون علامة مائية - سريع، آمن ومجاني. Download videos and stories without watermark - fast, safe and free.">
 <meta name="keywords" content="تحميل فيديوهات, بدون علامة مائية, تنزيل مقاطع, save videos, download without watermark">
@@ -1178,25 +1177,24 @@ footer.show {
 
   <!-- 🆕 إضافة خيارات الجودة فقط -->
   <div class="quality-options" id="qualityOptions">
-    <h4>اختر جودة التحميل:</h4>
+    <h4 id="quality-title">اختر جودة التحميل:</h4>
     <div class="quality-buttons">
       <button class="quality-btn active" data-quality="original">
-        <span class="quality-badge">أفضل</span> الجودة الأصلية
+        <span class="quality-badge" id="quality-best">أفضل</span> <span id="quality-original">الجودة الأصلية</span>
       </button>
-      <button class="quality-btn" data-quality="1080">عالية 1080p</button>
-      <button class="quality-btn" data-quality="720">متوسطة 720p</button>
-      <button class="quality-btn" data-quality="480">منخفضة 480p</button>
+      <button class="quality-btn" data-quality="1080"><span id="quality-1080">عالية 1080p</span></button>
+      <button class="quality-btn" data-quality="720"><span id="quality-720">متوسطة 720p</span></button>
+      <button class="quality-btn" data-quality="480"><span id="quality-480">منخفضة 480p</span></button>
     </div>
     <button class="download" id="btn-confirm-download" style="width: 100%; margin-top: 15px;">
       <i class="fa-solid fa-download"></i>
-      <span>بدء التحميل</span>
+      <span id="confirm-download">بدء التحميل</span>
     </button>
   </div>
 </div>
 
 <div id="result"></div>
 
-<!-- باقي المحتوى الأصلي يبقى كما هو -->
 <div class="features-container">
   <div class="feature-column">
     <div class="feature">
@@ -1242,7 +1240,7 @@ footer.show {
   <span id="footer-text">© 2025 SaveMyReels - جميع الحقوق محفوظة</span>
   <button class="contact" onclick="document.getElementById('contactModal').style.display='flex'" aria-label="اتصل بنا">
     <i class="fa-solid fa-envelope"></i>
-    <span>اتصل بنا</span>
+    <span id="contact-btn">اتصل بنا</span>
   </button>
 </footer>
 
@@ -1256,10 +1254,10 @@ footer.show {
       <div class="button-group">
         <button type="submit" class="send">
           <i class="fa-solid fa-paper-plane"></i>
-          <span>إرسال</span>
+          <span id="send-btn">إرسال</span>
         </button>
         <button type="button" class="cancel" onclick="document.getElementById('contactModal').style.display='none'">
-          <span>إلغاء</span>
+          <span id="cancel-btn">إلغاء</span>
         </button>
       </div>
     </form>
@@ -1267,28 +1265,226 @@ footer.show {
 </div>
 
 <script>
-// المتغيرات العامة
+// 🌍 نظام الترجمة الكامل
+const translations = {
+  AR: {
+    // Navigation
+    langLabel: 'AR',
+    
+    // Main Section
+    mainTitle: '🚀 SaveMyReels - تحميل الفيديوهات',
+    mainDesc: 'ألصق رابط الفيديو واضغط التحميل — سريع، آمن، وبدون علامة مائية.',
+    placeholder: 'ضع رابط الفيديو هنا',
+    
+    // Buttons
+    btnVideo: 'تحميل فيديو',
+    btnStory: 'تحميل قصة', 
+    btnMp3: 'تحميل MP3',
+    
+    // Quality Options
+    qualityTitle: 'اختر جودة التحميل:',
+    qualityBest: 'أفضل',
+    qualityOriginal: 'الجودة الأصلية',
+    quality1080: 'عالية 1080p',
+    quality720: 'متوسطة 720p',
+    quality480: 'منخفضة 480p',
+    confirmDownload: 'بدء التحميل',
+    
+    // Features
+    feature1Title: 'تحميل سريع',
+    feature1Text: 'خادمنا يوفر تنزيل أسرع من أي وقت مضى.',
+    feature2Title: 'آمن',
+    feature2Text: 'لا نحفظ بياناتك أو روابطك إطلاقًا.',
+    feature3Title: 'بدون علامة مائية',
+    feature3Text: 'استمتع بفيديوهات نظيفة وجاهزة للمشاركة.',
+    feature4Title: 'تحميل MP3',
+    feature4Text: 'استخرج الصوت من أي فيديو بصيغة MP3.',
+    
+    // Info Section
+    infoTitle: 'بدون علامة مائية • غير محدود • مجاني',
+    infoDesc: 'SaveMyReels أداة متقدمة لتحميل الفيديوهات بدون علامة مائية. يمكنك حفظ مقاطع الفيديو عالية الدقة HD بأعلى جودة ممكنة.',
+    
+    // Footer
+    footer: '© 2025 SaveMyReels - جميع الحقوق محفوظة',
+    contactBtn: 'اتصل بنا',
+    
+    // Contact Modal
+    contactTitle: 'اتصل بنا',
+    contactName: 'الاسم الكامل',
+    contactEmail: 'البريد الإلكتروني',
+    contactMessage: 'رسالتك',
+    sendBtn: 'إرسال',
+    cancelBtn: 'إلغاء',
+    
+    // Alerts
+    alertEnterUrl: 'أدخل الرابط أولا',
+    alertInvalidUrl: 'الرجاء إدخال رابط صحيح',
+    alertDownloadStarted: 'بدأ التحميل! تحقق من مجلد التنزيلات'
+  },
+  EN: {
+    // Navigation
+    langLabel: 'EN',
+    
+    // Main Section
+    mainTitle: '🚀 SaveMyReels - Video Downloader',
+    mainDesc: 'Paste video link and click download — fast, safe, and watermark-free.',
+    placeholder: 'Paste video link here',
+    
+    // Buttons
+    btnVideo: 'Download Video',
+    btnStory: 'Download Story',
+    btnMp3: 'Download MP3',
+    
+    // Quality Options
+    qualityTitle: 'Choose Download Quality:',
+    qualityBest: 'Best',
+    qualityOriginal: 'Original Quality',
+    quality1080: 'High 1080p',
+    quality720: 'Medium 720p',
+    quality480: 'Low 480p',
+    confirmDownload: 'Start Download',
+    
+    // Features
+    feature1Title: 'Fast Download',
+    feature1Text: 'Our server provides super fast downloads.',
+    feature2Title: 'Safe',
+    feature2Text: 'We never save your data or links.',
+    feature3Title: 'No Watermark',
+    feature3Text: 'Enjoy clean videos ready to share.',
+    feature4Title: 'MP3 Download',
+    feature4Text: 'Extract audio from any video as MP3.',
+    
+    // Info Section
+    infoTitle: 'No Watermark • Unlimited • Free',
+    infoDesc: 'SaveMyReels advanced video downloader without watermark. Download HD videos in highest quality.',
+    
+    // Footer
+    footer: '© 2025 SaveMyReels - All rights reserved',
+    contactBtn: 'Contact Us',
+    
+    // Contact Modal
+    contactTitle: 'Contact Us',
+    contactName: 'Full Name',
+    contactEmail: 'Email',
+    contactMessage: 'Your Message',
+    sendBtn: 'Send',
+    cancelBtn: 'Cancel',
+    
+    // Alerts
+    alertEnterUrl: 'Please enter URL first',
+    alertInvalidUrl: 'Please enter a valid URL',
+    alertDownloadStarted: 'Download started! Check your downloads folder'
+  },
+  FR: {
+    langLabel: 'FR',
+    mainTitle: '🚀 SaveMyReels - Téléchargeur de Vidéos',
+    mainDesc: 'Collez le lien vidéo et téléchargez — rapide, sûr et sans watermark.',
+    placeholder: 'Collez le lien vidéo ici',
+    btnVideo: 'Télécharger Vidéo',
+    btnStory: 'Télécharger Story',
+    btnMp3: 'Télécharger MP3',
+    qualityTitle: 'Choisir la qualité:',
+    qualityBest: 'Meilleur',
+    qualityOriginal: 'Qualité Originale',
+    quality1080: 'Haute 1080p',
+    quality720: 'Moyenne 720p',
+    quality480: 'Basse 480p',
+    confirmDownload: 'Commencer le Téléchargement',
+    feature1Title: 'Téléchargement Rapide',
+    feature1Text: 'Notre serveur offre des téléchargements ultra-rapides.',
+    feature2Title: 'Sécurisé',
+    feature2Text: 'Nous ne sauvegardons jamais vos données.',
+    feature3Title: 'Sans Watermark',
+    feature3Text: 'Profitez de vidéos propres à partager.',
+    feature4Title: 'Téléchargement MP3',
+    feature4Text: 'Extrayez l\'audio de toute vidéo en MP3.',
+    infoTitle: 'Sans Watermark • Illimité • Gratuit',
+    infoDesc: 'SaveMyReels téléchargeur de vidéos avancé sans watermark.',
+    footer: '© 2025 SaveMyReels - Tous droits réservés',
+    contactBtn: 'Contactez-nous',
+    contactTitle: 'Contactez-nous',
+    contactName: 'Nom Complet',
+    contactEmail: 'Email',
+    contactMessage: 'Votre Message',
+    sendBtn: 'Envoyer',
+    cancelBtn: 'Annuler',
+    alertEnterUrl: 'Veuillez entrer l\'URL d\'abord',
+    alertInvalidUrl: 'Veuillez entrer une URL valide',
+    alertDownloadStarted: 'Téléchargement commencé! Vérifiez votre dossier de téléchargements'
+  }
+};
+
+let currentLang = 'AR';
 let currentDownloadType = '';
 let currentQuality = 'original';
+
+// دالة تطبيق الترجمة
+function applyTranslations(lang) {
+  const t = translations[lang] || translations.AR;
+  currentLang = lang;
+
+  // تحديث العناصر
+  document.getElementById('main-title').textContent = t.mainTitle;
+  document.getElementById('main-desc').textContent = t.mainDesc;
+  document.getElementById('videoUrl').placeholder = t.placeholder;
+  
+  document.getElementById('btn-video').innerHTML = `<i class="fa-solid fa-download"></i><span>${t.btnVideo}</span>`;
+  document.getElementById('btn-story').innerHTML = `<i class="fa-solid fa-images"></i><span>${t.btnStory}</span>`;
+  document.getElementById('btn-mp3').innerHTML = `<i class="fa-solid fa-music"></i><span>${t.btnMp3}</span>`;
+  
+  document.getElementById('quality-title').textContent = t.qualityTitle;
+  document.getElementById('quality-best').textContent = t.qualityBest;
+  document.getElementById('quality-original').textContent = t.qualityOriginal;
+  document.getElementById('quality-1080').textContent = t.quality1080;
+  document.getElementById('quality-720').textContent = t.quality720;
+  document.getElementById('quality-480').textContent = t.quality480;
+  document.getElementById('confirm-download').textContent = t.confirmDownload;
+  
+  document.getElementById('feature1-title').textContent = t.feature1Title;
+  document.getElementById('feature1-text').textContent = t.feature1Text;
+  document.getElementById('feature2-title').textContent = t.feature2Title;
+  document.getElementById('feature2-text').textContent = t.feature2Text;
+  document.getElementById('feature3-title').textContent = t.feature3Title;
+  document.getElementById('feature3-text').textContent = t.feature3Text;
+  document.getElementById('feature4-title').textContent = t.feature4Title;
+  document.getElementById('feature4-text').textContent = t.feature4Text;
+  
+  document.getElementById('info-title').textContent = t.infoTitle;
+  document.getElementById('info-desc').textContent = t.infoDesc;
+  
+  document.getElementById('footer-text').textContent = t.footer;
+  document.getElementById('contact-btn').textContent = t.contactBtn;
+  
+  document.getElementById('contact-title').textContent = t.contactTitle;
+  document.querySelector('#contact-form input[name="from_name"]').placeholder = t.contactName;
+  document.querySelector('#contact-form input[name="from_email"]').placeholder = t.contactEmail;
+  document.querySelector('#contact-form textarea[name="message"]').placeholder = t.contactMessage;
+  document.getElementById('send-btn').textContent = t.sendBtn;
+  document.getElementById('cancel-btn').textContent = t.cancelBtn;
+
+  document.getElementById('langBtn').textContent = `🌐 ${t.langLabel}`;
+  document.documentElement.lang = lang.toLowerCase();
+  document.documentElement.dir = lang === 'AR' ? 'rtl' : 'ltr';
+}
 
 // دالة إظهار خيارات الجودة
 function showQualityOptions(type) {
   const url = document.getElementById("videoUrl").value.trim();
+  const t = translations[currentLang];
   
   if (!url) {
-    showAlert('أدخل الرابط أولا');
+    showAlert(t.alertEnterUrl);
     return;
   }
 
   if (!isValidUrl(url)) {
-    showAlert('الرجاء إدخال رابط صحيح');
+    showAlert(t.alertInvalidUrl);
     return;
   }
 
   currentDownloadType = type;
   document.getElementById('qualityOptions').style.display = 'block';
   
-  // تحريك العرض إلى الخيارات
   document.getElementById('qualityOptions').scrollIntoView({ 
     behavior: 'smooth', 
     block: 'center' 
@@ -1299,24 +1495,24 @@ function showQualityOptions(type) {
 function selectQuality(quality) {
   currentQuality = quality;
   
-  // تحديث الأزرار النشطة
   document.querySelectorAll('.quality-btn').forEach(btn => {
     btn.classList.remove('active');
   });
   event.target.classList.add('active');
 }
 
-// دالة التحميل النهائية
+// 🛠️ دالة التحميل المحسنة - بدون فتح صفحات جديدة
 async function startDownload() {
   const url = document.getElementById("videoUrl").value.trim();
   const resultDiv = document.getElementById("result");
+  const t = translations[currentLang];
 
   resultDiv.innerHTML = `
     <div class="loading-state">
       <div class="spinner"></div>
-      <p>جاري تجهيز ${currentDownloadType === 'video' ? 'الفيديو' : currentDownloadType === 'mp3' ? 'الصوت' : 'القصة'} للتحميل...</p>
+      <p>${currentLang === 'AR' ? 'جاري تجهيز المحتوى...' : 'Preparing content...'}</p>
       <p style="font-size: 14px; color: var(--text-secondary); margin-top: 10px;">
-        الجودة: ${currentQuality}
+        ${currentLang === 'AR' ? 'الجودة:' : 'Quality:'} ${currentQuality}
       </p>
     </div>
   `;
@@ -1337,7 +1533,7 @@ async function startDownload() {
         filename = `SaveMyReels_${currentDownloadType}_${currentQuality}_${Date.now()}.mp4`;
       }
 
-      // التحميل المباشر بدون فتح صفحة جديدة
+      // 🎯 التحميل المباشر بدون فتح صفحة جديدة
       const link = document.createElement('a');
       link.href = downloadUrl;
       link.download = filename;
@@ -1346,29 +1542,27 @@ async function startDownload() {
       link.click();
       document.body.removeChild(link);
 
+      // رسالة النجاح
       resultDiv.innerHTML = `
         <div class="success-result">
           <div class="result-header">
             <i class="fa-solid fa-circle-check"></i>
-            <h3>تم بدء التحميل بنجاح!</h3>
+            <h3>${currentLang === 'AR' ? 'تم بدء التحميل!' : 'Download Started!'}</h3>
           </div>
-          <p>جاري تحميل ${currentDownloadType === 'video' ? 'الفيديو' : currentDownloadType === 'mp3' ? 'الصوت' : 'القصة'} إلى جهازك...</p>
+          <p>${currentLang === 'AR' ? 'جاري تحميل الملف إلى جهازك...' : 'Downloading file to your device...'}</p>
           <p style="font-size: 14px; color: var(--text-secondary); margin-top: 15px;">
-            الجودة: ${currentQuality}
-          </p>
-          <p style="font-size: 14px; color: var(--text-secondary); margin-top: 15px;">
-            إذا لم يبدأ التحميل تلقائياً، 
+            ${currentLang === 'AR' ? 'إذا لم يبدأ التحميل تلقائياً،' : 'If download doesn\'t start automatically,'}
             <a href="${downloadUrl}" download="${filename}" style="color: #4facfe; text-decoration: underline; font-weight: bold;">
-              اضغط هنا للتحميل المباشر
+              ${currentLang === 'AR' ? 'اضغط هنا' : 'click here'}
             </a>
           </p>
         </div>
       `;
       
-      showAlert('✅ بدأ التحميل! تحقق من مجلد التنزيلات');
+      showAlert('✅ ' + t.alertDownloadStarted);
       
     } else {
-      throw new Error(data.msg || 'فشل في تحميل المحتوى');
+      throw new Error(data.msg || 'Failed to load content');
     }
     
   } catch (error) {
@@ -1377,12 +1571,12 @@ async function startDownload() {
       <div class="error-result">
         <div class="result-header">
           <i class="fa-solid fa-circle-xmark"></i>
-          <h3>خطأ في التحميل</h3>
+          <h3>${currentLang === 'AR' ? 'خطأ في التحميل' : 'Download Error'}</h3>
         </div>
         <p>${error.message}</p>
         <button class="retry-btn" onclick="startDownload()">
           <i class="fa-solid fa-rotate"></i>
-          إعادة المحاولة
+          ${currentLang === 'AR' ? 'إعادة المحاولة' : 'Try Again'}
         </button>
       </div>
     `;
@@ -1447,20 +1641,7 @@ document.getElementById('videoUrl').addEventListener('keypress', function(e) {
   }
 });
 
-// باقي كود الترجمة والنظام يبقى كما هو
-const translations = {
-  AR: {
-    // ... نفس كود الترجمة السابق
-  },
-  EN: {
-    // ... نفس كود الترجمة السابق  
-  }
-};
-
-// تطبيق الترجمة الافتراضية
-applyTranslations('AR');
-
-// نظام اللغة يبقى كما هو
+// نظام اللغة
 const langBtn = document.getElementById('langBtn');
 const langMenu = document.getElementById('langMenu');
 
@@ -1483,10 +1664,11 @@ document.querySelectorAll('#langMenu div[data-lang]').forEach(el => {
   });
 });
 
-// نموذج الاتصال يبقى كما هو
+// نموذج الاتصال
 document.getElementById('contact-form').addEventListener('submit', function(e) {
   e.preventDefault();
-  showAlert('تم إرسال رسالتك بنجاح!');
+  const t = translations[currentLang];
+  showAlert(currentLang === 'AR' ? 'تم إرسال رسالتك بنجاح!' : 'Your message has been sent!');
   document.getElementById('contactModal').style.display = 'none';
   this.reset();
 });
@@ -1496,6 +1678,9 @@ document.getElementById('contactModal').addEventListener('click', (e) => {
     document.getElementById('contactModal').style.display = 'none';
   }
 });
+
+// تطبيق اللغة الافتراضية
+applyTranslations('AR');
 </script>
 
 </body>
