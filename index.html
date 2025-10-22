@@ -365,6 +365,66 @@ button.contact:hover {
   box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
 }
 
+/* أنماط خيارات الجودة الجديدة */
+.quality-options {
+  margin-top: 20px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  text-align: center;
+  animation: fadeIn 0.3s ease;
+}
+
+.quality-options h4 {
+  margin-bottom: 15px;
+  color: var(--text-primary);
+  font-size: 18px;
+}
+
+.quality-buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.quality-btn {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: var(--transition);
+  font-weight: 600;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.quality-btn.hd {
+  background: var(--success-gradient);
+  color: white;
+  box-shadow: 0 4px 15px rgba(79, 172, 254, 0.4);
+}
+
+.quality-btn.sd {
+  background: var(--primary-gradient);
+  color: white;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+}
+
+.quality-btn.low {
+  background: var(--secondary-gradient);
+  color: white;
+  box-shadow: 0 4px 15px rgba(245, 87, 108, 0.4);
+}
+
+.quality-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+
 .features-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -1113,6 +1173,22 @@ footer.show {
       <span>تحميل MP3</span>
     </button>
   </div>
+  
+  <!-- إضافة خيارات الجودة تحت الأزرار -->
+  <div class="quality-options" id="qualityOptions">
+    <h4>اختر جودة التحميل</h4>
+    <div class="quality-buttons">
+      <button class="quality-btn hd" data-quality="hd">
+        <i class="fa-solid fa-star"></i> HD - عالية
+      </button>
+      <button class="quality-btn sd" data-quality="sd">
+        <i class="fa-solid fa-play"></i> SD - متوسطة
+      </button>
+      <button class="quality-btn low" data-quality="low">
+        <i class="fa-solid fa-gauge-low"></i> منخفضة
+      </button>
+    </div>
+  </div>
 </div>
 
 <div id="result"></div>
@@ -1242,22 +1318,25 @@ footer.show {
 </div>
 
 <script>
+// متغيرات لإدارة خيارات الجودة
+let currentDownloadType = '';
+let currentVideoUrl = '';
+
 window.addEventListener('DOMContentLoaded', () => {
   setTimeout(() => document.querySelector('nav').classList.add('show'), 100);
   setTimeout(() => document.querySelector('.container').classList.add('show'), 200);
   setTimeout(() => document.querySelector('.features-container').classList.add('show'), 300);
   setTimeout(() => document.querySelector('.info-section').classList.add('show'), 400);
   setTimeout(() => document.querySelector('footer').classList.add('show'), 500);
+  
+  // إخفاء خيارات الجودة في البداية
+  document.getElementById('qualityOptions').style.display = 'none';
 });
 
-// دالة التحميل الرئيسية - تحميل مباشر بدون نافذة جديدة
-async function downloadContent(type) {
+// دالة لإظهار خيارات الجودة
+function showQualityOptions(type) {
   const url = document.getElementById("videoUrl").value.trim();
-  const btnVideo = document.getElementById('btn-video');
-  const btnStory = document.getElementById('btn-story');
-  const btnMp3 = document.getElementById('btn-mp3');
-  const resultDiv = document.getElementById("result");
- 
+  
   if (!url) {
     showAlert("أدخل الرابط أولا");
     return;
@@ -1267,27 +1346,40 @@ async function downloadContent(type) {
     showAlert("الرجاء إدخال رابط تيك توك صحيح");
     return;
   }
- 
-  let activeBtn;
-  if (type === 'video') activeBtn = btnVideo;
-  else if (type === 'story') activeBtn = btnStory;
-  else if (type === 'mp3') activeBtn = btnMp3;
- 
-  // إظهار حالة التحميل فقط
+  
+  currentDownloadType = type;
+  currentVideoUrl = url;
+  
+  // إظهار خيارات الجودة
+  const qualityOptions = document.getElementById('qualityOptions');
+  qualityOptions.style.display = 'block';
+  
+  // تمرير للأعلى لرؤية خيارات الجودة
+  qualityOptions.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  
+  showAlert(`اختر جودة التحميل لـ ${type === 'video' ? 'الفيديو' : type === 'mp3' ? 'الصوت' : 'القصة'}`);
+}
+
+// دالة التحميل الرئيسية مع الجودة
+async function downloadWithQuality(quality) {
+  const resultDiv = document.getElementById("result");
+  const qualityOptions = document.getElementById('qualityOptions');
+  
+  // إخفاء خيارات الجودة
+  qualityOptions.style.display = 'none';
+  
+  // إظهار حالة التحميل
   resultDiv.innerHTML = `
     <div class="loading-state">
       <div class="spinner"></div>
-      <p>جاري تجهيز ${type === 'video' ? 'الفيديو' : type === 'mp3' ? 'الصوت' : 'القصة'} للتحميل...</p>
+      <p>جاري تجهيز ${currentDownloadType === 'video' ? 'الفيديو' : currentDownloadType === 'mp3' ? 'الصوت' : 'القصة'} بجودة ${quality === 'hd' ? 'عالية' : quality === 'sd' ? 'متوسطة' : 'منخفضة'}...</p>
       <p style="font-size: 14px; color: var(--text-secondary); margin-top: 10px;">قد يستغرق هذا بضع ثوانٍ</p>
     </div>
   `;
   
-  activeBtn.classList.add('loading');
-  activeBtn.disabled = true;
- 
   try {
-    // استخدام API مباشر بدون الحاجة للسيرفر
-    const apiUrl = `https://www.tikwm.com/api/?url=${encodeURIComponent(url)}`;
+    // استخدام API مباشر
+    const apiUrl = `https://www.tikwm.com/api/?url=${encodeURIComponent(currentVideoUrl)}`;
     
     const response = await fetch(apiUrl, {
       method: 'GET',
@@ -1302,20 +1394,20 @@ async function downloadContent(type) {
     if (data.code === 0 && data.data) {
       let downloadUrl, filename;
       
-      if (type === 'video') {
+      if (currentDownloadType === 'video') {
         downloadUrl = data.data.play;
-        filename = `tiktok_video_${Date.now()}.mp4`;
-      } else if (type === 'mp3') {
+        filename = `tiktok_video_${quality}_${Date.now()}.mp4`;
+      } else if (currentDownloadType === 'mp3') {
         downloadUrl = data.data.music;
-        filename = `tiktok_audio_${Date.now()}.mp3`;
-      } else if (type === 'story') {
+        filename = `tiktok_audio_${quality}_${Date.now()}.mp3`;
+      } else if (currentDownloadType === 'story') {
         downloadUrl = data.data.play;
-        filename = `tiktok_story_${Date.now()}.mp4`;
+        filename = `tiktok_story_${quality}_${Date.now()}.mp4`;
       }
 
-      // طريقة التحميل المباشر عبر blob لمنع فتح صفحة جديدة
+      // طريقة التحميل المباشر
       try {
-        showAlert('جاري تحميل الملف...');
+        showAlert(`جاري تحميل الملف بجودة ${quality === 'hd' ? 'عالية' : quality === 'sd' ? 'متوسطة' : 'منخفضة'}...`);
         
         const videoResponse = await fetch(downloadUrl);
         const blob = await videoResponse.blob();
@@ -1329,12 +1421,10 @@ async function downloadContent(type) {
         link.click();
         document.body.removeChild(link);
         
-        // تحرير الذاكرة بعد التحميل
         setTimeout(() => URL.revokeObjectURL(blobUrl), 1000);
         
       } catch (blobError) {
-        // إذا فشلت طريقة blob، نستخدم الطريقة العادية
-        console.log('استخدام الطريقة العادية');
+        // الطريقة العادية إذا فشلت طريقة blob
         const link = document.createElement('a');
         link.href = downloadUrl;
         link.download = filename;
@@ -1351,7 +1441,7 @@ async function downloadContent(type) {
             <i class="fa-solid fa-circle-check"></i>
             <h3>تم بدء التحميل بنجاح!</h3>
           </div>
-          <p>جاري تحميل ${type === 'video' ? 'الفيديو' : type === 'mp3' ? 'الصوت' : 'القصة'} إلى جهازك...</p>
+          <p>جاري تحميل ${currentDownloadType === 'video' ? 'الفيديو' : currentDownloadType === 'mp3' ? 'الصوت' : 'القصة'} بجودة ${quality === 'hd' ? 'عالية' : quality === 'sd' ? 'متوسطة' : 'منخفضة'}...</p>
           <p style="font-size: 14px; color: var(--text-secondary); margin-top: 15px;">
             إذا لم يبدأ التحميل تلقائياً، 
             <a href="${downloadUrl}" download="${filename}" style="color: #4facfe; text-decoration: underline; font-weight: bold;">
@@ -1376,15 +1466,12 @@ async function downloadContent(type) {
           <h3>خطأ في التحميل</h3>
         </div>
         <p>${error.message || 'حدث خطأ غير متوقع'}</p>
-        <button class="retry-btn" onclick="downloadContent('${type}')">
+        <button class="retry-btn" onclick="downloadWithQuality('${quality}')">
           <i class="fa-solid fa-rotate"></i>
           إعادة المحاولة
         </button>
       </div>
     `;
-  } finally {
-    activeBtn.classList.remove('loading');
-    activeBtn.disabled = false;
   }
 }
 
@@ -1413,15 +1500,23 @@ function showAlert(message) {
   }, 4000);
 }
 
-// إضافة Event Listeners للأزرار
-document.getElementById('btn-video').addEventListener('click', () => downloadContent('video'));
-document.getElementById('btn-story').addEventListener('click', () => downloadContent('story'));
-document.getElementById('btn-mp3').addEventListener('click', () => downloadContent('mp3'));
+// إضافة Event Listeners للأزرار الرئيسية
+document.getElementById('btn-video').addEventListener('click', () => showQualityOptions('video'));
+document.getElementById('btn-story').addEventListener('click', () => showQualityOptions('story'));
+document.getElementById('btn-mp3').addEventListener('click', () => showQualityOptions('mp3'));
+
+// إضافة Event Listeners لأزرار الجودة
+document.querySelectorAll('.quality-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const quality = btn.getAttribute('data-quality');
+    downloadWithQuality(quality);
+  });
+});
 
 // السماح بالضغط على Enter
 document.getElementById('videoUrl').addEventListener('keypress', function(e) {
   if (e.key === 'Enter') {
-    downloadContent('video');
+    showQualityOptions('video');
   }
 });
 
@@ -1648,4 +1743,4 @@ document.addEventListener('keydown', (e) => {
 </script>
 
 </body>
-  </html>
+</html>
