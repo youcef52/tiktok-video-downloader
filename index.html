@@ -1339,7 +1339,7 @@ footer.show {
 
 <footer>
   <span id="footer-text">© 2025 جميع الحقوق محفوظة — ClipVault</span>
-  <button class="contact" onclick="document.getElementById('contactModal').style.display='flex'" aria-label="اتصل بنا">
+  <button class="contact" id="contact-btn" onclick="document.getElementById('contactModal').style.display='flex'" aria-label="اتصل بنا">
     <i class="fa-solid fa-envelope"></i>
     <span>اتصل بنا</span>
   </button>
@@ -1349,15 +1349,15 @@ footer.show {
   <div class="modal-content">
     <h3 id="contact-title">اتصل بنا</h3>
     <form id="contact-form">
-      <input type="text" name="from_name" placeholder="الاسم الكامل" required aria-label="الاسم الكامل">
-      <input type="email" name="from_email" placeholder="البريد الإلكتروني" required aria-label="البريد الإلكتروني">
-      <textarea name="message" placeholder="رسالتك" rows="4" required aria-label="رسالتك"></textarea>
+      <input type="text" id="contact-name" name="from_name" placeholder="الاسم الكامل" required aria-label="الاسم الكامل">
+      <input type="email" id="contact-email" name="from_email" placeholder="البريد الإلكتروني" required aria-label="البريد الإلكتروني">
+      <textarea id="contact-message" name="message" placeholder="رسالتك" rows="4" required aria-label="رسالتك"></textarea>
       <div class="button-group">
-        <button type="submit" class="send">
+        <button type="submit" class="send" id="send-btn">
           <i class="fa-solid fa-paper-plane"></i>
           <span>إرسال</span>
         </button>
-        <button type="button" class="cancel" onclick="document.getElementById('contactModal').style.display='none'">
+        <button type="button" class="cancel" id="cancel-btn" onclick="document.getElementById('contactModal').style.display='none'">
           <span>إلغاء</span>
         </button>
       </div>
@@ -1848,7 +1848,7 @@ const translations = {
         "info-title": "Sem Marca d'Água • Ilimitado • Gratuito",
         "info-desc": "ClipVault é um dos downloaders de vídeo online mais populares que permite salvar vídeos de alta definição HD na mais alta qualidade possível sem marca d'água. Baixe vídeos e clipes de música em qualquer dispositivo que desejar: celular, PC ou tablet. Com ClipVault você pode baixar sem marca d'água e com melhor qualidade, o que a maioria das ferramentas disponíveis não consegue fazer.",
         "info-browser-title": "Download Apenas pelo Navegador",
-        "info-browser-desc": "Queremos simplificar as coisas para você. Não precisa baixar ou instalar nenhum programa. Tudo é feito diretamente do seu navegador. Para melhor desempenho você pode baixar o app ClipVault em dispositivos Android ou iOS. O app permite salvar vídeos em qualidade muito alta sem marca d'água, ilimitado e 100% gratuito.",
+        "info-browser-desc": "Queremos simplificar as coisas para você. Não precisa baixar ou instalar nenhum programa. Tudo é feito diretamente do seu navegador. Para melhor desempenho você pode baixar o app ClipVault em dispositivos Android ou iOS. The app permite salvar vídeos em qualidade muito alta sem marca d'água, ilimitado e 100% gratuito.",
         "info-faq-title": "Como Baixar em Diferentes Dispositivos?",
         "faq-android-title": "Em telefones Android",
         "faq-android-text": "Copie o link do vídeo do aplicativo, depois cole no campo de entrada e pressione o botão de download. Você pode usar o app ClipVault para melhor desempenho.",
