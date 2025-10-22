@@ -366,7 +366,7 @@ button.contact:hover {
   box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
 }
 
-/* أنماط خيارات الجودة الجديدة */
+/* أنماط خيارات الجودة الجديدة - معدلة */
 .quality-options {
   margin-top: 20px;
   padding: 20px;
@@ -401,6 +401,9 @@ button.contact:hover {
   display: flex;
   align-items: center;
   gap: 8px;
+  position: relative;
+  min-width: 140px;
+  justify-content: center;
 }
 
 .quality-btn.hd {
@@ -426,60 +429,39 @@ button.contact:hover {
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
 }
 
-/* أنماط معاينة الفيديو - معدلة */
-.video-preview {
-  margin: 25px 0;
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.video-preview-container {
-  max-width: 500px;
-  width: 100%;
-  margin: 0 auto;
-}
-
-.video-preview video {
-  width: 100%;
-  max-width: 500px;
-  height: auto;
-  max-height: 400px;
-  border-radius: 16px;
-  box-shadow: var(--shadow-lg);
-  background: #000;
-  display: block;
-  margin: 0 auto;
-}
-
-.preview-placeholder {
-  padding: 60px 40px;
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 16px;
-  border: 2px dashed rgba(255, 255, 255, 0.1);
-  color: var(--text-secondary);
-  text-align: center;
-  max-width: 500px;
-  margin: 0 auto;
-}
-
-.preview-placeholder i {
-  font-size: 48px;
-  margin-bottom: 20px;
-  opacity: 0.5;
-  display: block;
-}
-
 .quality-badge {
   display: inline-block;
-  padding: 4px 12px;
-  background: var(--primary-gradient);
+  padding: 4px 8px;
+  background: rgba(255, 255, 255, 0.2);
   color: white;
-  border-radius: 20px;
-  font-size: 12px;
+  border-radius: 12px;
+  font-size: 10px;
   font-weight: 600;
-  margin-left: 10px;
+  margin-left: 8px;
+}
+
+/* معاينة الفيديو الصغيرة */
+.video-preview-small {
+  width: 120px;
+  height: 80px;
+  border-radius: 8px;
+  background: #000;
+  margin: 8px auto;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.video-preview-small video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.preview-icon {
+  font-size: 24px;
+  color: rgba(255, 255, 255, 0.5);
 }
 
 .features-container {
@@ -1231,31 +1213,33 @@ footer.show {
     </button>
   </div>
   
-  <!-- معاينة الفيديو - معدلة -->
-  <div class="video-preview" id="videoPreview" style="display: none;">
-    <div class="video-preview-container">
-      <video id="previewVideo" controls style="display: none;">
-        متصفحك لا يدعم تشغيل الفيديو
-      </video>
-      <div class="preview-placeholder" id="previewPlaceholder">
-        <i class="fa-solid fa-play"></i>
-        <p>سيظهر معاينة الفيديو هنا بعد التحليل</p>
-      </div>
-    </div>
-  </div>
-  
   <!-- إضافة خيارات الجودة تحت الأزرار -->
   <div class="quality-options" id="qualityOptions" style="display: none;">
     <h4 id="quality-title">اختر جودة التحميل</h4>
     <div class="quality-buttons">
       <button class="quality-btn hd" data-quality="1080">
-        <i class="fa-solid fa-star"></i> 1080p <span class="quality-badge">HD</span>
+        <div class="video-preview-small">
+          <div class="preview-icon">
+            <i class="fa-solid fa-play"></i>
+          </div>
+        </div>
+        <span>1080p <span class="quality-badge">HD</span></span>
       </button>
       <button class="quality-btn sd" data-quality="720">
-        <i class="fa-solid fa-play"></i> 720p <span class="quality-badge">SD</span>
+        <div class="video-preview-small">
+          <div class="preview-icon">
+            <i class="fa-solid fa-play"></i>
+          </div>
+        </div>
+        <span>720p <span class="quality-badge">SD</span></span>
       </button>
       <button class="quality-btn low" data-quality="480">
-        <i class="fa-solid fa-gauge-low"></i> 480p <span class="quality-badge">منخفضة</span>
+        <div class="video-preview-small">
+          <div class="preview-icon">
+            <i class="fa-solid fa-play"></i>
+          </div>
+        </div>
+        <span>480p <span class="quality-badge">منخفضة</span></span>
       </button>
     </div>
   </div>
@@ -1402,115 +1386,9 @@ window.addEventListener('DOMContentLoaded', () => {
   
   // إخفاء خيارات الجودة في البداية
   document.getElementById('qualityOptions').style.display = 'none';
-  document.getElementById('videoPreview').style.display = 'none';
 });
 
-// دالة لتحليل الفيديو وإظهار المعاينة
-async function analyzeVideo(url) {
-  const resultDiv = document.getElementById("result");
-  const videoPreview = document.getElementById('videoPreview');
-  const previewVideo = document.getElementById('previewVideo');
-  const previewPlaceholder = document.getElementById('previewPlaceholder');
-  
-  // إظهار حالة التحميل
-  resultDiv.innerHTML = `
-    <div class="loading-state">
-      <div class="spinner"></div>
-      <p>جاري تحليل الفيديو وإعداد المعاينة...</p>
-      <p style="font-size: 14px; color: var(--text-secondary); margin-top: 10px;">قد يستغرق هذا بضع ثوانٍ</p>
-    </div>
-  `;
-  
-  // إظهار قسم المعاينة
-  videoPreview.style.display = 'block';
-  previewVideo.style.display = 'none';
-  previewPlaceholder.style.display = 'block';
-  
-  try {
-    // استخدام API لتحليل الفيديو
-    const apiUrl = `https://www.tikwm.com/api/?url=${encodeURIComponent(url)}`;
-    
-    const response = await fetch(apiUrl, {
-      method: 'GET',
-      headers: {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
-        'Accept': 'application/json',
-      }
-    });
-    
-    const data = await response.json();
-    
-    if (data.code === 0 && data.data) {
-      currentVideoData = data.data;
-      
-      // إظهار معاينة الفيديو
-      if (data.data.play) {
-        previewVideo.src = data.data.play;
-        previewVideo.style.display = 'block';
-        previewPlaceholder.style.display = 'none';
-        
-        // إظهار معلومات الفيديو
-        showVideoInfo(data.data);
-      }
-      
-      resultDiv.innerHTML = '';
-      return data.data;
-      
-    } else {
-      throw new Error(data.msg || 'فشل في تحليل الفيديو');
-    }
-    
-  } catch (error) {
-    console.error('Error:', error);
-    resultDiv.innerHTML = `
-      <div class="error-result">
-        <div class="result-header">
-          <i class="fa-solid fa-circle-xmark"></i>
-          <h3>خطأ في التحليل</h3>
-        </div>
-        <p>${error.message || 'حدث خطأ غير متوقع أثناء تحليل الفيديو'}</p>
-        <button class="retry-btn" onclick="analyzeVideo('${url}')">
-          <i class="fa-solid fa-rotate"></i>
-          إعادة المحاولة
-        </button>
-      </div>
-    `;
-    throw error;
-  }
-}
-
-// دالة لإظهار معلومات الفيديو
-function showVideoInfo(videoData) {
-  const resultDiv = document.getElementById("result");
-  
-  let infoHTML = `
-    <div class="success-result">
-      <div class="result-header">
-        <i class="fa-solid fa-circle-check"></i>
-        <h3>تم تحليل الفيديو بنجاح!</h3>
-      </div>
-      <div style="text-align: left; margin-top: 15px;">
-  `;
-  
-  if (videoData.title) {
-    infoHTML += `<p><strong>العنوان:</strong> ${videoData.title}</p>`;
-  }
-  
-  if (videoData.author) {
-    infoHTML += `<p><strong>المستخدم:</strong> ${videoData.author.nickname || videoData.author.unique_id}</p>`;
-  }
-  
-  infoHTML += `
-        <p><strong>المدة:</strong> ${videoData.duration || 'غير معروفة'} ثانية</p>
-        <p><strong>الجودة المتاحة:</strong> 1080p, 720p, 480p</p>
-      </div>
-    </div>
-  `;
-  
-  resultDiv.innerHTML = infoHTML;
-}
-
-// دالة لإظهار خيارات الجودة
+// دالة لإظهار خيارات الجودة مباشرة
 async function showQualityOptions(type) {
   const url = document.getElementById("videoUrl").value.trim();
   
@@ -1528,33 +1406,87 @@ async function showQualityOptions(type) {
   currentVideoUrl = url;
   
   try {
-    // تحليل الفيديو أولاً
-    await analyzeVideo(url);
+    // تحليل الفيديو مباشرة
+    const resultDiv = document.getElementById("result");
+    resultDiv.innerHTML = `
+      <div class="loading-state">
+        <div class="spinner"></div>
+        <p>جاري تحضير خيارات التحميل...</p>
+      </div>
+    `;
+
+    // استخدام API لتحليل الفيديو
+    const apiUrl = `https://www.tikwm.com/api/?url=${encodeURIComponent(url)}`;
     
-    // إظهار خيارات الجودة
-    const qualityOptions = document.getElementById('qualityOptions');
-    const qualityTitle = document.getElementById('quality-title');
+    const response = await fetch(apiUrl, {
+      method: 'GET',
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+        'Accept': 'application/json',
+      }
+    });
     
-    qualityTitle.textContent = `اختر جودة التحميل لـ ${type === 'video' ? 'الفيديو' : type === 'mp3' ? 'الصوت' : 'القصة'}`;
-    qualityOptions.style.display = 'block';
+    const data = await response.json();
     
-    // تمرير للأعلى لرؤية خيارات الجودة
-    qualityOptions.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    
-    showAlert(`✓ تم تحليل الفيديو بنجاح! اختر الجودة المناسبة`);
+    if (data.code === 0 && data.data) {
+      currentVideoData = data.data;
+      
+      // إظهار خيارات الجودة مباشرة
+      const qualityOptions = document.getElementById('qualityOptions');
+      const qualityTitle = document.getElementById('quality-title');
+      
+      qualityTitle.textContent = `اختر جودة التحميل لـ ${type === 'video' ? 'الفيديو' : type === 'mp3' ? 'الصوت' : 'القصة'}`;
+      qualityOptions.style.display = 'block';
+      
+      // تحديث معاينة الفيديو الصغيرة
+      updateSmallPreviews(data.data.play);
+      
+      resultDiv.innerHTML = '';
+      
+      // تمرير للأعلى لرؤية خيارات الجودة
+      qualityOptions.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      
+      showAlert(`✓ جاهز للتحميل! اختر الجودة المناسبة`);
+      
+    } else {
+      throw new Error(data.msg || 'فشل في تحليل الفيديو');
+    }
     
   } catch (error) {
-    showAlert('❌ فشل في تحليل الفيديو. حاول مرة أخرى.');
+    console.error('Error:', error);
+    document.getElementById("result").innerHTML = `
+      <div class="error-result">
+        <div class="result-header">
+          <i class="fa-solid fa-circle-xmark"></i>
+          <h3>خطأ في التحليل</h3>
+        </div>
+        <p>${error.message || 'حدث خطأ غير متوقع'}</p>
+        <button class="retry-btn" onclick="showQualityOptions('${type}')">
+          <i class="fa-solid fa-rotate"></i>
+          إعادة المحاولة
+        </button>
+      </div>
+    `;
   }
 }
 
-// دالة التحميل الرئيسية مع الجودة - بدون فتح صفحات جديدة
+// تحديث المعاينات الصغيرة
+function updateSmallPreviews(videoUrl) {
+  const previews = document.querySelectorAll('.video-preview-small');
+  previews.forEach(preview => {
+    const icon = preview.querySelector('.preview-icon');
+    icon.innerHTML = `<i class="fa-solid fa-play"></i>`;
+    // يمكن إضافة فيديو صغير هنا إذا أردت
+  });
+}
+
+// دالة التحميل المباشرة بدون فتح صفحات جديدة
 async function downloadWithQuality(quality) {
   const resultDiv = document.getElementById("result");
   const qualityOptions = document.getElementById('qualityOptions');
   
   if (!currentVideoData) {
-    showAlert("يجب تحليل الفيديو أولاً");
+    showAlert("يجب تحضير الفيديو أولاً");
     return;
   }
   
@@ -1565,8 +1497,8 @@ async function downloadWithQuality(quality) {
   resultDiv.innerHTML = `
     <div class="loading-state">
       <div class="spinner"></div>
-      <p>جاري تجهيز ${currentDownloadType === 'video' ? 'الفيديو' : currentDownloadType === 'mp3' ? 'الصوت' : 'القصة'} بجودة ${quality}p...</p>
-      <p style="font-size: 14px; color: var(--text-secondary); margin-top: 10px;">قد يستغرق هذا بضع ثوانٍ</p>
+      <p>جاري تحميل ${currentDownloadType === 'video' ? 'الفيديو' : currentDownloadType === 'mp3' ? 'الصوت' : 'القصة'} بجودة ${quality}p...</p>
+      <p style="font-size: 14px; color: var(--text-secondary); margin-top: 10px;">جاري التحميل المباشر...</p>
     </div>
   `;
   
@@ -1575,7 +1507,7 @@ async function downloadWithQuality(quality) {
     
     if (currentDownloadType === 'video') {
       downloadUrl = currentVideoData.play;
-      filename = `clipvault_video_${quality}p_${Date.now()}.mp4`;
+      filename = `clipvault_${quality}p_${Date.now()}.mp4`;
     } else if (currentDownloadType === 'mp3') {
       downloadUrl = currentVideoData.music;
       filename = `clipvault_audio_${Date.now()}.mp3`;
@@ -1585,41 +1517,40 @@ async function downloadWithQuality(quality) {
     }
 
     // طريقة التحميل المباشر بدون فتح صفحات جديدة
-    showAlert(`جاري تحميل الملف بجودة ${quality}p...`);
+    showAlert(`جاري التحميل بجودة ${quality}p...`);
     
     // إنشاء رابط تحميل مخفي
     const link = document.createElement('a');
     link.href = downloadUrl;
     link.download = filename;
     link.style.display = 'none';
-    document.body.appendChild(link);
     
-    // محاكاة الضغط على الرابط
+    // إضافة إلى الجسم والنقر
+    document.body.appendChild(link);
     link.click();
     
-    // إزالة الرابط بعد التحميل
+    // تنظيف بعد التحميل
     setTimeout(() => {
       document.body.removeChild(link);
-    }, 1000);
+    }, 100);
     
     // إظهار رسالة النجاح
-    resultDiv.innerHTML = `
-      <div class="success-result">
-        <div class="result-header">
-          <i class="fa-solid fa-circle-check"></i>
-          <h3>تم بدء التحميل بنجاح!</h3>
+    setTimeout(() => {
+      resultDiv.innerHTML = `
+        <div class="success-result">
+          <div class="result-header">
+            <i class="fa-solid fa-circle-check"></i>
+            <h3>تم التحميل بنجاح!</h3>
+          </div>
+          <p>تم تحميل ${currentDownloadType === 'video' ? 'الفيديو' : currentDownloadType === 'mp3' ? 'الصوت' : 'القصة'} بجودة ${quality}p بنجاح</p>
+          <p style="font-size: 14px; color: var(--text-secondary); margin-top: 15px;">
+            تم حفظ الملف في مجلد التنزيلات
+          </p>
         </div>
-        <p>جاري تحميل ${currentDownloadType === 'video' ? 'الفيديو' : currentDownloadType === 'mp3' ? 'الصوت' : 'القصة'} بجودة ${quality}p...</p>
-        <p style="font-size: 14px; color: var(--text-secondary); margin-top: 15px;">
-          إذا لم يبدأ التحميل تلقائياً، 
-          <a href="#" onclick="forceDownload('${downloadUrl}', '${filename}')" style="color: #4facfe; text-decoration: underline; font-weight: bold;">
-            اضغط هنا للتحميل المباشر
-          </a>
-        </p>
-      </div>
-    `;
+      `;
+    }, 1500);
     
-    showAlert('✅ بدأ التحميل! تحقق من مجلد التنزيلات');
+    showAlert('✅ تم التحميل بنجاح!');
     
   } catch (error) {
     console.error('Error:', error);
@@ -1637,17 +1568,6 @@ async function downloadWithQuality(quality) {
       </div>
     `;
   }
-}
-
-// دالة للتحميل القسري
-function forceDownload(url, filename) {
-  const link = document.createElement('a');
-  link.href = url;
-  link.download = filename;
-  link.target = '_blank';
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
 }
 
 // دالة عرض التنبيهات
@@ -1672,7 +1592,7 @@ function showAlert(message) {
     setTimeout(() => {
       document.body.removeChild(alertDiv);
     }, 300);
-  }, 4000);
+  }, 3000);
 }
 
 // إضافة Event Listeners للأزرار الرئيسية
@@ -1723,7 +1643,7 @@ document.getElementById('contactModal').addEventListener('click', (e) => {
   }
 });
 
-// ترجمات كاملة للغات المختلفة - محدثة
+// ترجمات كاملة للغات المختلفة
 const translations = {
   AR: {
     langLabel: 'AR',
@@ -2012,55 +1932,62 @@ function applyTranslations(lang) {
   currentTranslations = t;
 
   // تحديث جميع النصوص في الموقع
-  document.getElementById('main-title').textContent = t.mainTitle;
-  document.getElementById('main-desc').textContent = t.mainDesc;
+  const elementsToTranslate = {
+    'main-title': t.mainTitle,
+    'main-desc': t.mainDesc,
+    'feature1-title': t.feature1Title,
+    'feature1-text': t.feature1Text,
+    'feature1-extra': t.feature1Extra,
+    'feature2-title': t.feature2Title,
+    'feature2-text': t.feature2Text,
+    'feature2-extra': t.feature2Extra,
+    'feature3-title': t.feature3Title,
+    'feature3-text': t.feature3Text,
+    'feature3-extra': t.feature3Extra,
+    'feature4-title': t.feature4Title,
+    'feature4-text': t.feature4Text,
+    'feature4-extra': t.feature4Extra,
+    'faq1-summary': t.faq1,
+    'faq1-text': t.faq1Ans,
+    'faq2-summary': t.faq2,
+    'faq2-text': t.faq2Ans,
+    'faq3-summary': t.faq3,
+    'faq3-text': t.faq3Ans,
+    'faq4-summary': t.faq4,
+    'faq4-text': t.faq4Ans,
+    'info-title': t.infoTitle,
+    'info-desc': t.infoDesc,
+    'info-browser-title': t.infoBrowserTitle,
+    'info-browser-desc': t.infoBrowserDesc,
+    'faq-android-title': t.faqAndroidSummary,
+    'faq-android-text': t.faqAndroidText,
+    'faq-ios-title': t.faqIosSummary,
+    'faq-ios-text': t.faqIosText,
+    'faq-pc-title': t.faqPcSummary,
+    'faq-pc-text': t.faqPcText,
+    'info-security-title': t.infoSecurityTitle,
+    'info-security-text': t.infoSecurityText,
+    'footer-text': t.footer,
+    'contact-title': t.contactTitle,
+    'quality-title': t.qualityTitle
+  };
+
+  // تطبيق الترجمات
+  Object.keys(elementsToTranslate).forEach(id => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.textContent = elementsToTranslate[id];
+    }
+  });
+
+  // تحديث الأزرار
   document.getElementById('btn-video').innerHTML = `<i class="fa-solid fa-download"></i><span>${t.btnVideo}</span>`;
   document.getElementById('btn-story').innerHTML = `<i class="fa-solid fa-images"></i><span>${t.btnStory}</span>`;
   document.getElementById('btn-mp3').innerHTML = `<i class="fa-solid fa-music"></i><span>${t.btnMp3}</span>`;
 
-  // تحديث الميزات
-  document.getElementById('feature1-title').textContent = t.feature1Title;
-  document.getElementById('feature1-text').textContent = t.feature1Text;
-  document.getElementById('feature1-extra').textContent = t.feature1Extra;
-  document.getElementById('feature2-title').textContent = t.feature2Title;
-  document.getElementById('feature2-text').textContent = t.feature2Text;
-  document.getElementById('feature2-extra').textContent = t.feature2Extra;
-  document.getElementById('feature3-title').textContent = t.feature3Title;
-  document.getElementById('feature3-text').textContent = t.feature3Text;
-  document.getElementById('feature3-extra').textContent = t.feature3Extra;
-  document.getElementById('feature4-title').textContent = t.feature4Title;
-  document.getElementById('feature4-text').textContent = t.feature4Text;
-  document.getElementById('feature4-extra').textContent = t.feature4Extra;
-
-  // تحديث الأسئلة الشائعة
-  document.getElementById('faq1-summary').textContent = t.faq1;
-  document.getElementById('faq1-text').textContent = t.faq1Ans;
-  document.getElementById('faq2-summary').textContent = t.faq2;
-  document.getElementById('faq2-text').textContent = t.faq2Ans;
-  document.getElementById('faq3-summary').textContent = t.faq3;
-  document.getElementById('faq3-text').textContent = t.faq3Ans;
-  document.getElementById('faq4-summary').textContent = t.faq4;
-  document.getElementById('faq4-text').textContent = t.faq4Ans;
-
-  // تحديث القسم المعلوماتي
-  document.getElementById('info-title').textContent = t.infoTitle;
-  document.getElementById('info-desc').textContent = t.infoDesc;
-  document.getElementById('info-browser-title').textContent = t.infoBrowserTitle;
-  document.getElementById('info-browser-desc').textContent = t.infoBrowserDesc;
-  document.getElementById('faq-android-title').textContent = t.faqAndroidSummary;
-  document.getElementById('faq-android-text').textContent = t.faqAndroidText;
-  document.getElementById('faq-ios-title').textContent = t.faqIosSummary;
-  document.getElementById('faq-ios-text').textContent = t.faqIosText;
-  document.getElementById('faq-pc-title').textContent = t.faqPcSummary;
-  document.getElementById('faq-pc-text').textContent = t.faqPcText;
-  document.getElementById('info-security-title').textContent = t.infoSecurityTitle;
-  document.getElementById('info-security-text').textContent = t.infoSecurityText;
-
-  // تحديث الفوتر والنماذج
-  document.getElementById('footer-text').textContent = t.footer;
+  // تحديث العناصر الأخرى
   document.getElementById('videoUrl').placeholder = t.placeholder;
-  document.getElementById('contact-title').textContent = t.contactTitle;
-  document.getElementById('quality-title').textContent = t.qualityTitle;
+  document.getElementById('langBtn').textContent = `🌐 ${t.langLabel}`;
 
   // تحديث نموذج الاتصال
   const nameInput = document.querySelector('#contact-form input[name="from_name"]');
@@ -2075,8 +2002,6 @@ function applyTranslations(lang) {
   if (sendBtn) sendBtn.textContent = t.send;
   if (cancelBtn) cancelBtn.textContent = t.cancel;
 
-  document.getElementById('langBtn').textContent = `🌐 ${t.langLabel}`;
- 
   // تحديث اتجاه الصفحة
   document.documentElement.lang = lang.toLowerCase();
   document.documentElement.dir = lang === 'AR' ? 'rtl' : 'ltr';
