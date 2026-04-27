@@ -4,102 +4,96 @@
 <meta name="google-site-verification" content="syoTnxQRsHgTeV6ZgExN2u10QICMOA-_2PAmTEbC6os" />
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
-
-<title>ClipVault | تحميل فيديوهات تيك توك بدون علامة مائية HD مجاناً</title>
-<meta name="description" content="أسرع أداة لتحميل فيديوهات تيك توك بدون علامة مائية. ClipVault يتيح لك حفظ المقاطع والقصص بجودة عالية HD وبصيغة MP4 و MP3 مجاناً وبسهولة.">
-<meta name="keywords" content="تحميل فيديوهات تيك توك بدون علامة مائية, حفظ مقاطع تيك توك, تنزيل فيديو تيك توك بدون شعار, TikTok downloader no watermark, تحميل ستوري تيك توك, تحويل تيك توك MP3, ClipVault">
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
-  "name": "ClipVault",
-  "operatingSystem": "WINDOWS, Android, iOS, Linux",
-  "applicationCategory": "MultimediaApplication",
-  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-  "description": "أداة مجانية لتحميل فيديوهات تيك توك بدون علامة مائية وبجودة عالية."
-}
-</script>
+<title>ClipVault - Download Videos Without Watermark</title>
+<meta name="description" content="Download videos without watermark - Fast, secure and free video downloader">
+<meta name="keywords" content="video download, download videos, without watermark, video downloader, clipvault, تنزيل فيديو, تحميل فيديوهات">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
-* { box-sizing: border-box; margin: 0; padding: 0; }
+/* كل الCSS الأصلي بدون تغيير */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 :root {
   --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-  --dark-bg: #0f0c29; --darker-bg: #0a0818;
+  --success-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  --accent-gradient: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+  --dark-bg: #0f0c29;
+  --darker-bg: #0a0818;
   --card-bg: rgba(255, 255, 255, 0.08);
-  --text-primary: #ffffff; --text-secondary: #b8c5d6;
-  --border-radius: 16px; --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  --card-hover: rgba(255, 255, 255, 0.12);
+  --text-primary: #ffffff;
+  --text-secondary: #b8c5d6;
+  --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.5);
+  --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.3);
+  --border-radius: 16px;
+  --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
+
 body {
-  font-family: 'Cairo', sans-serif;
+  font-family: 'Cairo', 'Segoe UI', Tahoma, sans-serif;
   background: linear-gradient(135deg, var(--dark-bg) 0%, var(--darker-bg) 100%);
-  color: var(--text-primary); min-height: 100vh; display: flex; flex-direction: column;
+  background-attachment: fixed;
+  color: var(--text-primary);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
 }
+
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background:
+    radial-gradient(circle at 20% 50%, rgba(120, 119, 198, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(249, 168, 212, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 40% 20%, rgba(96, 165, 250, 0.1) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
 nav {
-  background: rgba(15, 12, 41, 0.8); padding: 18px 30px; display: flex;
-  justify-content: space-between; align-items: center; backdrop-filter: blur(20px);
-  position: sticky; top: 0; z-index: 100; border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(15, 12, 41, 0.8);
+  padding: 18px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  position: sticky;
+  top: 0;
+  opacity: 0;
+  transform: translateY(-30px);
+  transition: var(--transition);
+  z-index: 100;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
 }
-nav .logo { font-weight: 700; font-size: 22px; background: var(--primary-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-.main-container { padding: 40px 20px; text-align: center; flex: 1; }
-.search-area { max-width: 600px; margin: 0 auto 40px; }
-input[type="text"] {
-  width: 100%; padding: 15px; border-radius: var(--border-radius); border: none;
-  background: var(--card-bg); color: white; margin-bottom: 20px; outline: none;
+
+nav.show {
+  opacity: 1;
+  transform: translateY(0);
 }
-.btn-group { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
-button {
-  padding: 12px 25px; border-radius: 12px; border: none; cursor: pointer;
-  font-weight: bold; transition: var(--transition); color: white;
+
+nav .logo {
+  font-weight: 700;
+  font-size: 22px;
+  background: var(--primary-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
-.btn-primary { background: var(--primary-gradient); }
-.btn-secondary { background: var(--secondary-gradient); }
-
-/* قسم السيو المضاف */
-.seo-text { max-width: 800px; margin: 60px auto; text-align: right; background: var(--card-bg); padding: 25px; border-radius: var(--border-radius); }
-.seo-text h2 { color: #f093fb; margin-bottom: 15px; }
-.seo-text p, .seo-text li { color: var(--text-secondary); line-height: 1.7; margin-bottom: 10px; }
-</style>
-</head>
-<body>
-
-<nav>
-  <div class="logo"><i class="fas fa-vault"></i> ClipVault</div>
-  <div style="background: rgba(255,255,255,0.1); padding: 5px 15px; border-radius: 8px;">AR</div>
-</nav>
-
-<div class="main-container">
-  <h1>تحميل فيديوهات تيك توك بدون علامة مائية</h1>
-  <p style="margin-bottom: 30px; color: var(--text-secondary);">أداة مجانية وسريعة لحفظ المقاطع بجودة HD</p>
-
-  <div class="search-area">
-    <input type="text" placeholder="ضع رابط الفيديو هنا..." id="videoUrl">
-    <div class="btn-group">
-      <button class="btn-primary"><i class="fas fa-download"></i> تحميل فيديو</button>
-      <button class="btn-secondary"><i class="fas fa-bolt"></i> تحميل قصة</button>
-      <button style="background: #4facfe;"><i class="fas fa-music"></i> تحميل MP3</button>
-    </div>
-  </div>
-
-  <div class="seo-text">
-    <h2>لماذا تستخدم ClipVault؟</h2>
-    <p>موقع <strong>ClipVault</strong> هو الأداة الأقوى لتوفير ميزة <strong>تنزيل فيديوهات تيك توك بدون علامة مائية</strong>. نحن نضمن لك الحصول على الفيديو بجودته الأصلية وبدون أي شعارات مزعجة قد تعيق استمتاعك بالمحتوى أو إعادة نشره.</p>
-    <h3>طريقة التحميل:</h3>
-    <ul>
-      <li>انسخ رابط المقطع من تطبيق TikTok.</li>
-      <li>الصق الرابط في المربع بالأعلى.</li>
-      <li>اختر صيغة التحميل (فيديو أو صوت) واضغط ابدأ.</li>
-    </ul>
-  </div>
-</div>
-
-<footer style="padding: 20px; text-align: center; border-top: 1px solid rgba(255,255,255,0.1);">
-  <p>&copy; 2026 ClipVault - جميع الحقوق محفوظة</p>
-</footer>
-
-</body>
-</html>
