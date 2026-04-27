@@ -2257,21 +2257,10 @@ document.querySelectorAll('.lang-menu div').forEach(item => {
 window.addEventListener('click', e => {
   if (!e.target.closest('.lang-dropdown')) {
     langMenu.style.display = 'none';
-// تثبيت العنوان النهائي للسيو
+// غلق الأوامر بشكل صحيح
+});
+
 document.title = "ClipVault | تحميل فيديوهات تيك توك بدون علامة مائية HD";
-
-document.getElementById('contactModal').addEventListener('click', (e) => {
-    if (e.target.id === 'contactModal') {
-        document.getElementById('contactModal').style.display = 'none';
-    }
-});
-
-document.getElementById('contact-form').addEventListener('submit', function(e) {
-    e.preventDefault();
-    alert(currentLanguage === 'AR' ? 'تم إرسال رسالتك!' : 'Your message has been sent!');
-    document.getElementById('contactModal').style.display = 'none';
-    this.reset();
-});
 </script>
 </body>
 </html>
