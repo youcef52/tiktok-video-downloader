@@ -2259,23 +2259,26 @@ window.addEventListener('click', e => {
     langMenu.style.display = 'none';
   }
 });
+// تثبيت العنوان النهائي للسيو
+document.title = "ClipVault | تحميل فيديوهات تيك توك بدون علامة مائية HD";
 
-// باقي الكود الأصلي...
 document.getElementById('contactModal').addEventListener('click', (e) => {
-  if (e.target.id === 'contactModal') {
-    document.getElementById('contactModal').style.display = 'none';
-  }
+    if (e.target.id === 'contactModal') {
+        document.getElementById('contactModal').style.display = 'none';
+    }
 });
 
 document.getElementById('contact-form').addEventListener('submit', function(e) {
-  e.preventDefault();
-  const trans = translations[currentLanguage];
-  alert(currentLanguage === 'AR' ? 'تم إرسال رسالتك!' : 'Your message has been sent!');
+    e.preventDefault();
+    alert(currentLanguage === 'AR' ? 'تم إرسال رسالتك!' : 'Your message has been sent!');
+    document.getElementById('contactModal').style.display = 'none';
+    this.reset();
 });
-document.title = "ClipVault | تحميل فيديوهات تيك توك بدون علامة مائية HD
 </script>
 </body>
 </html>
+
+
 
 
 
