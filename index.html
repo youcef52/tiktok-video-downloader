@@ -1,17 +1,16 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
-    <title>ClipVault | تحميل فيديوهات تيك توك بدون علامة مائية HD</title>
-    <meta name="description" content="أسرع أداة مجانية لتحميل فيديوهات تيك توك بدون علامة مائية بجودة HD عبر ClipVault.">
-    <meta name="google-site-verification" content="syoTnxQRsHgTeV6ZgExN2u10QICMOA-_2PAmTEbC6os" />
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
-</head>
-<body>
+<meta name="google-site-verification" content="syoTnxQRsHgTeV6ZgExN2u10QICMOA-_2PAmTEbC6os" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+<title>ClipVault - Download Videos Without Watermark</title>
+<meta name="description" content="Download videos without watermark - Fast, secure and free video downloader">
+<meta name="keywords" content="video download, download videos, without watermark, video downloader, clipvault, تنزيل فيديو, تحميل فيديوهات">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
 /* كل الCSS الأصلي بدون تغيير */
 * {
@@ -2257,10 +2256,28 @@ document.querySelectorAll('.lang-menu div').forEach(item => {
 window.addEventListener('click', e => {
   if (!e.target.closest('.lang-dropdown')) {
     langMenu.style.display = 'none';
-// غلق الأوامر بشكل صحيح
+  }
 });
 
-document.title = "ClipVault | تحميل فيديوهات تيك توك بدون علامة مائية HD";
+// باقي الكود الأصلي...
+document.getElementById('contactModal').addEventListener('click', (e) => {
+  if (e.target.id === 'contactModal') {
+    document.getElementById('contactModal').style.display = 'none';
+  }
+});
+
+document.getElementById('contact-form').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const trans = translations[currentLanguage];
+  alert(currentLanguage === 'AR' ? 'تم إرسال رسالتك!' : 'Your message has been sent!');
+  document.getElementById('contactModal').style.display = 'none';
+  this.reset();
+});
 </script>
+
 </body>
 </html>
+
+
+
+
