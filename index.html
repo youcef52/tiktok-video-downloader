@@ -1,146 +1,1691 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
-    <title>ClipVault | تحميل فيديوهات تيك توك بدون علامة مائية HD مجاناً</title>
-    <meta name="description" content="أفضل أداة مجانية لتحميل فيديوهات تيك توك بدون علامة مائية. ClipVault يتيح لك حفظ المقاطع بجودة HD وبصيغة MP3 بسرعة فائقة وسهولة.">
-    <meta name="keywords" content="تحميل فيديوهات تيك توك, بدون علامة مائية, تنزيل فيديو, ClipVault, tiktok downloader, no watermark, download mp3, تحميل ستوري">
-    <meta name="author" content="ClipVault">
-    <meta name="robots" content="index, follow">
-    
-    <meta property="og:title" content="ClipVault - تحميل فيديوهات بدون علامة مائية">
-    <meta property="og:description" content="حمل فيديوهاتك المفضلة بجودة عالية وبدون شعار مجاناً.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://clipvault.com">
-    
-    <meta name="google-site-verification" content="syoTnxQRsHgTeV6ZgExN2u10QICMOA-_2PAmTEbC6os" />
-    
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+<title>ClipVault | تحميل فيديوهات تيك توك بدون علامة مائية HD</title>
+<meta name="description" content="أسرع أداة مجانية لتحميل فيديوهات تيك توك بدون علامة مائية. احفظ المقاطع بجودة HD وبصيغة MP3 بسهولة تامة عبر ClipVault.">
+<meta name="keywords" content="تحميل فيديوهات تيك توك, بدون علامة مائية, تنزيل فيديو, ClipVault, tiktok downloader, no watermark, تحميل فيديوهات">
+<meta name="google-site-verification" content="syoTnxQRsHgTeV6ZgExN2u10QICMOA-_2PAmTEbC6os" />
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
 
 <style>
-/* تعبك وألوانك وتصميمك الأصلي محفوظ تماماً كما هو */
-* { box-sizing: border-box; margin: 0; padding: 0; }
+/* كل الCSS الأصلي بدون تغيير */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 :root {
   --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
   --success-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
   --accent-gradient: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
-  --dark-bg: #0f0c29; --darker-bg: #0a0818;
-  --card-bg: rgba(255, 255, 255, 0.08); --card-hover: rgba(255, 255, 255, 0.12);
-  --text-primary: #ffffff; --text-secondary: #b8c5d6;
-  --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.5); --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.3);
-  --border-radius: 16px; --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  --dark-bg: #0f0c29;
+  --darker-bg: #0a0818;
+  --card-bg: rgba(255, 255, 255, 0.08);
+  --card-hover: rgba(255, 255, 255, 0.12);
+  --text-primary: #ffffff;
+  --text-secondary: #b8c5d6;
+  --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.5);
+  --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.3);
+  --border-radius: 16px;
+  --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
+
 body {
   font-family: 'Cairo', 'Segoe UI', Tahoma, sans-serif;
   background: linear-gradient(135deg, var(--dark-bg) 0%, var(--darker-bg) 100%);
-  background-attachment: fixed; color: var(--text-primary);
-  display: flex; flex-direction: column; min-height: 100vh; overflow-x: hidden; position: relative;
+  background-attachment: fixed;
+  color: var(--text-primary);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
 }
+
 body::before {
-  content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-  background: radial-gradient(circle at 20% 50%, rgba(120, 119, 198, 0.15) 0%, transparent 50%),
-              radial-gradient(circle at 80% 80%, rgba(249, 168, 212, 0.15) 0%, transparent 50%);
-  pointer-events: none; z-index: 0;
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background:
+    radial-gradient(circle at 20% 50%, rgba(120, 119, 198, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(249, 168, 212, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 40% 20%, rgba(96, 165, 250, 0.1) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
 }
+
 nav {
-  background: rgba(15, 12, 41, 0.8); padding: 18px 30px; display: flex;
-  justify-content: space-between; align-items: center; backdrop-filter: blur(20px) saturate(180%);
-  position: sticky; top: 0; z-index: 100; border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3); transition: var(--transition);
+  background: rgba(15, 12, 41, 0.8);
+  padding: 18px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  position: sticky;
+  top: 0;
+  opacity: 0;
+  transform: translateY(-30px);
+  transition: var(--transition);
+  z-index: 100;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
 }
-nav.show { opacity: 1; transform: translateY(0); }
-nav .logo { font-weight: 700; font-size: 22px; background: var(--primary-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: flex; align-items: center; gap: 10px; }
-nav .logo i { font-size: 28px; background: var(--secondary-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: pulse 2s ease-in-out infinite; }
-@keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
-.lang-dropdown { position: relative; display: inline-block; }
-.lang-btn { background: var(--primary-gradient); border: none; padding: 10px 20px; border-radius: 12px; cursor: pointer; font-weight: 600; color: var(--text-primary); transition: var(--transition); font-size: 14px; }
-.lang-menu { display: none; position: absolute; right: 0; background: rgba(15, 12, 41, 0.95); backdrop-filter: blur(20px); min-width: 180px; border-radius: 12px; z-index: 1000; border: 1px solid rgba(255, 255, 255, 0.1); margin-top: 10px; }
-.lang-menu div { color: var(--text-primary); padding: 12px 16px; cursor: pointer; transition: var(--transition); font-size: 14px; }
-.lang-menu div:hover { background: var(--primary-gradient); }
-.container { max-width: 700px; width: 90%; margin: 40px auto; background: var(--card-bg); backdrop-filter: blur(20px); border-radius: 24px; padding: 40px 30px; box-shadow: var(--shadow-lg); text-align: center; border: 1px solid rgba(255, 255, 255, 0.1); position: relative; z-index: 1; }
-h1 { margin-bottom: 15px; font-size: 32px; font-weight: 700; background: var(--primary-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-.subtitle { color: var(--text-secondary); margin-bottom: 30px; font-size: 16px; }
-.input-group { display: flex; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; }
-input { flex: 1; min-width: 200px; padding: 16px 20px; border-radius: 14px; border: 2px solid rgba(255, 255, 255, 0.1); background: rgba(255, 255, 255, 0.05); color: white; }
-button { padding: 16px 24px; border: none; border-radius: 14px; font-weight: 600; cursor: pointer; transition: var(--transition); display: flex; align-items: center; justify-content: center; gap: 10px; }
-button.download { background: var(--secondary-gradient); color: white; }
-button.story { background: var(--success-gradient); color: white; }
-button.mp3 { background: var(--accent-gradient); color: white; }
-.quality-options { margin-top: 20px; padding: 20px; background: rgba(255, 255, 255, 0.05); border-radius: 16px; display: none; }
-.quality-buttons { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
-.quality-btn { padding: 12px 20px; border-radius: 10px; font-size: 14px; }
-/* ... تكملة الـ CSS الخاص بك ... */
-.features-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; margin: 50px auto; padding: 0 20px; }
-.feature { background: var(--card-bg); padding: 35px 25px; border-radius: 20px; text-align: center; transition: var(--transition); border: 1px solid rgba(255, 255, 255, 0.1); }
-.info-section { max-width: 1000px; margin: 50px auto; padding: 40px 35px; background: var(--card-bg); border-radius: 24px; border: 1px solid rgba(255, 255, 255, 0.1); }
-footer { display: flex; justify-content: center; padding: 30px; border-top: 1px solid rgba(255, 255, 255, 0.1); }
+
+nav.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+nav .logo {
+  font-weight: 700;
+  font-size: 22px;
+  background: var(--primary-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+nav .logo i {
+  font-size: 28px;
+  background: var(--secondary-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+.lang-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.lang-btn {
+  background: var(--primary-gradient);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--text-primary);
+  transition: var(--transition);
+  font-size: 14px;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+  font-family: inherit;
+}
+
+.lang-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+}
+
+.lang-menu {
+  display: none;
+  position: absolute;
+  right: 0;
+  background: rgba(15, 12, 41, 0.95);
+  backdrop-filter: blur(20px);
+  min-width: 180px;
+  box-shadow: var(--shadow-lg);
+  border-radius: 12px;
+  z-index: 1000;
+  max-height: 350px;
+  overflow-y: auto;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  margin-top: 10px;
+}
+
+.lang-menu::-webkit-scrollbar {
+  width: 6px;
+}
+
+.lang-menu::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+}
+
+.lang-menu::-webkit-scrollbar-thumb {
+  background: var(--primary-gradient);
+  border-radius: 10px;
+}
+
+.lang-menu div {
+  color: var(--text-primary);
+  padding: 12px 16px;
+  cursor: pointer;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  transition: var(--transition);
+  font-size: 14px;
+}
+
+.lang-menu div:last-child {
+  border-bottom: none;
+}
+
+.lang-menu div:hover {
+  background: var(--primary-gradient);
+  padding-right: 20px;
+}
+
+.container {
+  max-width: 700px;
+  width: 90%;
+  margin: 40px auto;
+  background: var(--card-bg);
+  backdrop-filter: blur(20px);
+  border-radius: 24px;
+  padding: 40px 30px;
+  box-shadow: var(--shadow-lg);
+  text-align: center;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: var(--transition);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  position: relative;
+  z-index: 1;
+}
+
+.container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 24px;
+  padding: 2px;
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.5), rgba(118, 75, 162, 0.5));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.container.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+h1 {
+  margin: 0 0 15px;
+  font-size: 32px;
+  line-height: 1.3;
+  font-weight: 700;
+  background: var(--primary-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.subtitle {
+  color: var(--text-secondary);
+  margin-bottom: 30px;
+  font-size: 16px;
+  line-height: 1.6;
+  font-weight: 400;
+}
+
+.input-group {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+input {
+  flex: 1;
+  min-width: 200px;
+  padding: 16px 20px;
+  border-radius: 14px;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  outline: none;
+  font-size: 15px;
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-primary);
+  transition: var(--transition);
+  font-family: inherit;
+}
+
+input:focus {
+  border-color: rgba(102, 126, 234, 0.6);
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+}
+
+input::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+button {
+  padding: 16px 24px;
+  border: none;
+  border-radius: 14px;
+  font-size: 15px;
+  cursor: pointer;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: var(--transition);
+  white-space: nowrap;
+  font-family: inherit;
+  position: relative;
+  overflow: hidden;
+}
+
+button::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+button:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+button i {
+  position: relative;
+  z-index: 1;
+}
+
+button span {
+  position: relative;
+  z-index: 1;
+}
+
+button.download {
+  background: var(--secondary-gradient);
+  color: var(--text-primary);
+  box-shadow: 0 4px 15px rgba(245, 87, 108, 0.4);
+}
+
+button.download:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(245, 87, 108, 0.6);
+}
+
+button.story {
+  background: var(--success-gradient);
+  color: var(--text-primary);
+  box-shadow: 0 4px 15px rgba(79, 172, 254, 0.4);
+}
+
+button.story:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(79, 172, 254, 0.6);
+}
+
+button.mp3 {
+  background: var(--accent-gradient);
+  color: var(--text-primary);
+  box-shadow: 0 4px 15px rgba(250, 112, 154, 0.4);
+}
+
+button.mp3:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(250, 112, 154, 0.6);
+}
+
+button.contact {
+  background: var(--primary-gradient);
+  color: var(--text-primary);
+  padding: 12px 24px;
+  font-size: 14px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+}
+
+button.contact:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+}
+
+/* أنماط خيارات الجودة - معدلة قليلاً فقط */
+.quality-options {
+  margin-top: 20px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  text-align: center;
+  animation: fadeIn 0.3s ease;
+}
+
+.quality-options h4 {
+  margin-bottom: 15px;
+  color: var(--text-primary);
+  font-size: 18px;
+}
+
+.quality-buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.quality-btn {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: var(--transition);
+  font-weight: 600;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+}
+
+.quality-btn.hd {
+  background: var(--success-gradient);
+  color: white;
+  box-shadow: 0 4px 15px rgba(79, 172, 254, 0.4);
+}
+
+.quality-btn.sd {
+  background: var(--primary-gradient);
+  color: white;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+}
+
+.quality-btn.low {
+  background: var(--secondary-gradient);
+  color: white;
+  box-shadow: 0 4px 15px rgba(245, 87, 108, 0.4);
+}
+
+.quality-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+
+.quality-badge {
+  display: inline-block;
+  padding: 4px 8px;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  border-radius: 8px;
+  font-size: 10px;
+  font-weight: 600;
+  margin-left: 5px;
+}
+
+/* معاينة الفيديو الصغيرة داخل الأزرار */
+.video-preview-small {
+  width: 40px;
+  height: 30px;
+  border-radius: 4px;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.video-preview-small video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.preview-icon {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* باقي الCSS بدون تغيير */
+.features-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 25px;
+  max-width: 1200px;
+  margin: 50px auto;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: var(--transition);
+  padding: 0 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.features-container.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.feature-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.feature {
+  background: var(--card-bg);
+  backdrop-filter: blur(20px);
+  padding: 35px 25px;
+  border-radius: 20px;
+  text-align: center;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  transition: var(--transition);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.feature::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(
+    transparent,
+    rgba(102, 126, 234, 0.1),
+    transparent 30%
+  );
+  animation: rotate 6s linear infinite;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.feature:hover::before {
+  opacity: 1;
+}
+
+@keyframes rotate {
+  100% { transform: rotate(1turn); }
+}
+
+.feature:hover {
+  transform: translateY(-8px);
+  background: var(--card-hover);
+  box-shadow: 0 15px 40px rgba(102, 126, 234, 0.3);
+}
+
+.feature i {
+  font-size: 42px;
+  margin-bottom: 18px;
+  background: var(--secondary-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  position: relative;
+  z-index: 1;
+}
+
+.feature h3 {
+  margin: 8px 0 12px;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text-primary);
+  position: relative;
+  z-index: 1;
+}
+
+.feature p {
+  margin-top: 10px;
+  color: var(--text-secondary);
+  font-size: 15px;
+  flex-grow: 1;
+  line-height: 1.6;
+  position: relative;
+  z-index: 1;
+}
+
+.feature-extra {
+  font-size: 14px;
+  margin-top: 12px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  padding: 15px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.feature-faqs {
+  width: 100%;
+  margin-top: 15px;
+}
+
+.feature-faqs details {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 15px;
+  cursor: pointer;
+  box-sizing: border-box;
+  margin-top: 10px;
+  transition: var(--transition);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.feature-faqs details:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.feature-faqs details[open] {
+  background: rgba(102, 126, 234, 0.1);
+}
+
+.feature-faqs summary {
+  font-weight: 600;
+  outline: none;
+  color: var(--text-primary);
+  font-size: 15px;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.feature-faqs summary::-webkit-details-marker {
+  display: none;
+}
+
+.feature-faqs summary::after {
+  content: '+';
+  font-size: 24px;
+  font-weight: 300;
+  transition: transform 0.3s;
+}
+
+.feature-faqs details[open] summary::after {
+  transform: rotate(45deg);
+}
+
+.feature-faqs p {
+  color: var(--text-secondary);
+  margin-top: 12px;
+  font-size: 14px;
+  line-height: 1.6;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+#result {
+  max-width: 700px;
+  margin: 30px auto;
+  background: var(--card-bg);
+  backdrop-filter: blur(20px);
+  padding: 25px;
+  border-radius: 16px;
+  text-align: center;
+  font-size: 16px;
+  word-break: break-word;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: var(--shadow-md);
+  position: relative;
+  z-index: 1;
+}
+
+.loading-state {
+  text-align: center;
+  padding: 40px 20px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 4px solid rgba(255, 255, 255, 0.1);
+  border-top: 4px solid #4facfe;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 20px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.success-result {
+  background: rgba(79, 172, 254, 0.1);
+  border: 1px solid rgba(79, 172, 254, 0.3);
+  border-radius: 16px;
+  padding: 25px;
+  text-align: center;
+}
+
+.error-result {
+  background: rgba(245, 87, 108, 0.1);
+  border: 1px solid rgba(245, 87, 108, 0.3);
+  border-radius: 16px;
+  padding: 25px;
+  text-align: center;
+}
+
+.result-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.result-header i {
+  font-size: 24px;
+  color: #4facfe;
+}
+
+.error-result i {
+  color: #f5576c;
+}
+
+.result-header h3 {
+  margin: 0;
+  color: var(--text-primary);
+}
+
+.download-link {
+  display: inline-block;
+  padding: 12px 24px;
+  background: var(--success-gradient);
+  color: white;
+  text-decoration: none;
+  border-radius: 10px;
+  font-weight: bold;
+  margin: 10px 5px;
+  transition: var(--transition);
+}
+
+.download-link:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(79, 172, 254, 0.4);
+}
+
+.retry-btn {
+  background: var(--secondary-gradient);
+  color: var(--text-primary);
+  border: none;
+  padding: 12px 24px;
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 15px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: var(--transition);
+}
+
+.retry-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(245, 87, 108, 0.4);
+}
+
+.custom-alert {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: var(--success-gradient);
+  color: white;
+  padding: 15px 20px;
+  border-radius: 12px;
+  box-shadow: var(--shadow-lg);
+  z-index: 10000;
+  transform: translateX(400px);
+  transition: transform 0.3s ease;
+  max-width: 300px;
+}
+
+.custom-alert.show {
+  transform: translateX(0);
+}
+
+.alert-content {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.alert-content i {
+  font-size: 18px;
+}
+
+.info-section {
+  max-width: 1000px;
+  margin: 50px auto;
+  padding: 40px 35px;
+  background: var(--card-bg);
+  backdrop-filter: blur(20px);
+  border-radius: 24px;
+  color: var(--text-primary);
+  line-height: 1.8;
+  box-shadow: var(--shadow-lg);
+  opacity: 0;
+  transform: translateY(30px);
+  transition: var(--transition);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  position: relative;
+  z-index: 1;
+}
+
+.info-section.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.info-section h2 {
+  font-size: 28px;
+  text-align: center;
+  margin-bottom: 20px;
+  background: var(--secondary-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1.4;
+  font-weight: 700;
+}
+
+.info-section h3 {
+  font-size: 22px;
+  margin-top: 35px;
+  background: var(--success-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1.4;
+  font-weight: 700;
+  margin-bottom: 15px;
+}
+
+.info-section p {
+  font-size: 16px;
+  margin-top: 12px;
+  color: var(--text-secondary);
+  line-height: 1.8;
+}
+
+.info-section details {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 18px 20px;
+  border-radius: 14px;
+  margin-top: 15px;
+  transition: var(--transition);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.info-section details:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.info-section details[open] {
+  background: rgba(102, 126, 234, 0.1);
+  box-shadow: 0 4px 20px rgba(102, 126, 234, 0.2);
+}
+
+.info-section details summary {
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--text-primary);
+  font-size: 17px;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.info-section details summary::-webkit-details-marker {
+  display: none;
+}
+
+.info-section details summary::after {
+  content: '▼';
+  font-size: 14px;
+  transition: transform 0.3s;
+}
+
+.info-section details[open] summary::after {
+  transform: rotate(180deg);
+}
+
+footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  padding: 30px 20px;
+  font-size: 14px;
+  color: var(--text-secondary);
+  flex-wrap: wrap;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: var(--transition);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(15, 12, 41, 0.5);
+  backdrop-filter: blur(10px);
+  position: relative;
+  z-index: 1;
+}
+
+footer.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+#contactModal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(10px);
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  padding: 20px;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+#contactModal .modal-content {
+  background: rgba(15, 12, 41, 0.95);
+  backdrop-filter: blur(20px);
+  padding: 35px 30px;
+  border-radius: 20px;
+  width: 100%;
+  max-width: 450px;
+  text-align: center;
+  position: relative;
+  box-shadow: var(--shadow-lg);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  animation: slideUp 0.4s ease;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+#contactModal h3 {
+  margin-top: 0;
+  margin-bottom: 25px;
+  font-size: 24px;
+  background: var(--primary-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+#contactModal input,
+#contactModal textarea {
+  width: 100%;
+  margin-bottom: 15px;
+  padding: 14px 18px;
+  border-radius: 12px;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  font-family: inherit;
+  font-size: 15px;
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-primary);
+  transition: var(--transition);
+}
+
+#contactModal input:focus,
+#contactModal textarea:focus {
+  outline: none;
+  border-color: rgba(102, 126, 234, 0.6);
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+}
+
+#contactModal input::placeholder,
+#contactModal textarea::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+#contactModal textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+#contactModal .button-group {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+#contactModal button {
+  flex: 1;
+  padding: 14px;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 15px;
+  transition: var(--transition);
+}
+
+#contactModal button.send {
+  background: var(--secondary-gradient);
+  color: var(--text-primary);
+  box-shadow: 0 4px 15px rgba(245, 87, 108, 0.4);
+}
+
+#contactModal button.send:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(245, 87, 108, 0.6);
+}
+
+#contactModal button.cancel {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-primary);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+#contactModal button.cancel:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateY(-2px);
+}
+
+.loading {
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+.loading::after {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@media(max-width: 768px) {
+  nav {
+    padding: 15px 20px;
+  }
+ 
+  nav .logo {
+    font-size: 18px;
+  }
+ 
+  h1 {
+    font-size: 26px;
+  }
+ 
+  .subtitle {
+    font-size: 15px;
+  }
+ 
+  .container {
+    width: 95%;
+    padding: 30px 20px;
+    margin: 30px auto;
+  }
+ 
+  .input-group {
+    flex-direction: column;
+    gap: 12px;
+  }
+ 
+  input, button {
+    width: 100%;
+  }
+ 
+  .features-container {
+    grid-template-columns: 1fr;
+    padding: 0 15px;
+    margin: 40px auto;
+    gap: 20px;
+  }
+ 
+  .feature {
+    padding: 30px 20px;
+  }
+ 
+  .feature h3 {
+    font-size: 18px;
+  }
+ 
+  .info-section {
+    width: 95%;
+    padding: 30px 20px;
+    margin: 40px auto;
+  }
+ 
+  .info-section h2 {
+    font-size: 24px;
+  }
+ 
+  .info-section h3 {
+    font-size: 19px;
+  }
+ 
+  .info-section p {
+    font-size: 15px;
+  }
+ 
+  footer {
+    flex-direction: column;
+    gap: 15px;
+    padding: 25px 15px;
+  }
+ 
+  #contactModal {
+    padding: 15px;
+  }
+ 
+  #contactModal .modal-content {
+    width: 100%;
+    padding: 30px 20px;
+  }
+}
+
+@media(max-width: 480px) {
+  h1 {
+    font-size: 22px;
+  }
+ 
+  nav .logo {
+    font-size: 16px;
+  }
+ 
+  .lang-btn {
+    padding: 8px 16px;
+    font-size: 13px;
+  }
+ 
+  button {
+    padding: 14px 18px;
+    font-size: 14px;
+  }
+ 
+  .feature {
+    padding: 25px 18px;
+  }
+ 
+  .feature i {
+    font-size: 36px;
+  }
+ 
+  .info-section h2 {
+    font-size: 21px;
+  }
+ 
+  .info-section h3 {
+    font-size: 18px;
+  }
+}
+
+@media(prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
 </style>
 </head>
 <body>
 
-<nav class="show">
-  <div class="logo"><i class="fa-solid fa-video"></i><span>ClipVault</span></div>
-  <div class="lang-dropdown">
-    <button class="lang-btn" id="langBtn">🌐 AR</button>
-    <div class="lang-menu" id="langMenu">
-      <div data-lang="AR">العربية</div><div data-lang="EN">English</div><div data-lang="FR">Français</div>
+<nav>
+  <div class="logo">
+    <i class="fa-solid fa-video"></i>
+    <span>ClipVault</span>
+  </div>
+  <div class="lang-dropdown" aria-haspopup="true">
+    <button class="lang-btn" id="langBtn" aria-label="تغيير اللغة">🌐 AR</button>
+    <div class="lang-menu" id="langMenu" role="menu" aria-hidden="true">
+      <div data-lang="AR">العربية</div>
+      <div data-lang="EN">English</div>
+      <div data-lang="FR">Français</div>
+      <div data-lang="ZH">中文</div>
+      <div data-lang="IT">Italiano</div>
+      <div data-lang="DE">Deutsch</div>
+      <div data-lang="PT">Português</div>
+      <div data-lang="TR">Türkçe</div>
     </div>
   </div>
 </nav>
 
-<div class="container show">
-  <h1 id="main-title">🚀 تنزيل فيديوهات تيك توك بدون علامة مائية</h1>
-  <p class="subtitle" id="main-desc">ألصق رابط الفيديو واضغط التحميل — سريع، آمن، ومجاني تماماً.</p>
+<div class="container">
+  <h1 id="main-title">🚀 تنزيل الفيديوهات بدون علامة مائية</h1>
+  <p class="subtitle" id="main-desc">ألصق رابط الفيديو واضغط التحميل — سريع، آمن، وبدون علامة مائية.</p>
   <div class="input-group">
-    <input type="url" id="videoUrl" placeholder="ضع رابط الفيديو هنا">
-    <button class="download" id="btn-video"><i class="fa-solid fa-download"></i><span>تحميل فيديو</span></button>
-    <button class="story" id="btn-story"><i class="fa-solid fa-images"></i><span>تحميل قصة</span></button>
-    <button class="mp3" id="btn-mp3"><i class="fa-solid fa-music"></i><span>تحميل MP3</span></button>
+    <input type="url" id="videoUrl" placeholder="ضع رابط الفيديو هنا" aria-label="رابط الفيديو">
+    <button class="download" id="btn-video" aria-label="تحميل فيديو">
+      <i class="fa-solid fa-download"></i>
+      <span>تحميل فيديو</span>
+    </button>
+    <button class="story" id="btn-story" aria-label="تحميل قصة">
+      <i class="fa-solid fa-images"></i>
+      <span>تحميل قصة</span>
+    </button>
+    <button class="mp3" id="btn-mp3" aria-label="تحميل صوت MP3">
+      <i class="fa-solid fa-music"></i>
+      <span>تحميل MP3</span>
+    </button>
   </div>
-  <div class="quality-options" id="qualityOptions">
-    <h4>اختر جودة التحميل</h4>
+  
+  <!-- إضافة خيارات الجودة تحت الأزرار -->
+  <div class="quality-options" id="qualityOptions" style="display: none;">
+    <h4 id="quality-title">اختر جودة التحميل</h4>
     <div class="quality-buttons">
-      <button class="quality-btn hd">1080p HD</button>
-      <button class="quality-btn sd">720p SD</button>
+      <button class="quality-btn hd" data-quality="1080">
+        <div class="video-preview-small">
+          <div class="preview-icon">
+            <i class="fa-solid fa-play"></i>
+          </div>
+        </div>
+        <span>1080p <span class="quality-badge">HD</span></span>
+      </button>
+      <button class="quality-btn sd" data-quality="720">
+        <div class="video-preview-small">
+          <div class="preview-icon">
+            <i class="fa-solid fa-play"></i>
+          </div>
+        </div>
+        <span>720p <span class="quality-badge">SD</span></span>
+      </button>
+      <button class="quality-btn low" data-quality="480">
+        <div class="video-preview-small">
+          <div class="preview-icon">
+            <i class="fa-solid fa-play"></i>
+          </div>
+        </div>
+        <span>480p <span class="quality-badge">منخفضة</span></span>
+      </button>
     </div>
   </div>
 </div>
 
 <div id="result"></div>
 
-<div class="features-container show">
-    <div class="feature"><i class="fa-solid fa-bolt"></i><h3>تحميل سريع</h3><p>خادمنا يوفر تنزيل أسرع من أي وقت مضى.</p></div>
-    <div class="feature"><i class="fa-solid fa-shield-halved"></i><h3>آمن ومحمي</h3><p>لا نحفظ بياناتك أو روابطك إطلاقاً.</p></div>
-    <div class="feature"><i class="fa-solid fa-ban"></i><h3>بدون علامة مائية</h3><p>استمتع بفيديوهات نظيفة وجاهزة للمشاركة.</p></div>
+<div class="features-container">
+  <div class="feature-column">
+    <div class="feature">
+      <i class="fa-solid fa-bolt"></i>
+      <h3 id="feature1-title">تحميل سريع</h3>
+      <p id="feature1-text">خادمنا يوفر تنزيل أسرع من أي وقت مضى.</p>
+    </div>
+    <div class="feature-extra" id="feature1-extra">يمكنك تنزيل أي فيديو خلال ثوانٍ فقط.</div>
+    <div class="feature-faqs">
+      <details>
+        <summary id="faq1-summary">هل التحميل سريع؟</summary>
+        <p id="faq1-text">نعم، التحميل سريع جدًا حتى للفيديوهات الطويلة.</p>
+      </details>
+    </div>
+  </div>
+
+  <div class="feature-column">
+    <div class="feature">
+      <i class="fa-solid fa-shield-halved"></i>
+      <h3 id="feature2-title">آمن</h3>
+      <p id="feature2-text">لا نحفظ بياناتك أو روابطك إطلاقًا.</p>
+    </div>
+    <div class="feature-extra" id="feature2-extra">خصوصيتك مضمونة؛ الموقع لا يخزن أي بيانات عن الفيديوهات.</div>
+    <div class="feature-faqs">
+      <details>
+        <summary id="faq2-summary">هل الموقع آمن؟</summary>
+        <p id="faq2-text">نعم، نضمن خصوصية بياناتك وعدم حفظ أي روابط.</p>
+      </details>
+    </div>
+  </div>
+
+  <div class="feature-column">
+    <div class="feature">
+      <i class="fa-solid fa-ban"></i>
+      <h3 id="feature3-title">بدون علامة مائية</h3>
+      <p id="feature3-text">استمتع بفيديوهات نظيفة وجاهزة للمشاركة.</p>
+    </div>
+    <div class="feature-extra" id="feature3-extra">تحميل الفيديو بدون أي شعار أو علامة مائية.</div>
+    <div class="feature-faqs">
+      <details>
+        <summary id="faq3-summary">هل الفيديو بدون علامة مائية؟</summary>
+        <p id="faq3-text">نعم، جميع الفيديوهات يتم تحميلها بدون أي علامة مائية.</p>
+      </details>
+    </div>
+  </div>
+
+  <div class="feature-column">
+    <div class="feature">
+      <i class="fa-solid fa-music"></i>
+      <h3 id="feature4-title">تحميل MP3</h3>
+      <p id="feature4-text">استخرج الصوت من أي فيديو بصيغة MP3.</p>
+    </div>
+    <div class="feature-extra" id="feature4-extra">حول أي فيديو إلى ملف صوتي MP3 بجودة عالية.</div>
+    <div class="feature-faqs">
+      <details>
+        <summary id="faq4-summary">هل يمكنني تحميل الصوت فقط؟</summary>
+        <p id="faq4-text">نعم، يمكنك تحميل الصوت فقط بصيغة MP3 بجودة عالية.</p>
+      </details>
+    </div>
+  </div>
 </div>
 
-<div class="info-section show">
-  <h2>أداة ClipVault لتحميل الفيديوهات</h2>
-  <p>يعتبر ClipVault الحل الأمثل لكل من يبحث عن تنزيل مقاطع الفيديو بأعلى جودة ممكنة HD وبدون العلامة المائية المزعجة. الأداة مجانية بالكامل وتعمل على كافة الأجهزة.</p>
+<div class="info-section">
+  <h2 id="info-title">بدون علامة مائية • غير محدود • مجاني</h2>
+  <p id="info-desc">
+    ClipVault واحد من أشهر برامج تنزيل الفيديو عبر الإنترنت يمكنك من حفظ مقاطع الفيديو عالية الدقة HD بأعلى جودة ممكنة دون علامة مائية. قم بتنزيل مقاطع الفيديو والمقاطع الموسيقية على أي جهاز تريده: الهاتف المحمول، الكمبيوتر الشخصي، أو الجهاز اللوحي. مع ClipVault تستطيع التحميل بدون علامة مائية وبجودة أفضل، وهو ما لا تستطيع معظم الأدوات المتوفرة فعله.
+  </p>
+
+  <h3 id="info-browser-title">التنزيل باستخدام المتصفح فقط</h3>
+  <p id="info-browser-desc">
+    نريد أن نجعل الأمور بسيطة بالنسبة لك. لا حاجة لتنزيل أو تثبيت أي برنامج. كل شيء يتم مباشرة من المتصفح الخاص بك. لأداء أفضل يمكنك تحميل تطبيق ClipVault على أجهزة Android أو iOS. التطبيق يسمح لك بحفظ الفيديوهات بجودة عالية جداً بدون أي علامة مائية وبشكل غير محدود ومجاني 100%.
+  </p>
+
+  <h3 id="info-faq-title">كيفية التنزيل على الأجهزة المختلفة؟</h3>
+ 
+  <details>
+    <summary id="faq-android-title">على هواتف Android</summary>
+    <p id="faq-android-text">انسخ رابط الفيديو من التطبيق، ثم الصقه في خانة الإدخال واضغط زر التحميل. يمكنك استخدام تطبيق ClipVault للأداء الأسرع.</p>
+  </details>
+
+  <details>
+    <summary id="faq-ios-title">على أجهزة iPhone / iPad / iPod</summary>
+    <p id="faq-ios-text">نظرًا لسياسات أمان Apple، استخدم متصفح Safari أو تطبيق Documents by Readdle لنسخ رابط الفيديو وتنزيله مباشرة بدون علامة مائية.</p>
+  </details>
+
+  <details>
+    <summary id="faq-pc-title">على الكمبيوتر</summary>
+    <p id="faq-pc-text">انسخ رابط الفيديو ثم الصقه في الموقع. الفيديو سيتم تنزيله مباشرة إلى مجلد "التنزيلات"، يمكنك اختيار Save As لتغيير مكان الحفظ.</p>
+  </details>
+
+  <h3 id="info-security-title">الخصوصية والأمان</h3>
+  <p id="info-security-text">
+    ClipVault لا يحتفظ بأي نسخة من الفيديوهات أو سجل البحث الخاص بك. جميع الفيديوهات يتم تنزيلها مباشرة من الخوادم إلى جهاز المستخدم. خصوصيتك مضمونة، ولا توجد أي قيود على عدد التحميلات.
+  </p>
 </div>
 
 <footer>
-  <span>© 2026 جميع الحقوق محفوظة — ClipVault</span>
+  <span id="footer-text">© 2025 جميع الحقوق محفوظة — ClipVault</span>
+  <button class="contact" id="contact-btn" onclick="document.getElementById('contactModal').style.display='flex'" aria-label="اتصل بنا">
+    <i class="fa-solid fa-envelope"></i>
+    <span>اتصل بنا</span>
+  </button>
 </footer>
 
+<div id="contactModal" role="dialog" aria-labelledby="contact-title" aria-modal="true">
+  <div class="modal-content">
+    <h3 id="contact-title">اتصل بنا</h3>
+    <form id="contact-form">
+      <input type="text" id="contact-name" name="from_name" placeholder="الاسم الكامل" required aria-label="الاسم الكامل">
+      <input type="email" id="contact-email" name="from_email" placeholder="البريد الإلكتروني" required aria-label="البريد الإلكتروني">
+      <textarea id="contact-message" name="message" placeholder="رسالتك" rows="4" required aria-label="رسالتك"></textarea>
+      <div class="button-group">
+        <button type="submit" class="send" id="send-btn">
+          <i class="fa-solid fa-paper-plane"></i>
+          <span>إرسال</span>
+        </button>
+        <button type="button" class="cancel" id="cancel-btn" onclick="document.getElementById('contactModal').style.display='none'">
+          <span>إلغاء</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
 <script>
-// تعبك في السكربتات واللغات محفوظ كما هو هنا
-const langBtn = document.getElementById('langBtn');
-const langMenu = document.getElementById('langMenu');
-langBtn.onclick = () => langMenu.style.display = langMenu.style.display === 'block' ? 'none' : 'block';
-
-// أضف هنا بقية منطق التحميل (API) الخاص بك ليعود الموقع للعمل فوراً
-document.getElementById('btn-video').onclick = function() {
-    const url = document.getElementById('videoUrl').value;
-    if(!url) return alert("يرجى إدخال الرابط أولاً");
-    document.getElementById('qualityOptions').style.display = 'block';
-};
-</script>
-
-</body>
-</html>
+// ==================== نظام اللغات المضاف ====================
+const translations = {
+    AR: {
+        // Navigation
+        "logo": "ClipVault",
+        "langBtn": "🌐 AR",
+        
+        // Main Section
+        "main-title": "🚀 تنزيل الفيديوهات بدون علامة مائية",
+        "main-desc": "ألصق رابط الفيديو واضغط التحميل — سريع، آمن، وبدون علامة مائية.",
+        "videoUrl-placeholder": "ضع رابط الفيديو هنا",
+        "btn-video": "تحميل فيديو",
+        "btn-story": "تحميل قصة", 
+        "btn-mp3": "تحميل MP3",
+        
+        // Quality Options
+        "quality-title": "اختر جودة التحميل",
+        "quality-1080": "1080p",
+        "quality-720": "720p", 
+        "quality-480": "480p",
+        "quality-hd": "HD",
+        "quality-sd": "SD",
+        "quality-low": "منخفضة",
+        
+        // Features
+        "feature1-title": "تحميل سريع",
+        "feature1-text": "خادمنا يوفر تنزيل أسرع من أي وقت مضى.",
+        "feature1-extra": "يمكنك تنزيل أي فيديو خلال ثوانٍ فقط.",
+        "faq1-summary": "هل التحميل سريع؟",
+        "faq1-text": "نعم، التحميل سريع جدًا حتى للفيديوهات الطويلة.",
+        
+        "feature2-title": "آمن", 
+        "feature2-text": "لا نحفظ بياناتك أو روابطك إطلاقًا.",
+        "feature2-extra": "خصوصيتك مضمونة؛ الموقع لا يخزن أي بيانات عن الفيديوهات.",
+        "faq2-summary": "هل الموقع آمن؟",
+        "faq2-text": "نعم، نضمن خصوصية بياناتك وعدم حفظ أي روابط.",
+        
+        "feature3-title": "بدون علامة مائية",
+        "feature3-text": "استمتع بفيديوهات نظيفة وجاهزة للمشاركة.",
+        "feature3-extra": "تحميل الفيديو بدون أي شعار أو علامة مائية.",
+        "faq3-summary": "هل الفيديو بدون علامة مائية؟", 
+        "faq3-text": "نعم، جميع الفيديوهات يتم تحميلها بدون أي علامة مائية.",
+        
+        "feature4-title": "تحميل MP3",
+        "feature4-text": "استخرج الصوت من أي فيديو بصيغة MP3.",
+        "feature4-extra": "حول أي فيديو إلى ملف صوتي MP3 بجودة عالية.",
+        "faq4-summary": "هل يمكنني تحميل الصوت فقط؟",
+        "faq4-text": "نعم، يمكنك تحميل الصوت فقط بصيغة MP3 بجودة عالية.",
+        
+        // Info Section
+        "info-title": "بدون علامة مائية • غير محدود • مجاني",
+        "info-desc": "ClipVault واحد من أشهر برامج تنزيل الفيديو عبر الإنترنت يمكنك من حفظ مقاطع الفيديو عالية الدقة HD بأعلى جودة ممكنة دون علامة مائية. قم بتنزيل مقاطع الفيديو والمقاطع الموسيقية على أي جهاز تريده: الهاتف المحمول، الكمبيوتر الشخصي، أو الجهاز اللوحي. مع ClipVault تستطيع التحميل بدون علامة مائية وبجودة أفضل، وهو ما لا تستطيع معظم الأدوات المتوفرة فعله.",
+        
+        "info-browser-title": "التنزيل باستخدام المتصفح فقط", 
+        "info-browser-desc": "نريد أن نجعل الأمور بسيطة بالنسبة لك. لا حاجة لتنزيل أو تثبيت أي برنامج. كل شيء يتم مباشرة من المتصفح الخاص بك. لأداء أفضل يمكنك تحميل تطبيق ClipVault على أجهزة Android أو iOS. التطبيق يسمح لك بحفظ الفيديوهات بجودة عالية جداً بدون أي علامة مائية وبشكل غير محدود ومجاني 100%.",
+        
+        "info-faq-title": "كيفية التنزيل على الأجهزة المختلفة؟",
+        "faq-android-title": "على هواتف Android",
+        "faq-android-text": "انسخ رابط الفيديو من التطبيق، ثم الصقه في خانة الإدخال واضغط زر التحميل. يمكنك استخدام تطبيق ClipVault للأداء الأسرع.",
+        "faq-ios-title": "على أجهزة iPhone / iPad / iPod",
+        "faq-ios-text": "نظرًا لسياسات أمان Apple، استخدم متصفح Safari أو تطبيق Documents by Readdle لنسخ رابط الفيديو وتنزيله مباشرة بدون علامة مائية.",
+        "faq-pc-title": "على الكمبيوتر", 
+        "faq-pc-text": "انسخ رابط الفيديو ثم الصقه في الموقع. الفيديو سيتم تنزيله مباشرة إلى مجلد \"التنزيلات\"، يمكنك اختيار Save As لتغيير مكان الحفظ.",
+        
+        "info-security-title": "الخصوصية والأمان",
+        "info-security-text": "ClipVault لا يحتفظ بأي نسخة من الفيديوهات أو سجل البحث الخاص بك. جميع الفيديوهات يتم تنزيلها مباشرة من الخوادم إلى جهاز المستخدم. خصوصيتك مضمونة، ولا توجد أي قيود على عدد التحميلات.",
+        
+        // Footer
+        "footer-text": "© 2025 جميع الحقوق محفوظة — ClipVault",
+        "contact-btn": "اتصل بنا",
+        
+        // Contact Modal
+        "contact-title": "اتصل بنا", 
+        "name-placeholder": "الاسم الكامل",
+        "email-placeholder": "البريد الإلكتروني", 
+        "message-placeholder": "رسالتك",
+        "send-btn": "إرسال",
+        "cancel-btn": "إلغاء",
+        
+        // Messages
+        "alert-enter-url": "أدخل الرابط أولا",
+        "alert-invalid-url": "الرجاء إدخال رابط صحيح",
+        "alert-ready": "✓ جاهز للتحميل! اختر الجودة المناسبة",
+        "alert-success": "✅ تم التحميل بنجاح!",
+        "loading-options": "جاري تحضير خيارات التحميل...",
+        "loading-download": "جاري التحميل المباشر...",
+        "error-parse": "خطأ في التحليل",
+        "error-download": "خطأ في التحميل",
+        "success-download": "تم التحميل بنجاح!",
+        "saved-to-downloads": "تم حفظ الملف في مجلد التنزيلات",
+        "retry-btn": "إعادة المحاولة"
+    },
+    
+    EN: {
+        "logo": "ClipVault",
+        "langBtn": "🌐 EN",
+        "main-title": "🚀 Download Videos Without Watermark", 
+        "main-desc": "Paste video link and click download — Fast, secure, and without watermark.",
+        "videoUrl-placeholder": "Paste video link here",
+        "btn-video": "Download Video",
+        "btn-story": "Download Story",
+        "btn-mp3": "Download MP3",
+        "quality-title": "Choose Download Quality",
+        "quality-1080": "1080p",
+        "quality-720": "720p",
+        "quality-480": "480p", 
+        "quality-hd": "HD",
+        "quality-sd": "SD",
+        "quality-low": "Low",
+        "feature1-title": "Fast Download",
+        "feature1-text": "Our server provides faster download than ever.",
+        "feature1-extra": "You can download any video in seconds.",
+        "faq1-summary": "Is download fast?",
+        "faq1-text": "Yes, download is very fast even for long videos.",
+        "feature2-title": "Secure",
+        "feature2-text": "We don't save your data or links at all.",
+        "feature2-extra": "Your privacy is guaranteed; the site doesn't store any video data.",
+        "faq2-summary": "Is the site secure?",
+        "faq2-text": "Yes, we guarantee your privacy and don't save any links.",
+        "feature3-title": "Without Watermark", 
+        "feature3-text": "Enjoy clean videos ready for sharing.",
+        "feature3-extra": "Download video without any logo or watermark.",
+        "faq3-summary": "Is video without watermark?",
+        "faq3-text": "Yes, all videos are downloaded without any watermark.",
+        "feature4-title": "MP3 Download",
+        "feature4-text": "Extract audio from any video in MP3 format.",
+        "feature4-extra": "Convert any video to MP3 audio file with high quality.",
+        "faq4-summary": "Can I download audio only?",
+        "faq4-text": "Yes, you can download audio only in MP3 format with high quality.",
+        "info-title": "Without Watermark • Unlimited • Free",
+        "info-desc": "ClipVault is one of the most popular online video downloaders that allows you to save high-definition HD videos in the highest possible quality without watermark. Download videos and music clips on any device you want: mobile phone, PC, or tablet. With ClipVault you can download without watermark and with better quality, which most available tools cannot do.",
+        "info-browser-title": "Download Using Browser Only",
+        "info-browser-desc": "We want to make things simple for you. No need to download or install any program. Everything is done directly from your browser. For better performance you can download ClipVault app on Android or iOS devices. The app allows you to save videos in very high quality without any watermark, unlimited and 100% free.",
+        "info-faq-title": "How to Download on Different Devices?",
+        "faq-android-title": "On Android Phones",
+        "faq-android-text": "Copy video link from the app, then paste it in the input field and press download button. You can use ClipVault app for faster performance.",
+        "faq-ios-title": "On iPhone / iPad / iPod Devices",
+        "faq-ios-text": "Due to Apple security policies, use Safari browser or Documents by Readdle app to copy video link and download directly without watermark.",
+        "faq-pc-title": "On Computer",
+        "faq-pc-text": "Copy video link then paste it in the site. The video will be downloaded directly to \"Downloads\" folder, you can choose Save As to change save location.",
+        "info-security-title": "Privacy & Security",
+        "info-security-text": "ClipVault doesn't keep any copy of videos or your search history. All videos are downloaded directly from servers to user's device. Your privacy is guaranteed, and there are no limits on number of downloads.",
+        "footer-text": "© 2025 All Rights Reserved — ClipVault",
+        "contact-btn": "Contact Us",
+        "contact-title": "Contact Us",
+        "name-placeholder": "Full Name",
+        "email-placeholder": "Email Address",
+        "message-placeholder": "Your Message",
+        "send-btn": "Send",
+        "cancel-btn": "Cancel",
+        "alert-enter-url": "Enter URL first",
+        "alert-invalid-url": "Please enter valid URL",
+        "alert-ready": "✓ Ready to download! Choose suitable quality",
+        "alert-success": "✅ Download completed successfully!",
+        "loading-options": "Preparing download options...",
+        "loading-download": "Processing direct download...",
+        "error-parse": "Parse Error",
+        "error-download": "Download Error", 
+        "success-download": "Download Successful!",
+        "saved-to-downloads": "File saved to downloads folder",
+        "retry-btn": "Try Again"
+    },
+    
+    FR: {
+        "logo": "ClipVault",
+        "langBtn": "🌐 FR", 
+        "main-title": "🚀 Télécharger des vidéos sans filigrane",
+        "main-desc": "Collez le lien vidéo et cliquez sur télécharger — Rapide, sécurisé et sans filigrane.",
+        "videoUrl-placeholder": "Collez le lien vidéo ici",
+        "btn-video": "Télécharger Vidéo",
+        "btn-story": "Télécharger Story", 
+        "btn-mp3": "Télécharger MP3",
+        "quality-title": "Choisir la qualité de téléchargement",
+        "quality-1080": "1080p",
+        "quality-720": "720p",
+        "quality-480": "480p",
+        "quality-hd": "HD",
+        "quality-sd": "SD",
+        "quality-low": "Basse",
+        "feature1-title": "Téléchargement Rapide",
+        "feature1-text": "Notre serveur offre un téléchargement plus rapide que jamais.",
+        "feature1-extra": "Vous pouvez télécharger n'importe quelle vidéo en quelques secondes.",
+        "faq1-summary": "Le téléchargement est-il rapide?",
+        "faq1-text": "Oui, le téléchargement est très rapide même pour les vidéos longues.",
+        "feature2-title": "Sécurisé",
+        "feature2-text": "Nous ne sauvegardons pas vos données ou liens.",
+        "feature2-extra": "Votre vie privée est garantie; le site ne stocke aucune donnée vidéo.",
+        "faq2-summary": "Le site est-il sécurisé?",
+        "faq2-text": "Oui, nous garantissons votre vie privée et ne sauvegardons aucun lien.",
+        "feature3-title": "Sans Filigrane",
+        "feature3-text": "Profitez de vidéos propres prêtes à partager.",
+        "feature3-extra": "Téléchargez la vidéo sans logo ni filigrane.",
+        "faq3-summary": "La vidéo est-elle sans filigrane?",
+        "faq3-text": "Oui, toutes les vidéos sont téléchargées sans filigrane.",
+        "feature4-title": "Téléchargement MP3",
+        "feature4-text": "Extrayez l'audio de toute vidéo au format MP3.",
+        "feature4-extra": "Convertissez toute vidéo en fichier audio MP3 de haute qualité.",
+        "faq4-summary": "Puis-je télécharger uniquement l'audio?",
+        "faq4-text": "Oui, vous pouvez télécharger uniquement l'audio au format MP3 avec haute qualité.",
+        "info-title": "Sans Filigrane • Illimité • Gratuit",
+        "info-desc": "ClipVault est l'un des téléchargeurs de vidéos en ligne les plus populaires qui vous permet de sauvegarder des vidéos haute définition HD dans la meilleure qualité possible sans filigrane. Téléchargez des vidéos et des clips musicaux sur n'importe quel appareil: téléphone mobile, PC ou tablette. Avec ClipVault, vous pouvez télécharger sans filigrane et avec une meilleure qualité, ce que la plupart des outils disponibles ne peuvent pas faire.",
+        "info-browser-title": "Téléchargement via Navigateur Seulement",
+        "info-browser-desc": "Nous voulons simplifier les choses pour vous. Aucun besoin de télécharger ou d'installer un programme. Tout se fait directement depuis votre navigateur. Pour de meilleures performances, vous pouvez télécharger l'application ClipVault sur les appareils Android ou iOS. L'application vous permet de sauvegarder des vidéos en très haute qualité sans filigrane, illimité et 100% gratuit.",
+        "info-faq-title": "Comment Télécharger sur Différents Appareils?",
+        "faq-android-title": "Sur les téléphones Android",
+        "faq-android-text": "Copiez le lien vidéo de l'application, puis collez-le dans le champ de saisie et appuyez sur le bouton de téléchargement. Vous pouvez utiliser l'application ClipVault pour de meilleures performances.",
+        "faq-ios-title": "Sur les appareils iPhone / iPad / iPod",
+        "faq-ios-text": "En raison des politiques de sécurité d'Apple, utilisez le navigateur Safari ou l'application Documents by Readdle pour copier le lien vidéo et télécharger directement sans filigrane.",
+        "faq-pc-title": "Sur Ordinateur",
+        "faq-pc-text": "Copiez le lien vidéo puis collez-le sur le site. La vidéo sera téléchargée directement dans le dossier \"Téléchargements\", vous pouvez choisir Enregistrer sous pour changer l'emplacement.",
+        "info-security-title": "Confidentialité et Sécurité",
+        "info-security-text": "ClipVault ne conserve aucune copie des vidéos ou de votre historique de recherche. Toutes les vidéos sont téléchargées directement des serveurs vers l'appareil de l'utilisateur. Votre vie privée est garantie et il n'y a aucune limite sur le nombre de téléchargements.",
+        "footer-text": "© 2025 Tous droits réservés — ClipVault",
+        "contact-btn": "Contactez-nous",
+        "contact-title": "Contactez-nous",
+        "name-placeholder": "Nom Complet",
+        "email-placeholder": "Adresse Email",
+        "message-placeholder": "Votre Message",
+        "send-btn": "Envoyer",
+        "cancel-btn": "Annuler",
+        "alert-enter-url": "Entrez d'abord l'URL",
+        "alert-invalid-url": "Veuillez entrer une URL valide",
+        "alert-ready": "✓ Prêt à télécharger! Choisissez la qualité appropriée",
+        "alert-success": "✅ Téléchargement réussi!",
+        "loading-options": "Préparation des options de téléchargement...",
+        "loading-download": "Traitement du téléchargement direct...",
+        "error-parse": "Erreur d'analyse",
+        "error-download": "Erreur de téléchargement",
+        "success-download": "Téléchargement réussi!",
+        "saved-to-downloads": "Fichier enregistré dans le dossier des téléchargements",
+        "retry-btn": "Réessayer"
+    },
+    
+    ZH: {
+        "logo": "ClipVault",
+        "langBtn": "🌐 中文",
+        "main-title": "🚀 下载无水印视频",
+        "main-desc": "粘贴视频链接并点击下载 — 快速、安全、无水印。",
+        "videoUrl-placeholder": "在此粘贴视频链接",
+        "btn-video": "下载视频",
+        "btn-story": "下载故事",
+        "btn-mp3": "下载MP3",
+        "quality-title": "选择下载质量",
+        "quality-1080": "1080p",
+        "quality-720": "720p",
+        "quality-480": "480p",
+        "quality-hd": "高清",
+        "quality-sd": "标清",
+        "quality-low": "低质量",
+        "feature1-title": "快速下载",
+        "feature1-text": "我们的服务器提供前所未有的快速下载。",
+        "feature1-extra": "您可以在几秒钟内下载任何视频。",
+        "faq1-summary": "下载速度快吗？",
+        "faq1-text": "是的，即使对于长视频，下载速度也非常快。",
+        "feature2-title": "安全",
+        "feature2-text": "我们绝不保存您的数据或链接。",
+        "feature2-extra": "您的隐私得到保障；网站不存储任何视频数据。",
+        "faq2-summary": "网站安全吗？",
+        "faq2-text": "是的，我们保证您的隐私，不保存任何链接。",
+        "feature3-title": "无水印",
+        "feature3-text": "享受干净的视频，随时准备分享。",
+        "feature3-extra": "下载无任何标志或水印的视频。",
+        "faq3-summary": "视频没有水印吗？",
+        "faq3-text": "是的，所有视频均无水印下载。",
+        "feature4-title": "MP3下载",
+        "feature4-text": "从任何视频中提取MP3格式的音频。",
+        "feature4-extra": "将任何视频转换为高质量的MP3音频文件。",
+        "faq4-summary": "我可以只下载音频吗？",
+        "faq4-text": "是的，您可以只下载高质量的MP3格式音频。",
+        "info-title": "无水印 • 无限量 • 免费",
+        "info-desc": "ClipVault是最流行的在线视频下载工具之一，让您以最高质量保存高清HD视频而无水印。在您想要的任何设备上下载视频和音乐片段：手机、PC或平板电脑。使用ClipVault，您可以无水印下载且质量更好，这是大多数可用工具无法做到的。",
+        "info-browser-title": "仅使用浏览器下载",
+        "info-browser-desc": "我们想为您简化操作。无需下载或安装任何程序。一切都可以直接从您的浏览器完成。为了获得更好的性能，您可以在Android或iOS设备上下载ClipVault应用程序。该应用程序允许您以非常高的质量保存视频，无水印、无限量且100%免费。",
+        "info-faq-title": "如何在不同的设备上下载？",
+        "faq-android-title": "在Android手机上",
+        "faq-android-text": "从应用程序复制视频链接，然后粘贴到输入字段中并按下载按钮。您可以使用ClipVault应用程序获得更快的性能。",
+        "faq-ios-title": "在iPhone / iPad / iPod设备上",
+        "faq-ios-text": "由于Apple的安全政策，请使用Safari浏览器或Documents by Readdle应用程序复制视频链接并直接无水印下载。",
+        "faq-pc-title": "在计算机上",
+        "faq-pc-text": "复制视频链接然后粘贴到网站中。视频将直接下载到\"下载\"文件夹，您可以选择另存为来更改保存位置。",
+        "info-security-title": "隐私与安全",
+        "info-security-text": "ClipVault不保留任何视频副本或您的搜索历史记录。所有视频都直接从服务器下载到用户设备。您的隐私得到保障，并且下载次数没有限制。",
+        "footer-text": "© 2025 版权所有 — ClipVault",
+        "contact-btn": "联系我们",
+        "contact-title": "联系我们",
+        "name-placeholder": "全名",
+        "email-placeholder": "电子邮件地址",
+        "message-placeholder": "您的消息",
+        "send-btn": "发送",
+        "cancel-btn": "取消",
+        "alert-enter-url": "请先输入网址",
+        "alert-invalid-url": "请输入有效的网址",
+        "alert-ready": "✓ 准备下载！选择合适的质量",
+        "alert-success": "✅ 下载成功完成！",
+        "loading-options": "正在准备下载选项...",
+        "loading-download": "正在处理直接下载...",
+        "error-parse": "解析错误",
+        "error-download": "下载错误",
+        "success-download": "下载成功！",
+        "saved-to-downloads": "文件已保存到下载文件夹",
+        "retry-btn": "重试"
+    },
+    
+    IT: {
+        "logo": "ClipVault",
+        "langBtn": "🌐 IT",
+        "main-title": "🚀 Scarica Video Senza Filigrana",
+        "main-desc": "Incolla il link del video e clicca download — Veloce, sicuro e senza filigrana.",
+        "videoUrl-placeholder": "Incolla il link del video qui",
+        "btn-video": "Scarica Video",
+        "btn-story": "Scarica Storia",
+        "btn-mp3": "Scarica MP3",
+        "quality-title": "Scegli Qualità Download",
+        "quality-1080": "1080p",
+        "quality-720": "720p",
+        "quality-480": "480p",
+        "quality-hd": "HD",
+        "quality-sd": "SD",
+        "quality-low": "Bassa",
+        "feature1-title": "Download Veloce",
+        "feature1-text": "Il nostro server fornisce download più veloci che mai.",
+        "feature1-extra": "Puoi scaricare qualsiasi vide
