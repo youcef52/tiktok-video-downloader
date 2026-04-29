@@ -1756,8 +1756,7 @@ document.querySelectorAll('.quality-btn').forEach(btn => {
 document.getElementById('videoUrl').addEventListener('keypress', function(e) { if (e.key === 'Enter') showQualityOptions('video'); });
 window.addEventListener('load', () => document.getElementById('videoUrl').focus());
 
-<script>
-// 1. القاموس الكامل لكل اللغات
+// 1. القاموس الكامل لكل لغات الموقع (الـ 8 لغات)
 const siteTranslations = {
     'AR': { title: 'تنزيل فيديوهات تيك توك', input: 'ضع رابط تيك توك هنا' },
     'EN': { title: 'Download TikTok Videos', input: 'Paste TikTok link here...' },
@@ -1766,48 +1765,60 @@ const siteTranslations = {
     'IT': { title: 'Scarica i video di TikTok', input: 'Incolla il link di TikTok qui...' },
     'DE': { title: 'TikTok Videos Herunterladen', input: 'TikTok-Link hier einfügen...' },
     'PT': { title: 'Baixar vídeos do TikTok', input: 'Cole o link do TikTok aqui...' },
-    'TR': { title: 'TikTok Videolarını İndir', input: 'TikTok bağlantısını buraya yapıştırين...' }
+    'TR': { title: 'TikTok Videolarını İndir', input: 'TikTok bağlantısını buraya yapıştırın...' }
 };
 
-// 2. وظيفة التبديل الفوري
+// 2. وظيفة تغيير اللغة
 function changeLanguage(lang) {
     const data = siteTranslations[lang];
     if (data) {
+        // تغيير العنوان الرئيسي
         const titleField = document.getElementById('main-title');
-        const inputField = document.getElementById('videoUrl');
-        const langBtn = document.getElementById('langBtn');
-        const langMenu = document.getElementById('langMenu');
-
         if (titleField) titleField.innerText = data.title;
+
+        // تغيير نص المربع (Placeholder) - حل المشكلة الأساسية
+        const inputField = document.getElementById('videoUrl');
         if (inputField) inputField.placeholder = data.input;
-        if (langBtn) langBtn.innerHTML = `<i class="fa-solid fa-globe"></i> ${lang}`;
-        if (langMenu) langMenu.style.display = 'none';
+
+        // تحديث اسم اللغة على الزر العلوي
+        const btnField = document.getElementById('langBtn');
+        if (btnField) btnField.innerHTML = `<i class="fa-solid fa-globe"></i> ${lang}`;
+
+        // إغلاق القائمة بعد الاختيار
+        const menuField = document.getElementById('langMenu');
+        if (menuField) menuField.style.display = 'none';
+        
+        // تحديث متغير اللغة العام لعمليات التحميل
+        if (typeof currentLanguage !== 'undefined') currentLanguage = lang;
     }
 }
 
-// 3. تفعيل الأزرار عند تحميل الصفحة
-document.addEventListener('DOMContentLoaded', function() {
-    const langBtn = document.getElementById('langBtn');
-    const langMenu = document.getElementById('langMenu');
+// 3. تفعيل الأزرار والضغط
+const langBtn = document.getElementById('langBtn');
+const langMenu = document.getElementById('langMenu');
 
-    if (langBtn && langMenu) {
-        langBtn.onclick = function(e) {
-            e.stopPropagation();
-            langMenu.style.display = (langMenu.style.display === 'block') ? 'none' : 'block';
-        };
-    }
+if (langBtn && langMenu) {
+    langBtn.onclick = function(e) {
+        e.stopPropagation();
+        langMenu.style.display = (langMenu.style.display === 'block') ? 'none' : 'block';
+    };
+}
 
-    document.querySelectorAll('.lang-menu div').forEach(item => {
-        item.onclick = function() {
-            changeLanguage(this.getAttribute('data-lang'));
-        };
-    });
-
-    window.onclick = function() {
-        if (langMenu) langMenu.style.display = 'none';
+// ربط كل لغة في القائمة بالوظيفة
+document.querySelectorAll('.lang-menu div').forEach(item => {
+    item.onclick = function() {
+        const selectedLang = this.getAttribute('data-lang');
+        changeLanguage(selectedLang);
     };
 });
-</script>
+
+// إغلاق القائمة عند الضغط في أي مكان خارجها
+window.onclick = function(e) {
+    if (!e.target.closest('.lang-dropdown')) {
+        if (langMenu) langMenu.style.display = 'none';
+    }
+};
+
 
 </body>
 </html>
