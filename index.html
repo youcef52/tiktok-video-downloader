@@ -1211,7 +1211,7 @@ footer.show {
   <h1 id="main-title">📱 تنزيل فيديوهات تيك توك بدون علامة مائية HD</h1>
   <p class="subtitle" id="main-desc">ألصق رابط فيديو تيك توك واضغط التحميل — بجودة HD وسرعة فائقة وبدون علامة مائية.</p>
   <div class="input-group">
-    <input type="url" id="videoUrl" id="videoUrl-placeholder" placeholder="ضع رابط تيك توك هنا" aria-label="رابط تيك توك">
+    <input type="url" id="videoUrl" placeholder="ضع رابط تيك توك هنا" aria-label="رابط تيك توك">
     <button class="download" id="btn-video" aria-label="تحميل فيديو">
       <i class="fa-solid fa-download"></i>
       <span>تحميل فيديو تيك توك</span>
@@ -1958,16 +1958,32 @@ function changeLanguage(lang) {
 
 function updateAllTexts() {
     const trans = translations[currentLanguage];
+    
+    // تحديث جميع العناصر النصية
     for (const [key, value] of Object.entries(trans)) {
         const element = document.getElementById(key);
-        if (element) {
-            if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
-                element.placeholder = value;
-            } else {
-                element.textContent = value;
-            }
+        if (element && element.tagName !== 'INPUT' && element.tagName !== 'TEXTAREA') {
+            element.textContent = value;
         }
     }
+    
+    // تحديث placeholder لحقل إدخال الفيديو (المشكلة الأساسية)
+    const videoInput = document.getElementById('videoUrl');
+    if (videoInput && trans['videoUrl-placeholder']) {
+        videoInput.placeholder = trans['videoUrl-placeholder'];
+    }
+    
+    // تحديث placeholder لحقول نموذج الاتصال
+    const contactName = document.getElementById('contact-name');
+    if (contactName && trans['name-placeholder']) contactName.placeholder = trans['name-placeholder'];
+    
+    const contactEmail = document.getElementById('contact-email');
+    if (contactEmail && trans['email-placeholder']) contactEmail.placeholder = trans['email-placeholder'];
+    
+    const contactMessage = document.getElementById('contact-message');
+    if (contactMessage && trans['message-placeholder']) contactMessage.placeholder = trans['message-placeholder'];
+    
+    // تحديث أزرار الجودة
     document.querySelectorAll('.quality-btn').forEach((btn, index) => {
         const qualitySpans = btn.querySelectorAll('span');
         if (qualitySpans.length > 0) {
