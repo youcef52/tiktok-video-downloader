@@ -1195,14 +1195,14 @@ footer.show {
   <div class="lang-dropdown" aria-haspopup="true">
     <button class="lang-btn" id="langBtn" aria-label="تغيير اللغة">🌐 AR</button>
     <div class="lang-menu" id="langMenu" role="menu" aria-hidden="true">
-      <div data-lang="AR">العربية</div>
-      <div data-lang="EN">English</div>
-      <div data-lang="FR">Français</div>
-      <div data-lang="ZH">中文</div>
-      <div data-lang="IT">Italiano</div>
-      <div data-lang="DE">Deutsch</div>
-      <div data-lang="PT">Português</div>
-      <div data-lang="TR">Türkçe</div>
+      <div data-lang="AR" onclick="changeLanguage('AR')">العربية</div>
+<div data-lang="EN" onclick="changeLanguage('EN')">English</div>
+<div data-lang="FR" onclick="changeLanguage('FR')">Français</div>
+<div data-lang="ZH" onclick="changeLanguage('ZH')">中文</div>
+<div data-lang="IT" onclick="changeLanguage('IT')">Italiano</div>
+<div data-lang="DE" onclick="changeLanguage('DE')">Deutsch</div>
+<div data-lang="PT" onclick="changeLanguage('PT')">Português</div>
+<div data-lang="TR" onclick="changeLanguage('TR')">Türkçe</div>
     </div>
   </div>
 </nav>
@@ -1756,14 +1756,69 @@ document.querySelectorAll('.quality-btn').forEach(btn => {
 document.getElementById('videoUrl').addEventListener('keypress', function(e) { if (e.key === 'Enter') showQualityOptions('video'); });
 window.addEventListener('load', () => document.getElementById('videoUrl').focus());
 
+// 1. القاموس الكامل لكل لغات الموقع (الـ 8 لغات)
+const siteTranslations = {
+    'AR': { title: 'تنزيل فيديوهات تيك توك', input: 'ضع رابط تيك توك هنا' },
+    'EN': { title: 'Download TikTok Videos', input: 'Paste TikTok link here...' },
+    'FR': { title: 'Télécharger des vidéos TikTok', input: 'Coller le lien TikTok ici...' },
+    'ZH': { title: '下载 TikTok 视频', input: '在此处粘贴 TikTok 链接...' },
+    'IT': { title: 'Scarica i video di TikTok', input: 'Incolla il link di TikTok qui...' },
+    'DE': { title: 'TikTok Videos Herunterladen', input: 'TikTok-Link hier einfügen...' },
+    'PT': { title: 'Baixar vídeos do TikTok', input: 'Cole o link do TikTok aqui...' },
+    'TR': { title: 'TikTok Videolarını İndir', input: 'TikTok bağlantısını buraya yapıştırın...' }
+};
+
+// 2. وظيفة تغيير اللغة
+function changeLanguage(lang) {
+    const data = siteTranslations[lang];
+    if (data) {
+        // تغيير العنوان الرئيسي
+        const titleField = document.getElementById('main-title');
+        if (titleField) titleField.innerText = data.title;
+
+        // تغيير نص المربع (Placeholder) - حل المشكلة الأساسية
+        const inputField = document.getElementById('videoUrl');
+        if (inputField) inputField.placeholder = data.input;
+
+        // تحديث اسم اللغة على الزر العلوي
+        const btnField = document.getElementById('langBtn');
+        if (btnField) btnField.innerHTML = `<i class="fa-solid fa-globe"></i> ${lang}`;
+
+        // إغلاق القائمة بعد الاختيار
+        const menuField = document.getElementById('langMenu');
+        if (menuField) menuField.style.display = 'none';
+        
+        // تحديث متغير اللغة العام لعمليات التحميل
+        if (typeof currentLanguage !== 'undefined') currentLanguage = lang;
+    }
+}
+
+// 3. تفعيل الأزرار والضغط
 const langBtn = document.getElementById('langBtn');
 const langMenu = document.getElementById('langMenu');
-langBtn.addEventListener('click', (e) => { e.stopPropagation(); langMenu.style.display = langMenu.style.display === 'block' ? 'none' : 'block'; });
-document.querySelectorAll('.lang-menu div').forEach(item => { item.addEventListener('click', () => { changeLanguage(item.getAttribute('data-lang')); }); });
-window.addEventListener('click', e => { if (!e.target.closest('.lang-dropdown')) { langMenu.style.display = 'none'; } });
-document.getElementById('contactModal').addEventListener('click', (e) => { if (e.target.id === 'contactModal') { document.getElementById('contactModal').style.display = 'none'; } });
-document.getElementById('contact-form').addEventListener('submit', function(e) { e.preventDefault(); alert(translations[currentLanguage]["alert-success"]); document.getElementById('contactModal').style.display = 'none'; this.reset(); });
-</script>
+
+if (langBtn && langMenu) {
+    langBtn.onclick = function(e) {
+        e.stopPropagation();
+        langMenu.style.display = (langMenu.style.display === 'block') ? 'none' : 'block';
+    };
+}
+
+// ربط كل لغة في القائمة بالوظيفة
+document.querySelectorAll('.lang-menu div').forEach(item => {
+    item.onclick = function() {
+        const selectedLang = this.getAttribute('data-lang');
+        changeLanguage(selectedLang);
+    };
+});
+
+// إغلاق القائمة عند الضغط في أي مكان خارجها
+window.onclick = function(e) {
+    if (!e.target.closest('.lang-dropdown')) {
+        if (langMenu) langMenu.style.display = 'none';
+    }
+};
+
 
 </body>
 </html>
