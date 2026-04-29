@@ -1211,7 +1211,7 @@ footer.show {
   <h1 id="main-title">📱 تنزيل فيديوهات تيك توك بدون علامة مائية HD</h1>
   <p class="subtitle" id="main-desc">ألصق رابط فيديو تيك توك واضغط التحميل — بجودة HD وسرعة فائقة وبدون علامة مائية.</p>
   <div class="input-group">
-    <input type="url" id="videoUrl" id="videoUrl-placeholder" placeholder="ضع رابط تيك توك هنا" aria-label="رابط تيك توك">
+    <input type="url" id="videoUrl" placeholder="ضع رابط تيك توك هنا" aria-label="رابط تيك توك">
     <button class="download" id="btn-video" aria-label="تحميل فيديو">
       <i class="fa-solid fa-download"></i>
       <span>تحميل فيديو تيك توك</span>
@@ -1967,6 +1967,11 @@ function updateAllTexts() {
                 element.textContent = value;
             }
         }
+    }
+    // تحديث placeholder لحقل إدخال الفيديو بشكل خاص (للتأكيد)
+    const videoUrlInput = document.getElementById("videoUrl");
+    if (videoUrlInput && trans["videoUrl-placeholder"]) {
+        videoUrlInput.placeholder = trans["videoUrl-placeholder"];
     }
     document.querySelectorAll('.quality-btn').forEach((btn, index) => {
         const qualitySpans = btn.querySelectorAll('span');
