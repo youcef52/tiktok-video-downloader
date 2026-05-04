@@ -697,3 +697,621 @@ window.addEventListener('click', e => { if (!e.target.closest('.lang-dropdown'))
 </script>
 </body>
 </html>
+<script>
+// ============================================
+// ترجمات 8 لغات مع الأعلام
+// ============================================
+const translations = {
+    AR: {
+        mainDesc: "ألصق رابط فيديو تيك توك واضغط التحميل — بجودة HD وسرعة فائقة وبدون علامة مائية، احفظ فيديوهات تيك توك مباشرة.",
+        ph: "ضع رابط تيك توك هنا",
+        btnVideo: "تحميل فيديو",
+        btnStory: "تحميل قصة",
+        btnMp3: "تحميل MP3",
+        qualityTitle: "اختر جودة التحميل",
+        alertUrl: "أدخل رابط تيك توك أولاً",
+        alertInvalid: "الرجاء إدخال رابط تيك توك صحيح",
+        alertReady: "جاهز للتحميل!",
+        alertSuccess: "تم التحميل بنجاح!",
+        loadingOpt: "جاري تحضير خيارات التحميل...",
+        loadingDown: "جاري التحميل...",
+        errorParse: "خطأ في تحليل الرابط",
+        errorDown: "خطأ في التحميل",
+        successDown: "تم التحميل بنجاح!",
+        savedVideo: "تم حفظ الفيديو",
+        retry: "إعادة المحاولة",
+        storyLoading: "جاري تحميل القصة..."
+    },
+    EN: {
+        mainDesc: "Paste TikTok video link and click download — HD quality, fast, no watermark, save TikTok videos directly.",
+        ph: "Paste TikTok link here",
+        btnVideo: "Download Video",
+        btnStory: "Download Story",
+        btnMp3: "Download MP3",
+        qualityTitle: "Choose Quality",
+        alertUrl: "Enter TikTok URL first",
+        alertInvalid: "Please enter a valid TikTok URL",
+        alertReady: "Ready to download!",
+        alertSuccess: "Download successful!",
+        loadingOpt: "Preparing download options...",
+        loadingDown: "Downloading...",
+        errorParse: "Error parsing link",
+        errorDown: "Download error",
+        successDown: "Download successful!",
+        savedVideo: "Video saved",
+        retry: "Try Again",
+        storyLoading: "Loading story..."
+    },
+    FR: {
+        mainDesc: "Collez le lien TikTok et cliquez sur télécharger — qualité HD, rapide, sans filigrane, sauvegardez les vidéos TikTok directement.",
+        ph: "Collez le lien TikTok ici",
+        btnVideo: "Télécharger Vidéo",
+        btnStory: "Télécharger Story",
+        btnMp3: "Télécharger MP3",
+        qualityTitle: "Choisir la qualité",
+        alertUrl: "Entrez d'abord l'URL TikTok",
+        alertInvalid: "Veuillez entrer une URL TikTok valide",
+        alertReady: "Prêt à télécharger!",
+        alertSuccess: "Téléchargement réussi!",
+        loadingOpt: "Préparation des options...",
+        loadingDown: "Téléchargement en cours...",
+        errorParse: "Erreur d'analyse du lien",
+        errorDown: "Erreur de téléchargement",
+        successDown: "Téléchargement réussi!",
+        savedVideo: "Vidéo enregistrée",
+        retry: "Réessayer",
+        storyLoading: "Chargement de l'histoire..."
+    },
+    ZH: {
+        mainDesc: "粘贴TikTok视频链接并点击下载 — 高清质量，快速，无水印，直接保存TikTok视频。",
+        ph: "在此粘贴TikTok链接",
+        btnVideo: "下载视频",
+        btnStory: "下载故事",
+        btnMp3: "下载MP3",
+        qualityTitle: "选择质量",
+        alertUrl: "请先输入TikTok链接",
+        alertInvalid: "请输入有效的TikTok链接",
+        alertReady: "准备下载！",
+        alertSuccess: "下载成功！",
+        loadingOpt: "正在准备下载选项...",
+        loadingDown: "正在下载...",
+        errorParse: "链接解析错误",
+        errorDown: "下载错误",
+        successDown: "下载成功！",
+        savedVideo: "视频已保存",
+        retry: "重试",
+        storyLoading: "正在加载故事..."
+    },
+    IT: {
+        mainDesc: "Incolla il link di TikTok e clicca scarica — qualità HD, veloce, senza watermark, salva i video TikTok direttamente.",
+        ph: "Incolla il link TikTok qui",
+        btnVideo: "Scarica Video",
+        btnStory: "Scarica Story",
+        btnMp3: "Scarica MP3",
+        qualityTitle: "Scegli qualità",
+        alertUrl: "Inserisci prima l'URL TikTok",
+        alertInvalid: "Inserisci un URL TikTok valido",
+        alertReady: "Pronto per il download!",
+        alertSuccess: "Download riuscito!",
+        loadingOpt: "Preparazione opzioni...",
+        loadingDown: "Download in corso...",
+        errorParse: "Errore nell'analisi del link",
+        errorDown: "Errore di download",
+        successDown: "Download riuscito!",
+        savedVideo: "Video salvato",
+        retry: "Riprova",
+        storyLoading: "Caricamento della storia..."
+    },
+    DE: {
+        mainDesc: "Füge den TikTok-Link ein und klicke auf Herunterladen — HD-Qualität, schnell, ohne Wasserzeichen, speichere TikTok-Videos direkt.",
+        ph: "TikTok-Link hier einfügen",
+        btnVideo: "Video herunterladen",
+        btnStory: "Story herunterladen",
+        btnMp3: "MP3 herunterladen",
+        qualityTitle: "Qualität wählen",
+        alertUrl: "TikTok-URL zuerst eingeben",
+        alertInvalid: "Bitte gib eine gültige TikTok-URL ein",
+        alertReady: "Bereit zum Herunterladen!",
+        alertSuccess: "Download erfolgreich!",
+        loadingOpt: "Optionen werden vorbereitet...",
+        loadingDown: "Wird heruntergeladen...",
+        errorParse: "Fehler beim Parsen des Links",
+        errorDown: "Download-Fehler",
+        successDown: "Download erfolgreich!",
+        savedVideo: "Video gespeichert",
+        retry: "Wiederholen",
+        storyLoading: "Story wird geladen..."
+    },
+    PT: {
+        mainDesc: "Cole o link do TikTok e clique em baixar — qualidade HD, rápido, sem marca d'água, salve vídeos do TikTok diretamente.",
+        ph: "Cole o link do TikTok aqui",
+        btnVideo: "Baixar Vídeo",
+        btnStory: "Baixar Story",
+        btnMp3: "Baixar MP3",
+        qualityTitle: "Escolher qualidade",
+        alertUrl: "Insira a URL do TikTok primeiro",
+        alertInvalid: "Por favor, insira uma URL válida do TikTok",
+        alertReady: "Pronto para baixar!",
+        alertSuccess: "Download bem-sucedido!",
+        loadingOpt: "Preparando opções...",
+        loadingDown: "Baixando...",
+        errorParse: "Erro ao analisar link",
+        errorDown: "Erro de download",
+        successDown: "Download bem-sucedido!",
+        savedVideo: "Vídeo salvo",
+        retry: "Tentar novamente",
+        storyLoading: "Carregando história..."
+    },
+    TR: {
+        mainDesc: "TikTok video bağlantısını yapıştır ve indir'e tıkla — HD kalite, hızlı, filigransız, TikTok videolarını doğrudan kaydet.",
+        ph: "TikTok bağlantısını buraya yapıştır",
+        btnVideo: "Video İndir",
+        btnStory: "Hikaye İndir",
+        btnMp3: "MP3 İndir",
+        qualityTitle: "Kaliteyi Seç",
+        alertUrl: "Önce TikTok URL'sini gir",
+        alertInvalid: "Lütfen geçerli bir TikTok URL'si girin",
+        alertReady: "İndirmeye hazır!",
+        alertSuccess: "İndirme başarılı!",
+        loadingOpt: "Seçenekler hazırlanıyor...",
+        loadingDown: "İndiriliyor...",
+        errorParse: "Bağlantı analiz hatası",
+        errorDown: "İndirme hatası",
+        successDown: "İndirme başarılı!",
+        savedVideo: "Video kaydedildi",
+        retry: "Tekrar Dene",
+        storyLoading: "Hikaye yükleniyor..."
+    }
+};
+
+// ============================================
+// المتغيرات العامة
+// ============================================
+let currentLanguage = "AR";
+let currentVideoData = null;
+let currentDownloadType = "video";
+
+// ============================================
+// وظائف تغيير اللغة
+// ============================================
+function changeLanguage(lang) {
+    currentLanguage = lang;
+    localStorage.setItem("selectedLanguage", lang);
+    
+    let langBtn = document.getElementById("langBtn");
+    if (lang === "AR") langBtn.textContent = "🌐 AR";
+    else if (lang === "EN") langBtn.textContent = "🌐 EN";
+    else if (lang === "FR") langBtn.textContent = "🌐 FR";
+    else if (lang === "ZH") langBtn.textContent = "🌐 中文";
+    else if (lang === "IT") langBtn.textContent = "🌐 IT";
+    else if (lang === "DE") langBtn.textContent = "🌐 DE";
+    else if (lang === "PT") langBtn.textContent = "🌐 PT";
+    else if (lang === "TR") langBtn.textContent = "🌐 TR";
+    
+    updateAllTexts();
+    
+    let langMenu = document.getElementById("langMenu");
+    if (langMenu) langMenu.style.display = "none";
+    
+    document.documentElement.setAttribute("dir", lang === "AR" ? "rtl" : "ltr");
+    document.documentElement.setAttribute("lang", lang === "AR" ? "ar" : lang.toLowerCase());
+}
+
+function updateAllTexts() {
+    let t = translations[currentLanguage];
+    if (!t) return;
+    
+    let mainDesc = document.getElementById("main-desc");
+    if (mainDesc) mainDesc.textContent = t.mainDesc;
+    
+    let videoUrl = document.getElementById("videoUrl");
+    if (videoUrl) videoUrl.placeholder = t.ph;
+    
+    let btnVideoSpan = document.querySelector("#btn-video span");
+    if (btnVideoSpan) btnVideoSpan.textContent = t.btnVideo;
+    
+    let btnStorySpan = document.querySelector("#btn-story span");
+    if (btnStorySpan) btnStorySpan.textContent = t.btnStory;
+    
+    let btnMp3Span = document.querySelector("#btn-mp3 span");
+    if (btnMp3Span) btnMp3Span.textContent = t.btnMp3;
+    
+    let qualityTitle = document.querySelector("#qualityOptions h4");
+    if (qualityTitle) qualityTitle.textContent = t.qualityTitle;
+}
+
+function initLanguage() {
+    let savedLang = localStorage.getItem("selectedLanguage");
+    if (savedLang && translations[savedLang]) {
+        changeLanguage(savedLang);
+    } else {
+        changeLanguage("AR");
+    }
+}
+
+// ============================================
+// وظائف التنبيه
+// ============================================
+function showAlert(message) {
+    let alertDiv = document.createElement("div");
+    alertDiv.className = "custom-alert";
+    alertDiv.innerHTML = '<div class="alert-content"><i class="fa-solid fa-circle-info"></i><span>' + message + '</span></div>';
+    document.body.appendChild(alertDiv);
+    setTimeout(function() { alertDiv.classList.add("show"); }, 100);
+    setTimeout(function() {
+        alertDiv.classList.remove("show");
+        setTimeout(function() {
+            if (document.body.contains(alertDiv)) document.body.removeChild(alertDiv);
+        }, 300);
+    }, 3000);
+}
+
+// ============================================
+// وظائف جودة التحميل
+// ============================================
+function createQualityButtons() {
+    let container = document.getElementById("qualityButtons");
+    if (!container) return;
+    container.innerHTML = "";
+    
+    if (currentDownloadType === "mp3") {
+        let qualities = [
+            { label: "128kbps", quality: "128", className: "hd" },
+            { label: "256kbps", quality: "256", className: "sd" },
+            { label: "320kbps", quality: "320", className: "low" }
+        ];
+        for (let i = 0; i < qualities.length; i++) {
+            let q = qualities[i];
+            let btn = document.createElement("button");
+            btn.className = "quality-btn " + q.className;
+            btn.innerHTML = '<div class="video-preview-small"><div class="preview-icon music-icon"><i class="fa-solid fa-headphones"></i></div></div><span>' + q.label + '</span>';
+            btn.onclick = (function(quality) {
+                return function() { downloadMP3(quality); };
+            })(q.quality);
+            container.appendChild(btn);
+        }
+    } else {
+        let qualities = [
+            { label: "1080p HD", quality: "1080", badge: "HD", className: "hd" },
+            { label: "720p HD", quality: "720", badge: "HD", className: "sd" },
+            { label: "480p SD", quality: "480", badge: "SD", className: "low" }
+        ];
+        for (let j = 0; j < qualities.length; j++) {
+            let q = qualities[j];
+            let btn = document.createElement("button");
+            btn.className = "quality-btn " + q.className;
+            btn.innerHTML = '<div class="video-preview-small"><div class="preview-icon"><i class="fa-solid fa-play"></i></div></div><span>' + q.label + ' <span class="quality-badge">' + q.badge + '</span></span>';
+            btn.onclick = (function(quality) {
+                return function() { downloadVideo(quality); };
+            })(q.quality);
+            container.appendChild(btn);
+        }
+        if (currentVideoData && currentVideoData.play) {
+            updateVideoPreviews(currentVideoData.play);
+        }
+    }
+}
+
+function updateVideoPreviews(videoUrl) {
+    let previews = document.querySelectorAll("#qualityButtons .video-preview-small");
+    for (let i = 0; i < previews.length; i++) {
+        let preview = previews[i];
+        let icon = preview.querySelector(".preview-icon");
+        if (icon && icon.classList.contains("music-icon")) continue;
+        if (icon) icon.style.display = "none";
+        let video = document.createElement("video");
+        video.src = videoUrl;
+        video.muted = true;
+        video.playsInline = true;
+        video.style.width = "100%";
+        video.style.height = "100%";
+        video.style.objectFit = "cover";
+        preview.innerHTML = "";
+        preview.appendChild(video);
+        video.play().catch(function() {
+            if (icon) {
+                preview.innerHTML = "";
+                preview.appendChild(icon);
+                icon.style.display = "flex";
+            }
+        });
+    }
+}
+
+function scrollToQuality() {
+    let qualitySection = document.getElementById("qualityOptions");
+    if (qualitySection) {
+        qualitySection.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+}
+
+// ============================================
+// وظائف التحميل الرئيسية
+// ============================================
+async function showQualityOptions(type) {
+    let url = document.getElementById("videoUrl").value.trim();
+    let t = translations[currentLanguage];
+    if (!url) {
+        showAlert(t.alertUrl);
+        return;
+    }
+    if (!url.includes("tiktok.com")) {
+        showAlert(t.alertInvalid);
+        return;
+    }
+    currentDownloadType = type;
+    try {
+        let resultDiv = document.getElementById("result");
+        resultDiv.innerHTML = '<div class="loading-state"><div class="spinner"></div><p>' + t.loadingOpt + '</p></div>';
+        resultDiv.style.display = "block";
+        
+        let apiUrl = "https://www.tikwm.com/api/?url=" + encodeURIComponent(url);
+        let response = await fetch(apiUrl);
+        let data = await response.json();
+        
+        if (data.code === 0 && data.data) {
+            currentVideoData = data.data;
+            createQualityButtons();
+            document.getElementById("qualityOptions").style.display = "block";
+            resultDiv.innerHTML = "";
+            showAlert(t.alertReady);
+            scrollToQuality();
+        } else {
+            throw new Error(data.msg || "Failed");
+        }
+    } catch (error) {
+        let resultDiv = document.getElementById("result");
+        resultDiv.innerHTML = '<div class="error-result"><div class="result-header"><i class="fa-solid fa-circle-xmark"></i><h3>' + t.errorParse + '</h3></div><p>' + error.message + '</p><button class="retry-btn" onclick="showQualityOptions(\'' + type + '\')"><i class="fa-solid fa-rotate"></i>' + t.retry + '</button></div>';
+    }
+}
+
+async function downloadVideo(quality) {
+    if (!currentVideoData) return;
+    let t = translations[currentLanguage];
+    let resultDiv = document.getElementById("result");
+    resultDiv.innerHTML = '<div class="loading-state"><div class="spinner"></div><p>' + t.loadingDown + '</p></div>';
+    resultDiv.style.display = "block";
+    try {
+        let response = await fetch(currentVideoData.play);
+        let blob = await response.blob();
+        let blobUrl = URL.createObjectURL(blob);
+        let link = document.createElement("a");
+        link.href = blobUrl;
+        link.download = "tiktok_" + quality + "p_" + Date.now() + ".mp4";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        setTimeout(function() { URL.revokeObjectURL(blobUrl); }, 100);
+        resultDiv.innerHTML = '<div class="success-result"><div class="result-header"><i class="fa-solid fa-circle-check"></i><h3>' + t.successDown + '</h3></div><p>' + t.savedVideo + '</p></div>';
+        showAlert(t.alertSuccess);
+        setTimeout(function() { resultDiv.style.display = "none"; }, 3000);
+    } catch (error) {
+        resultDiv.innerHTML = '<div class="error-result"><div class="result-header"><i class="fa-solid fa-circle-xmark"></i><h3>' + t.errorDown + '</h3></div><p>' + error.message + '</p></div>';
+    }
+}
+
+async function downloadMP3(bitrate) {
+    if (!currentVideoData) return;
+    let t = translations[currentLanguage];
+    let resultDiv = document.getElementById("result");
+    resultDiv.innerHTML = '<div class="loading-state"><div class="spinner"></div><p>' + t.loadingDown + '</p></div>';
+    resultDiv.style.display = "block";
+    try {
+        let response = await fetch(currentVideoData.music);
+        let blob = await response.blob();
+        let blobUrl = URL.createObjectURL(blob);
+        let link = document.createElement("a");
+        link.href = blobUrl;
+        link.download = "tiktok_audio_" + bitrate + "kbps_" + Date.now() + ".mp3";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        setTimeout(function() { URL.revokeObjectURL(blobUrl); }, 100);
+        resultDiv.innerHTML = '<div class="success-result"><div class="result-header"><i class="fa-solid fa-circle-check"></i><h3>' + t.successDown + '</h3></div><p>تم حفظ الصوت بصيغة MP3</p></div>';
+        showAlert(t.alertSuccess);
+        setTimeout(function() { resultDiv.style.display = "none"; }, 3000);
+    } catch (error) {
+        resultDiv.innerHTML = '<div class="error-result"><div class="result-header"><i class="fa-solid fa-circle-xmark"></i><h3>' + t.errorDown + '</h3></div><p>' + error.message + '</p></div>';
+    }
+}
+
+async function downloadStory() {
+    let url = document.getElementById("videoUrl").value.trim();
+    let t = translations[currentLanguage];
+    if (!url) {
+        showAlert(t.alertUrl);
+        return;
+    }
+    if (!url.includes("tiktok.com")) {
+        showAlert(t.alertInvalid);
+        return;
+    }
+    let resultDiv = document.getElementById("result");
+    resultDiv.innerHTML = '<div class="loading-state"><div class="spinner"></div><p>' + t.storyLoading + '</p></div>';
+    resultDiv.style.display = "block";
+    try {
+        let res = await fetch("https://www.tikwm.com/api/?url=" + encodeURIComponent(url));
+        let data = await res.json();
+        if (data.code === 0 && data.data) {
+            let response = await fetch(data.data.play);
+            let blob = await response.blob();
+            let blobUrl = URL.createObjectURL(blob);
+            let link = document.createElement("a");
+            link.href = blobUrl;
+            link.download = "tiktok_story_" + Date.now() + ".mp4";
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            setTimeout(function() { URL.revokeObjectURL(blobUrl); }, 100);
+            resultDiv.innerHTML = '<div class="success-result"><div class="result-header"><i class="fa-solid fa-circle-check"></i><h3>' + t.successDown + '</h3></div></div>';
+            showAlert(t.alertSuccess);
+            setTimeout(function() { resultDiv.style.display = "none"; }, 3000);
+        } else {
+            throw new Error();
+        }
+    } catch (error) {
+        resultDiv.innerHTML = '<div class="error-result"><div class="result-header"><i class="fa-solid fa-circle-xmark"></i><h3>' + t.errorDown + '</h3></div></div>';
+    }
+}
+
+// ============================================
+// تشغيل الأكوارديون (FAQ)
+// ============================================
+function initAccordions() {
+    let faqQuestions = document.querySelectorAll(".faq-question");
+    for (let i = 0; i < faqQuestions.length; i++) {
+        let btn = faqQuestions[i];
+        btn.addEventListener("click", function() {
+            this.classList.toggle("active");
+            let answer = this.nextElementSibling;
+            if (answer.style.maxHeight) {
+                answer.style.maxHeight = null;
+            } else {
+                answer.style.maxHeight = answer.scrollHeight + "px";
+            }
+        });
+    }
+}
+
+// ============================================
+// تشغيل النوافذ المنبثقة (Modals)
+// ============================================
+function initModals() {
+    function openModal(modalId) {
+        let modal = document.getElementById(modalId);
+        if (modal) {
+            modal.style.display = "flex";
+            document.body.style.overflow = "hidden";
+        }
+    }
+    
+    function closeModal(modalId) {
+        let modal = document.getElementById(modalId);
+        if (modal) {
+            modal.style.display = "none";
+            document.body.style.overflow = "";
+        }
+    }
+    
+    let modalLinks = document.querySelectorAll(".modal-link");
+    for (let i = 0; i < modalLinks.length; i++) {
+        let link = modalLinks[i];
+        link.addEventListener("click", function(e) {
+            e.preventDefault();
+            let modalId = "modal-" + this.getAttribute("data-modal");
+            openModal(modalId);
+        });
+    }
+    
+    let modalCloseButtons = document.querySelectorAll(".modal-close");
+    for (let i = 0; i < modalCloseButtons.length; i++) {
+        let closeBtn = modalCloseButtons[i];
+        closeBtn.addEventListener("click", function() {
+            let modalId = "modal-" + this.getAttribute("data-modal");
+            closeModal(modalId);
+        });
+    }
+    
+    let modalCloseBtns = document.querySelectorAll(".modal-close-btn");
+    for (let i = 0; i < modalCloseBtns.length; i++) {
+        let btn = modalCloseBtns[i];
+        btn.addEventListener("click", function() {
+            let modalId = "modal-" + this.getAttribute("data-modal");
+            closeModal(modalId);
+        });
+    }
+    
+    window.addEventListener("click", function(e) {
+        if (e.target.classList.contains("modal-overlay")) {
+            e.target.style.display = "none";
+            document.body.style.overflow = "";
+        }
+    });
+}
+
+// ============================================
+// تشغيل قائمة اللغات
+// ============================================
+function initLanguageDropdown() {
+    let langBtn = document.getElementById("langBtn");
+    let langMenu = document.getElementById("langMenu");
+    if (langBtn && langMenu) {
+        langBtn.addEventListener("click", function(e) {
+            e.stopPropagation();
+            if (langMenu.style.display === "block") {
+                langMenu.style.display = "none";
+            } else {
+                langMenu.style.display = "block";
+            }
+        });
+        
+        let langItems = document.querySelectorAll(".lang-menu div");
+        for (let i = 0; i < langItems.length; i++) {
+            let item = langItems[i];
+            item.addEventListener("click", function() {
+                changeLanguage(this.getAttribute("data-lang"));
+            });
+        }
+        
+        window.addEventListener("click", function(e) {
+            if (!e.target.closest(".lang-dropdown")) {
+                langMenu.style.display = "none";
+            }
+        });
+    }
+}
+
+// ============================================
+// تشغيل أزرار التحميل
+// ============================================
+function initDownloadButtons() {
+    let btnVideo = document.getElementById("btn-video");
+    if (btnVideo) {
+        btnVideo.addEventListener("click", function() { showQualityOptions("video"); });
+    }
+    
+    let btnStory = document.getElementById("btn-story");
+    if (btnStory) {
+        btnStory.addEventListener("click", downloadStory);
+    }
+    
+    let btnMp3 = document.getElementById("btn-mp3");
+    if (btnMp3) {
+        btnMp3.addEventListener("click", function() { showQualityOptions("mp3"); });
+    }
+    
+    let videoUrlInput = document.getElementById("videoUrl");
+    if (videoUrlInput) {
+        videoUrlInput.addEventListener("keypress", function(e) {
+            if (e.key === "Enter") {
+                showQualityOptions("video");
+            }
+        });
+    }
+}
+
+// ============================================
+// تشغيل الشريط العلوي
+// ============================================
+function initNavbar() {
+    setTimeout(function() {
+        let nav = document.querySelector("nav");
+        if (nav) nav.classList.add("show");
+    }, 100);
+}
+
+// ============================================
+// الحدث الرئيسي عند تحميل الصفحة
+// ============================================
+document.addEventListener("DOMContentLoaded", function() {
+    initLanguage();
+    initNavbar();
+    initAccordions();
+    initModals();
+    initLanguageDropdown();
+    initDownloadButtons();
+    
+    let qualityOptions = document.getElementById("qualityOptions");
+    if (qualityOptions) qualityOptions.style.display = "none";
+});
+</script>
