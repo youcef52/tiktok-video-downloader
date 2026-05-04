@@ -331,7 +331,7 @@ footer{background:rgba(15,12,41,0.8);backdrop-filter:blur(20px);padding:40px 20p
 <div id="modal-contact" class="modal-overlay"><div class="modal-container"><div class="modal-header"><h3>اتصل بنا</h3><span class="modal-close" data-modal="contact">&times;</span></div><div class="modal-body"><p>يمكنك التواصل مع فريق <strong>TikVultix</strong> عبر البريد الإلكتروني الرسمي:</p><div style="text-align:center; margin:20px 0"><a href="mailto:support@tikvultix.com" class="email-link"><i class="fa-solid fa-envelope"></i> support@tikvultix.com</a></div><p>نحن نرد على جميع الاستفسارات خلال <strong>24 ساعة عمل</strong>. للمساعدة الفنية أو الاستفسارات العامة أو الإبلاغ عن مشكلة تقنية.</p></div><div class="modal-footer"><button class="modal-close-btn" data-modal="contact">إغلاق</button></div></div></div>
 <script>
 // ============================================
-// ترجمات 8 لغات مع الأعلام
+// ترجمات 8 لغات
 // ============================================
 const translations = {
     AR: {
@@ -496,16 +496,10 @@ const translations = {
     }
 };
 
-// ============================================
-// المتغيرات العامة
-// ============================================
 let currentLanguage = "AR";
 let currentVideoData = null;
 let currentDownloadType = "video";
 
-// ============================================
-// وظائف تغيير اللغة
-// ============================================
 function changeLanguage(lang) {
     currentLanguage = lang;
     localStorage.setItem("selectedLanguage", lang);
@@ -561,9 +555,6 @@ function initLanguage() {
     }
 }
 
-// ============================================
-// وظائف التنبيه
-// ============================================
 function showAlert(message) {
     let alertDiv = document.createElement("div");
     alertDiv.className = "custom-alert";
@@ -578,9 +569,6 @@ function showAlert(message) {
     }, 3000);
 }
 
-// ============================================
-// وظائف جودة التحميل
-// ============================================
 function createQualityButtons() {
     let container = document.getElementById("qualityButtons");
     if (!container) return;
@@ -657,9 +645,6 @@ function scrollToQuality() {
     }
 }
 
-// ============================================
-// وظائف التحميل الرئيسية
-// ============================================
 async function showQualityOptions(type) {
     let url = document.getElementById("videoUrl").value.trim();
     let t = translations[currentLanguage];
@@ -786,9 +771,6 @@ async function downloadStory() {
     }
 }
 
-// ============================================
-// تشغيل الأكوارديون (FAQ)
-// ============================================
 function initAccordions() {
     let faqQuestions = document.querySelectorAll(".faq-question");
     for (let i = 0; i < faqQuestions.length; i++) {
@@ -805,9 +787,6 @@ function initAccordions() {
     }
 }
 
-// ============================================
-// تشغيل النوافذ المنبثقة (Modals)
-// ============================================
 function initModals() {
     function openModal(modalId) {
         let modal = document.getElementById(modalId);
@@ -861,9 +840,6 @@ function initModals() {
     });
 }
 
-// ============================================
-// تشغيل قائمة اللغات
-// ============================================
 function initLanguageDropdown() {
     let langBtn = document.getElementById("langBtn");
     let langMenu = document.getElementById("langMenu");
@@ -893,9 +869,6 @@ function initLanguageDropdown() {
     }
 }
 
-// ============================================
-// تشغيل أزرار التحميل
-// ============================================
 function initDownloadButtons() {
     let btnVideo = document.getElementById("btn-video");
     if (btnVideo) {
@@ -922,9 +895,6 @@ function initDownloadButtons() {
     }
 }
 
-// ============================================
-// تشغيل الشريط العلوي
-// ============================================
 function initNavbar() {
     setTimeout(function() {
         let nav = document.querySelector("nav");
@@ -932,9 +902,6 @@ function initNavbar() {
     }, 100);
 }
 
-// ============================================
-// الحدث الرئيسي عند تحميل الصفحة
-// ============================================
 document.addEventListener("DOMContentLoaded", function() {
     initLanguage();
     initNavbar();
@@ -947,3 +914,5 @@ document.addEventListener("DOMContentLoaded", function() {
     if (qualityOptions) qualityOptions.style.display = "none";
 });
 </script>
+</body>
+</html>
