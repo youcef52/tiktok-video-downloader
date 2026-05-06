@@ -1341,10 +1341,13 @@ icon.style.display = "flex";
 }
 
 function scrollToQuality() {
-let qualitySection = document.getElementById("qualityOptions");
-if (qualitySection) {
-qualitySection.scrollIntoView({ behavior: "smooth", block: "start" });
-}
+    let qualitySection = document.getElementById("qualityOptions");
+    if (qualitySection) {
+        let offset = 5;
+        let elementPosition = qualitySection.getBoundingClientRect().top;
+        let offsetPosition = elementPosition + window.scrollY - offset;
+        window.scrollTo({ top: offsetPosition, behavior: "smooth" });
+    }
 }
 
 // ============================================
