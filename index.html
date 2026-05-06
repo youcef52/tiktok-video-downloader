@@ -1343,7 +1343,7 @@ icon.style.display = "flex";
 function scrollToQuality() {
     let qualitySection = document.getElementById("qualityOptions");
     if (qualitySection) {
-        let offset = 5;
+        let offset = 1;
         let elementPosition = qualitySection.getBoundingClientRect().top;
         let offsetPosition = elementPosition + window.scrollY - offset;
         window.scrollTo({ top: offsetPosition, behavior: "smooth" });
