@@ -1217,7 +1217,6 @@ document.documentElement.setAttribute("lang", lang === "AR" ? "ar" : (lang === "
 }
 
 function updateAllTexts() {
-function updateAllTexts() {
 let t = translations[currentLanguage];
 if (!t) return;
 let elements = document.querySelectorAll("[data-i18n]");
@@ -1248,6 +1247,7 @@ changeLanguage(savedLang);
 changeLanguage("AR");
 }
 }
+
 // ============================================
 // وظائف التنبيه
 // ============================================
