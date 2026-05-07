@@ -1217,37 +1217,30 @@ document.documentElement.setAttribute("lang", lang === "AR" ? "ar" : (lang === "
 }
 
 function updateAllTexts() {
-let t = translations[currentLanguage];
-if (!t) return;
-let elements = document.querySelectorAll("[data-i18n]");
-for (let i = 0; i < elements.length; i++) {
-let el = elements[i];
-let key = el.getAttribute("data-i18n");
-if (t[key] !== undefined) {
-if (el.tagName === "INPUT" || el.tagName === "TEXTAREA") {
-if (el.getAttribute("data-i18n-placeholder")) {
-el.placeholder = t[key];
+  let t = translations[currentLanguage];
+  if (!t) return;
+  
+  raf(function() {
+    let elements = document.querySelectorAll("[data-i18n]");
+    for (let i = 0; i < elements.length; i++) {
+      let el = elements[i];
+      let key = el.getAttribute("data-i18n");
+      if (t[key] !== undefined) {
+        if (el.tagName === "INPUT" || el.tagName === "TEXTAREA") {
+          if (el.getAttribute("data-i18n-placeholder")) {
+            el.placeholder = t[key];
+          }
+        } else {
+          el.innerHTML = t[key];
+        }
+      }
+    }
+    let mainDesc = document.getElementById("main-desc");
+    if (mainDesc && t["main-desc"]) mainDesc.innerHTML = t["main-desc"];
+    let videoUrl = document.getElementById("videoUrl");
+    if (videoUrl && t["input-placeholder"]) videoUrl.placeholder = t["input-placeholder"];
+  });
 }
-} else {
-el.innerHTML = t[key];
-}
-}
-}
-let mainDesc = document.getElementById("main-desc");
-if (mainDesc && t["main-desc"]) mainDesc.innerHTML = t["main-desc"];
-let videoUrl = document.getElementById("videoUrl");
-if (videoUrl && t["input-placeholder"]) videoUrl.placeholder = t["input-placeholder"];
-}
-
-function initLanguage() {
-let savedLang = localStorage.getItem("selectedLanguage");
-if (savedLang && translations[savedLang]) {
-changeLanguage(savedLang);
-} else {
-changeLanguage("AR");
-}
-}
-
 // ============================================
 // وظائف التنبيه
 // ============================================
