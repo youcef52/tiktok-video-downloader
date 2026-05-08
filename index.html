@@ -1605,6 +1605,16 @@ initDownloadButtons();
 let qualityOptions = document.getElementById("qualityOptions");
 if (qualityOptions) qualityOptions.style.display = "none";
 });
+// الكشف التلقائي عن لغة المتصفح
+(function() {
+  if (localStorage.getItem("selectedLanguage")) return;
+  const browserLang = navigator.language || navigator.userLanguage;
+  const shortLang = browserLang.split('-')[0].toUpperCase();
+  const supported = ["AR", "EN", "FR", "ZH", "IT", "DE", "PT", "TR"];
+  if (supported.includes(shortLang)) {
+    changeLanguage(shortLang);
+  }
+})();
 </script>
 </body>
 </html>                                                                                               
