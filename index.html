@@ -1595,6 +1595,21 @@ if (nav) nav.classList.add("show");
 // ==============================================
 // الحدث الرئيسي عند تحميل الصفحة
 // ==============================================
+function initLanguage() {
+    let savedLang = localStorage.getItem("selectedLanguage");
+    if (savedLang && translations[savedLang]) {
+        changeLanguage(savedLang);
+    } else {
+        const browserLang = (navigator.language || "en").split('-')[0].toUpperCase();
+        const allLanguages = Object.keys(translations);
+        if (allLanguages.includes(browserLang)) {
+            changeLanguage(browserLang);
+        } else {
+            changeLanguage("EN");
+        }
+    }
+}
+
 document.addEventListener("DOMContentLoaded", function() {
     initLanguage();
     initNavbar();
@@ -1604,19 +1619,7 @@ document.addEventListener("DOMContentLoaded", function() {
     initDownloadButtons();
     let qualityOptions = document.getElementById("qualityOptions");
     if (qualityOptions) qualityOptions.style.display = "none";
-
-    // الكشف التلقائي عن لغة المتصفح
-    const savedLang = localStorage.getItem("selectedLanguage");
-    if (!savedLang) {
-        const browserLang = (navigator.language || "en").split('-')[0].toUpperCase();
-        const allLanguages = Object.keys(translations);
-        if (allLanguages.includes(browserLang)) {
-            changeLanguage(browserLang);
-        } else {
-            changeLanguage("EN");
-        }
-    }
 });
 </script>
 </body>
-</html>                                                                                               
+</html>
