@@ -1606,5 +1606,20 @@ let qualityOptions = document.getElementById("qualityOptions");
 if (qualityOptions) qualityOptions.style.display = "none";
 });
 </script>
+// الكشف التلقائي عن لغة المتصفح
+  const savedLang = localStorage.getItem("selectedLanguage");
+  if (!savedLang) {
+    const browserLang = (navigator.language || "en").split('-')[0].toUpperCase();
+    const allLanguages = Object.keys(translations);
+    if (allLanguages.includes(browserLang)) {
+      changeLanguage(browserLang);
+    } else {
+      changeLanguage("EN");
+    }
+  } else {
+    initLanguage();
+  }
+});
+</script>
 </body>
 </html>                                                                                               
