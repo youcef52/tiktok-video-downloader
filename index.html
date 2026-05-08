@@ -1380,7 +1380,7 @@ createQualityButtons();
 document.getElementById("qualityOptions").style.display = "block";
 resultDiv.innerHTML = "";
 showAlert("alert-ready");
-
+scrollToQuality();
 } else {
 throw new Error(data.msg || "Failed");
 }
