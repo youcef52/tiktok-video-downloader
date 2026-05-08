@@ -1288,15 +1288,15 @@ container.innerHTML = "";
 let t = translations[currentLanguage];
 if (currentDownloadType === "mp3") {
 let qualities = [
-{ label: "128kbps", quality: "128", className: "hd" },
-{ label: "256kbps", quality: "256", className: "sd" },
-{ label: "320kbps", quality: "320", className: "low" }
+{ label: "128kbps", quality: "128", className: "hd", icon: "🎵" },
+{ label: "256kbps", quality: "256", className: "sd", icon: "🎧" },
+{ label: "320kbps", quality: "320", className: "low", icon: "🎼" }
 ];
 for (let i = 0; i < qualities.length; i++) {
 let q = qualities[i];
 let btn = document.createElement("button");
 btn.className = "quality-btn " + q.className;
-btn.innerHTML = '<div class="video-preview-small"><div class="preview-icon music-icon"><i class="fa-solid fa-headphones"></i></div></div><span>' + q.label + '</span>';
+btn.innerHTML = '<div class="video-preview-small"><div class="preview-icon music-icon"><span style="font-size:16px">' + q.icon + '</span></div></div><span>' + q.label + '</span>';
 btn.onclick = (function(quality) {
 return function() { downloadMP3(quality); };
 })(q.quality);
