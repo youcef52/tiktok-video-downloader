@@ -1605,20 +1605,6 @@ initDownloadButtons();
 let qualityOptions = document.getElementById("qualityOptions");
 if (qualityOptions) qualityOptions.style.display = "none";
 });
-if (qualityOptions) qualityOptions.style.display = "none";
-});
-// الكشف التلقائي عن لغة المتصفح - كل اللغات
-(function() {
-  if (localStorage.getItem("selectedLanguage")) return;
-  const browserLang = navigator.language || navigator.userLanguage;
-  const shortLang = browserLang.split('-')[0].toUpperCase();
-  const allLanguages = Object.keys(translations);
-  if (allLanguages.includes(shortLang)) {
-    changeLanguage(shortLang);
-  } else {
-    changeLanguage("EN");
-  }
-})();
 </script>
 </body>
-</html>
+</html>                                                                                               
