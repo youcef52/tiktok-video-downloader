@@ -1592,32 +1592,30 @@ if (nav) nav.classList.add("show");
 }, 100);
 }
 
-// ============================================
+// ==============================================
 // الحدث الرئيسي عند تحميل الصفحة
-// ============================================
+// ==============================================
 document.addEventListener("DOMContentLoaded", function() {
-initLanguage();
-initNavbar();
-initAccordions();
-initModals();
-initLanguageDropdown();
-initDownloadButtons();
-let qualityOptions = document.getElementById("qualityOptions");
-if (qualityOptions) qualityOptions.style.display = "none";
-});
-// الكشف التلقائي عن لغة المتصفح
-  const savedLang = localStorage.getItem("selectedLanguage");
-  if (!savedLang) {
-    const browserLang = (navigator.language || "en").split('-')[0].toUpperCase();
-    const allLanguages = Object.keys(translations);
-    if (allLanguages.includes(browserLang)) {
-      changeLanguage(browserLang);
-    } else {
-      changeLanguage("EN");
-    }
-  } else {
     initLanguage();
-  }
+    initNavbar();
+    initAccordions();
+    initModals();
+    initLanguageDropdown();
+    initDownloadButtons();
+    let qualityOptions = document.getElementById("qualityOptions");
+    if (qualityOptions) qualityOptions.style.display = "none";
+
+    // الكشف التلقائي عن لغة المتصفح
+    const savedLang = localStorage.getItem("selectedLanguage");
+    if (!savedLang) {
+        const browserLang = (navigator.language || "en").split('-')[0].toUpperCase();
+        const allLanguages = Object.keys(translations);
+        if (allLanguages.includes(browserLang)) {
+            changeLanguage(browserLang);
+        } else {
+            changeLanguage("EN");
+        }
+    }
 });
 </script>
 </body>
