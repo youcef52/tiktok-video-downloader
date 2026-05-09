@@ -1596,15 +1596,15 @@ if (nav) nav.classList.add("show");
 // الحدث الرئيسي عند تحميل الصفحة
 // ============================================
 document.addEventListener("DOMContentLoaded", function() {
-    initNavbar();
-    initAccordions();
-    initModals();
-    initLanguageDropdown();
-    initDownloadButtons();
-    
-    let qualityOptions = document.getElementById("qualityOptions");
-    if (qualityOptions) qualityOptions.style.display = "none";
-  
+initLanguage();
+initNavbar();
+initAccordions();
+initModals();
+initLanguageDropdown();
+initDownloadButtons();
+let qualityOptions = document.getElementById("qualityOptions");
+if (qualityOptions) qualityOptions.style.display = "none";
+});
 </script>
 </body>
-</html>
+</html>                                                                                               
