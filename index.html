@@ -1604,20 +1604,7 @@ document.addEventListener("DOMContentLoaded", function() {
     
     let qualityOptions = document.getElementById("qualityOptions");
     if (qualityOptions) qualityOptions.style.display = "none";
-
-    // الكشف التلقائي عن لغة المتصفح
-    let savedLang = localStorage.getItem("selectedLanguage");
-    if (!savedLang) {
-        let browserLang = (navigator.language || "en").split('-')[0].toUpperCase();
-        if (translations[browserLang]) {
-            changeLanguage(browserLang);
-        } else {
-            changeLanguage("EN");
-        }
-    } else {
-        changeLanguage(savedLang);
-    }
-});
+  
 </script>
 </body>
 </html>
