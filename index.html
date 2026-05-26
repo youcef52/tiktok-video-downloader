@@ -1614,227 +1614,128 @@ if (e.key === "Enter") { showQualityOptions("video"); }
 }
 
 // ============================================
-// تشغيل الشريط العلوي
-// ============================================
-function initNavbar() {
-setTimeout(function() {
-let nav = document.querySelector("nav");
-if (nav) nav.classList.add("show");
-}, 100);
-}
-
-// ============================================
 // الحدث الرئيسي عند تحميل الصفحة
 // ============================================
 document.addEventListener("DOMContentLoaded", function() {
-  initLanguage();
-  initNavbar();
-  initAccordions();
-  initModals();
-  initLanguageDropdown();
-  initDownloadButtons();
-  let qualityOptions = document.getElementById("qualityOptions");
-  if (qualityOptions) qualityOptions.style.display = "none";
-  
-  // إظهار زر اللغة مرة أخرى
-  var langBtn = document.getElementById('langBtn');
-  if (langBtn) langBtn.style.display = 'inline-block';
+initLanguage();
+initNavbar();
+initAccordions();
+initModals();
+initLanguageDropdown();
+initDownloadButtons();
+let qualityOptions = document.getElementById("qualityOptions");
+if (qualityOptions) qualityOptions.style.display = "none";
 });
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
 
-// ============================================
-// كود الترجمة التلقائية
-// ============================================
-(function() {
-  var userLang = navigator.language || navigator.userLanguage;
-  userLang = userLang.substring(0, 2);
+  // اكتشاف لغة الزائر
+  const userLang = (navigator.language || navigator.userLanguage)
+    .toLowerCase()
+    .substring(0, 2);
 
-  var translations = {
-    'en': {
-      'main-title': 'Download TikTok Videos Without Watermark 2026 - TikVultix',
-      'main-desc': 'Paste TikTok video link and click download -- HD quality, fast, no watermark, save TikTok videos directly.',
-      'input-placeholder': 'Paste TikTok link here',
-      'btn-video': 'Download Video',
-      'btn-story': 'Download Story',
-      'btn-mp3': 'Download MP3',
-      'seo-title': 'TikTok Video Downloader Without Watermark - TikTok Video Downloader HD',
-      'feature1-title': 'No Watermark',
-      'feature2-title': 'All Devices',
-      'feature3-title': 'Always Free',
-      'feature4-title': 'MP3 Download',
-      'feature5-title': 'Ultra Fast',
-      'feature6-title': 'Secure & Private',
-      'faq-title': 'Most searched questions about downloading TikTok videos',
-      'faq-q1': 'What is TikVultix and how does it work to download TikTok videos without watermark?',
-      'faq-a1': 'TikVultix is a free tool for downloading TikTok videos without watermark in HD quality.',
-      'faq-q2': 'How can I download TikTok video without watermark in HD quality?',
-      'faq-a2': 'Copy the video link from TikTok, paste it on TikVultix, choose HD quality, then click Download.',
-      'faq-q3': 'How to download TikTok video on iPhone?',
-      'faq-a3': 'Use Safari browser, copy the video link from TikTok, paste it on TikVultix and click Download.',
-      'faq-q4': 'Can I download TikTok audio as MP3?',
-      'faq-a4': 'Yes! Just paste the video link and choose the MP3 download button.',
-      'faq-q5': 'Is downloading TikTok videos from TikVultix free and safe?',
-      'faq-a5': 'Yes, TikVultix is completely free and requires no login. Your privacy is 100% guaranteed.',
-      'faq-q6': 'What download qualities are available?',
-      'faq-a6': 'We provide 1080p HD, 720p HD, and 480p SD quality.',
-      'footer-privacy': 'Privacy Policy',
-      'footer-terms': 'Terms of Service',
-      'footer-dmca': 'DMCA',
-      'footer-mp3': 'Download MP3',
-      'footer-story': 'Download Stories',
-      'footer-iphone': 'iPhone Guide',
-      'footer-android': 'Android Guide',
-      'footer-about': 'About TikVultix',
-      'footer-contact': 'Contact Us',
-      'footer-copyright': '© 2026 TikVultix.com - All rights reserved'
+  // جميع الترجمات
+  const translations = {
+
+    en: {
+      "main-title": "Download TikTok Videos Without Watermark 2026 - TikVultix",
+      "main-desc": "Paste TikTok video link and click download -- HD quality, fast, no watermark.",
+      "input-placeholder": "Paste TikTok link here",
+      "btn-video": "Download Video",
+      "btn-story": "Download Story",
+      "btn-mp3": "Download MP3"
     },
-    'fr': {
-      'main-title': 'Télécharger des vidéos TikTok sans filigrane 2026 - TikVultix',
-      'main-desc': 'Collez le lien vidéo TikTok et cliquez sur télécharger -- qualité HD, rapide, sans filigrane.',
-      'input-placeholder': 'Collez le lien TikTok ici',
-      'btn-video': 'Télécharger Vidéo',
-      'btn-story': 'Télécharger Story',
-      'btn-mp3': 'Télécharger MP3',
-      'seo-title': 'Téléchargeur de vidéos TikTok sans filigrane',
-      'feature1-title': 'Sans filigrane',
-      'feature2-title': 'Tous appareils',
-      'feature3-title': 'Toujours gratuit',
-      'feature4-title': 'Téléchargement MP3',
-      'feature5-title': 'Ultra rapide',
-      'feature6-title': 'Sécurisé et privé'
+
+    fr: {
+      "main-title": "Télécharger des vidéos TikTok sans filigrane",
+      "main-desc": "Collez le lien TikTok et téléchargez en HD sans filigrane.",
+      "input-placeholder": "Collez le lien TikTok ici",
+      "btn-video": "Télécharger Vidéo",
+      "btn-story": "Télécharger Story",
+      "btn-mp3": "Télécharger MP3"
     },
-    'zh': {
-      'main-title': '下载无水印TikTok视频 2026 - TikVultix',
-      'main-desc': '粘贴TikTok视频链接并点击下载 -- 高清画质，快速，无水印。',
-      'input-placeholder': '在此粘贴TikTok链接',
-      'btn-video': '下载视频',
-      'btn-story': '下载故事',
-      'btn-mp3': '下载MP3',
-      'seo-title': 'TikTok视频下载器 无水印',
-      'feature1-title': '无水印',
-      'feature2-title': '所有设备',
-      'feature3-title': '永远免费',
-      'feature4-title': 'MP3下载',
-      'feature5-title': '超快速',
-      'feature6-title': '安全私密'
+
+    de: {
+      "main-title": "TikTok Videos ohne Wasserzeichen herunterladen",
+      "main-desc": "Füge den TikTok-Link ein und lade in HD herunter.",
+      "input-placeholder": "TikTok-Link hier einfügen",
+      "btn-video": "Video herunterladen",
+      "btn-story": "Story herunterladen",
+      "btn-mp3": "MP3 herunterladen"
     },
-    'it': {
-      'main-title': 'Scarica video TikTok senza watermark 2026 - TikVultix',
-      'main-desc': 'Incolla il link del video TikTok e clicca scarica -- qualità HD, veloce, senza watermark.',
-      'input-placeholder': 'Incolla il link TikTok qui',
-      'btn-video': 'Scarica Video',
-      'btn-story': 'Scarica Story',
-      'btn-mp3': 'Scarica MP3',
-      'seo-title': 'Downloader video TikTok senza watermark',
-      'feature1-title': 'Senza watermark',
-      'feature2-title': 'Tutti i dispositivi',
-      'feature3-title': 'Sempre gratuito',
-      'feature4-title': 'Download MP3',
-      'feature5-title': 'Ultra veloce',
-      'feature6-title': 'Sicuro e privato'
+
+    tr: {
+      "main-title": "Filigransız TikTok Video İndir",
+      "main-desc": "TikTok bağlantısını yapıştır ve HD indir.",
+      "input-placeholder": "TikTok bağlantısını buraya yapıştır",
+      "btn-video": "Video İndir",
+      "btn-story": "Hikaye İndir",
+      "btn-mp3": "MP3 İndir"
     },
-    'de': {
-      'main-title': 'Lade TikTok-Videos ohne Wasserzeichen 2026 herunter - TikVultix',
-      'main-desc': 'Füge den TikTok-Video-Link ein und klicke auf Herunterladen -- HD-Qualität, schnell, ohne Wasserzeichen.',
-      'input-placeholder': 'TikTok-Link hier einfügen',
-      'btn-video': 'Video herunterladen',
-      'btn-story': 'Story herunterladen',
-      'btn-mp3': 'MP3 herunterladen',
-      'seo-title': 'TikTok-Video-Downloader ohne Wasserzeichen',
-      'feature1-title': 'Ohne Wasserzeichen',
-      'feature2-title': 'Alle Geräte',
-      'feature3-title': 'Immer kostenlos',
-      'feature4-title': 'MP3-Download',
-      'feature5-title': 'Ultraschnell',
-      'feature6-title': 'Sicher & privat'
+
+    zh: {
+      "main-title": "下载无水印TikTok视频",
+      "main-desc": "粘贴TikTok链接并高清下载。",
+      "input-placeholder": "粘贴TikTok链接",
+      "btn-video": "下载视频",
+      "btn-story": "下载故事",
+      "btn-mp3": "下载MP3"
     },
-    'pt': {
-      'main-title': 'Baixe vídeos do TikTok sem marca d\'água 2026 - TikVultix',
-      'main-desc': 'Cole o link do vídeo do TikTok e clique em baixar -- qualidade HD, rápido, sem marca d\'água.',
-      'input-placeholder': 'Cole o link do TikTok aqui',
-      'btn-video': 'Baixar Vídeo',
-      'btn-story': 'Baixar Story',
-      'btn-mp3': 'Baixar MP3',
-      'seo-title': 'Downloader de vídeos do TikTok sem marca d\'água',
-      'feature1-title': 'Sem marca d\'água',
-      'feature2-title': 'Todos dispositivos',
-      'feature3-title': 'Sempre gratuito',
-      'feature4-title': 'Download MP3',
-      'feature5-title': 'Ultra rápido',
-      'feature6-title': 'Seguro e privado'
+
+    it: {
+      "main-title": "Scarica video TikTok senza watermark",
+      "main-desc": "Incolla il link TikTok e scarica in HD.",
+      "input-placeholder": "Incolla il link TikTok",
+      "btn-video": "Scarica Video",
+      "btn-story": "Scarica Story",
+      "btn-mp3": "Scarica MP3"
     },
-    'tr': {
-      'main-title': 'TikTok Videolarını Filigransız İndir 2026 - TikVultix',
-      'main-desc': 'TikTok video bağlantısını yapıştır ve indir\'e tıkla -- HD kalite, hızlı, filigransız.',
-      'input-placeholder': 'TikTok bağlantısını buraya yapıştır',
-      'btn-video': 'Video İndir',
-      'btn-story': 'Hikaye İndir',
-      'btn-mp3': 'MP3 İndir',
-      'seo-title': 'TikTok Video İndirici Filigransız',
-      'feature1-title': 'Filigransız',
-      'feature2-title': 'Tüm Cihazlar',
-      'feature3-title': 'Her zaman ücretsiz',
-      'feature4-title': 'MP3 İndir',
-      'feature5-title': 'Süper hızlı',
-      'feature6-title': 'Güvenli ve gizli'
+
+    pt: {
+      "main-title": "Baixar vídeos TikTok sem marca d'água",
+      "main-desc": "Cole o link TikTok e baixe em HD.",
+      "input-placeholder": "Cole o link TikTok aqui",
+      "btn-video": "Baixar Vídeo",
+      "btn-story": "Baixar Story",
+      "btn-mp3": "Baixar MP3"
     }
+
   };
 
-  var t = translations[userLang];
-  if (t && userLang !== 'ar') {
-    if (t['main-title']) document.title = t['main-title'];
-    var h1 = document.querySelector('h1');
-    if (h1 && t['main-title']) h1.innerText = t['main-title'];
-    var subtitle = document.querySelector('.subtitle');
-    if (subtitle && t['main-desc']) subtitle.innerHTML = t['main-desc'];
-    var input = document.getElementById('videoUrl');
-    if (input && t['input-placeholder']) input.placeholder = t['input-placeholder'];
-    var btns = document.querySelectorAll('.buttons-container button span');
+  // اختيار اللغة
+  const t = translations[userLang];
+
+  // إذا ليست عربية ويوجد ترجمة
+  if (t && userLang !== "ar") {
+
+    // تغيير العنوان
+    document.title = t["main-title"];
+
+    // H1
+    const h1 = document.querySelector("h1");
+    if (h1) h1.innerText = t["main-title"];
+
+    // الوصف
+    const subtitle = document.querySelector(".subtitle");
+    if (subtitle) subtitle.innerText = t["main-desc"];
+
+    // Placeholder
+    const input = document.getElementById("videoUrl");
+    if (input) input.placeholder = t["input-placeholder"];
+
+    // الأزرار
+    const btns = document.querySelectorAll(".buttons-container button span");
+
     if (btns.length >= 3) {
-      if (t['btn-video']) btns[0].innerText = t['btn-video'];
-      if (t['btn-story']) btns[1].innerText = t['btn-story'];
-      if (t['btn-mp3']) btns[2].innerText = t['btn-mp3'];
+      btns[0].innerText = t["btn-video"];
+      btns[1].innerText = t["btn-story"];
+      btns[2].innerText = t["btn-mp3"];
     }
-    var seoTitle = document.querySelector('#seo-content h2');
-    if (seoTitle && t['seo-title']) seoTitle.innerText = t['seo-title'];
-    var featureTitles = document.querySelectorAll('.feature-card h3');
-    for (var i = 0; i < featureTitles.length && i < 6; i++) {
-      if (featureTitles[i] && t['feature' + (i+1) + '-title']) {
-        featureTitles[i].innerText = t['feature' + (i+1) + '-title'];
-      }
-    }
-    var faqTitle = document.querySelector('#faq-section h2');
-    if (faqTitle && t['faq-title']) faqTitle.innerText = t['faq-title'];
-    var faqQuestions = document.querySelectorAll('.faq-question');
-    var faqAnswers = document.querySelectorAll('.faq-answer p');
-    for (var j = 0; j < faqQuestions.length && j < 6; j++) {
-      if (faqQuestions[j] && t['faq-q'+(j+1)]) {
-        var qText = t['faq-q'+(j+1)];
-        var icon = faqQuestions[j].querySelector('i');
-        if (icon) {
-          faqQuestions[j].innerHTML = qText + ' <i class="fas fa-chevron-down"></i>';
-          faqQuestions[j].appendChild(icon);
-        } else {
-          faqQuestions[j].innerHTML = qText + ' <i class="fas fa-chevron-down"></i>';
-        }
-      }
-      if (faqAnswers[j] && t['faq-a'+(j+1)]) faqAnswers[j].innerHTML = t['faq-a'+(j+1)];
-    }
-    var footerLinks = document.querySelectorAll('.footer-column ul li a, .footer-column ul li span');
-    if (footerLinks.length >= 9) {
-      if (t['footer-privacy']) footerLinks[0].innerText = t['footer-privacy'];
-      if (t['footer-terms']) footerLinks[1].innerText = t['footer-terms'];
-      if (t['footer-dmca']) footerLinks[2].innerText = t['footer-dmca'];
-      if (t['footer-mp3']) footerLinks[3].innerText = t['footer-mp3'];
-      if (t['footer-story']) footerLinks[4].innerText = t['footer-story'];
-      if (t['footer-iphone']) footerLinks[5].innerText = t['footer-iphone'];
-      if (t['footer-android']) footerLinks[6].innerText = t['footer-android'];
-      if (t['footer-about']) footerLinks[7].innerText = t['footer-about'];
-      if (t['footer-contact']) footerLinks[8].innerText = t['footer-contact'];
-    }
-    var copyright = document.querySelector('.footer-bottom p');
-    if (copyright && t['footer-copyright']) copyright.innerHTML = t['footer-copyright'];
+
   }
-})();
+
+});
 </script>
 </body>
-</html>
+</html>                                                                                               
