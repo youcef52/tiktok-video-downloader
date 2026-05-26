@@ -1611,7 +1611,6 @@ if (e.key === "Enter") { showQualityOptions("video"); }
 });
 }
 }
-
 // ============================================
 // تشغيل الشريط العلوي
 // ============================================
@@ -1626,6 +1625,13 @@ if (nav) nav.classList.add("show");
 // الحدث الرئيسي عند تحميل الصفحة
 // ============================================
 document.addEventListener("DOMContentLoaded", function() {
+
+if (!localStorage.getItem("selectedLanguage")) {
+  const lang = (navigator.language || "ar").toUpperCase().split("-")[0];
+  const supported = ["AR","EN","FR","ZH","IT","DE","PT","TR"];
+  localStorage.setItem("selectedLanguage", supported.includes(lang) ? lang : "EN");
+}
+
 initLanguage();
 initNavbar();
 initAccordions();
@@ -1637,6 +1643,4 @@ if (qualityOptions) qualityOptions.style.display = "none";
 });
 </script>
 </body>
-</html>                                                                                               
-
-
+</html>
