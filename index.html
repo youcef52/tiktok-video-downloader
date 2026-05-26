@@ -1623,30 +1623,29 @@ if (nav) nav.classList.add("show");
 }, 100);
 }
 
+<script>
 // ============================================
 // الحدث الرئيسي عند تحميل الصفحة
 // ============================================
 document.addEventListener("DOMContentLoaded", function() {
-initLanguage();
-initNavbar();
-initAccordions();
-initModals();
-initLanguageDropdown();
-initDownloadButtons();
-let qualityOptions = document.getElementById("qualityOptions");
-if (qualityOptions) qualityOptions.style.display = "none";
+  initLanguage();
+  initNavbar();
+  initAccordions();
+  initModals();
+  initLanguageDropdown();
+  initDownloadButtons();
+  let qualityOptions = document.getElementById("qualityOptions");
+  if (qualityOptions) qualityOptions.style.display = "none";
 });
+</script>
+
 <script>
+// ============================================
+// الترجمة التلقائية حسب لغة الزائر
+// ============================================
 document.addEventListener("DOMContentLoaded", function () {
-
-  // اكتشاف لغة الزائر
-  const userLang = (navigator.language || navigator.userLanguage)
-    .toLowerCase()
-    .substring(0, 2);
-
-  // جميع الترجمات
+  const userLang = (navigator.language || navigator.userLanguage).toLowerCase().substring(0, 2);
   const translations = {
-
     en: {
       "main-title": "Download TikTok Videos Without Watermark 2026 - TikVultix",
       "main-desc": "Paste TikTok video link and click download -- HD quality, fast, no watermark.",
@@ -1655,7 +1654,6 @@ document.addEventListener("DOMContentLoaded", function () {
       "btn-story": "Download Story",
       "btn-mp3": "Download MP3"
     },
-
     fr: {
       "main-title": "Télécharger des vidéos TikTok sans filigrane",
       "main-desc": "Collez le lien TikTok et téléchargez en HD sans filigrane.",
@@ -1664,7 +1662,6 @@ document.addEventListener("DOMContentLoaded", function () {
       "btn-story": "Télécharger Story",
       "btn-mp3": "Télécharger MP3"
     },
-
     de: {
       "main-title": "TikTok Videos ohne Wasserzeichen herunterladen",
       "main-desc": "Füge den TikTok-Link ein und lade in HD herunter.",
@@ -1673,7 +1670,6 @@ document.addEventListener("DOMContentLoaded", function () {
       "btn-story": "Story herunterladen",
       "btn-mp3": "MP3 herunterladen"
     },
-
     tr: {
       "main-title": "Filigransız TikTok Video İndir",
       "main-desc": "TikTok bağlantısını yapıştır ve HD indir.",
@@ -1682,7 +1678,6 @@ document.addEventListener("DOMContentLoaded", function () {
       "btn-story": "Hikaye İndir",
       "btn-mp3": "MP3 İndir"
     },
-
     zh: {
       "main-title": "下载无水印TikTok视频",
       "main-desc": "粘贴TikTok链接并高清下载。",
@@ -1691,7 +1686,6 @@ document.addEventListener("DOMContentLoaded", function () {
       "btn-story": "下载故事",
       "btn-mp3": "下载MP3"
     },
-
     it: {
       "main-title": "Scarica video TikTok senza watermark",
       "main-desc": "Incolla il link TikTok e scarica in HD.",
@@ -1700,7 +1694,6 @@ document.addEventListener("DOMContentLoaded", function () {
       "btn-story": "Scarica Story",
       "btn-mp3": "Scarica MP3"
     },
-
     pt: {
       "main-title": "Baixar vídeos TikTok sem marca d'água",
       "main-desc": "Cole o link TikTok e baixe em HD.",
@@ -1709,43 +1702,26 @@ document.addEventListener("DOMContentLoaded", function () {
       "btn-story": "Baixar Story",
       "btn-mp3": "Baixar MP3"
     }
-
   };
-
-  // اختيار اللغة
   const t = translations[userLang];
-
-  // إذا ليست عربية ويوجد ترجمة
   if (t && userLang !== "ar") {
-
-    // تغيير العنوان
     document.title = t["main-title"];
-
-    // H1
     const h1 = document.querySelector("h1");
     if (h1) h1.innerText = t["main-title"];
-
-    // الوصف
     const subtitle = document.querySelector(".subtitle");
     if (subtitle) subtitle.innerText = t["main-desc"];
-
-    // Placeholder
     const input = document.getElementById("videoUrl");
     if (input) input.placeholder = t["input-placeholder"];
-
-    // الأزرار
     const btns = document.querySelectorAll(".buttons-container button span");
-
     if (btns.length >= 3) {
       btns[0].innerText = t["btn-video"];
       btns[1].innerText = t["btn-story"];
       btns[2].innerText = t["btn-mp3"];
     }
-
   }
-
 });
 </script>
+
 </body>
 </html>                                                                                               
 
