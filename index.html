@@ -1613,20 +1613,29 @@ if (e.key === "Enter") { showQualityOptions("video"); }
 }
 }
 
+<script>
+
 // ============================================
 // الحدث الرئيسي عند تحميل الصفحة
 // ============================================
 document.addEventListener("DOMContentLoaded", function() {
-initLanguage();
-initNavbar();
-initAccordions();
-initModals();
-initLanguageDropdown();
-initDownloadButtons();
-let qualityOptions = document.getElementById("qualityOptions");
-if (qualityOptions) qualityOptions.style.display = "none";
+
+  initLanguage();
+  initNavbar();
+  initAccordions();
+  initModals();
+  initLanguageDropdown();
+  initDownloadButtons();
+
+  let qualityOptions = document.getElementById("qualityOptions");
+  if (qualityOptions) qualityOptions.style.display = "none";
+
 });
-</script>
+
+
+// ============================================
+// الترجمة التلقائية حسب لغة الزائر
+// ============================================
 document.addEventListener("DOMContentLoaded", function () {
 
   // اكتشاف لغة الزائر
@@ -1708,22 +1717,17 @@ document.addEventListener("DOMContentLoaded", function () {
   // إذا ليست عربية ويوجد ترجمة
   if (t && userLang !== "ar") {
 
-    // تغيير العنوان
     document.title = t["main-title"];
 
-    // H1
     const h1 = document.querySelector("h1");
     if (h1) h1.innerText = t["main-title"];
 
-    // الوصف
     const subtitle = document.querySelector(".subtitle");
     if (subtitle) subtitle.innerText = t["main-desc"];
 
-    // Placeholder
     const input = document.getElementById("videoUrl");
     if (input) input.placeholder = t["input-placeholder"];
 
-    // الأزرار
     const btns = document.querySelectorAll(".buttons-container button span");
 
     if (btns.length >= 3) {
@@ -1735,6 +1739,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
 });
+
 </script>
 </body>
 </html>                                                                                               
