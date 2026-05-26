@@ -1614,6 +1614,16 @@ if (e.key === "Enter") { showQualityOptions("video"); }
 }
 
 // ============================================
+// تشغيل الشريط العلوي
+// ============================================
+function initNavbar() {
+setTimeout(function() {
+let nav = document.querySelector("nav");
+if (nav) nav.classList.add("show");
+}, 100);
+}
+
+// ============================================
 // الحدث الرئيسي عند تحميل الصفحة
 // ============================================
 document.addEventListener("DOMContentLoaded", function() {
@@ -1628,4 +1638,6 @@ if (qualityOptions) qualityOptions.style.display = "none";
 });
 </script>
 </body>
-</html>    
+</html>                                                                                               
+
+
