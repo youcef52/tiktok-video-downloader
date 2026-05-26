@@ -1617,17 +1617,23 @@ if (e.key === "Enter") { showQualityOptions("video"); }
 // الحدث الرئيسي عند تحميل الصفحة
 // ============================================
 document.addEventListener("DOMContentLoaded", function() {
-initLanguage();
-initNavbar();
-initAccordions();
-initModals();
-initLanguageDropdown();
-initDownloadButtons();
-let qualityOptions = document.getElementById("qualityOptions");
-if (qualityOptions) qualityOptions.style.display = "none";
+  initLanguage();
+  initNavbar();
+  initAccordions();
+  initModals();
+  initLanguageDropdown();
+  initDownloadButtons();
+  let qualityOptions = document.getElementById("qualityOptions");
+  if (qualityOptions) qualityOptions.style.display = "none";
+  
+  // إظهار زر اللغة مرة أخرى
+  var langBtn = document.getElementById('langBtn');
+  if (langBtn) langBtn.style.display = 'inline-block';
 });
-</script>
-<script>
+
+// ============================================
+// كود الترجمة التلقائية
+// ============================================
 (function() {
   var userLang = navigator.language || navigator.userLanguage;
   userLang = userLang.substring(0, 2);
@@ -1821,4 +1827,4 @@ if (qualityOptions) qualityOptions.style.display = "none";
 })();
 </script>
 </body>
-</html>                                                                                               
+</html>
