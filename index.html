@@ -1623,72 +1623,20 @@ if (nav) nav.classList.add("show");
 }, 100);
 }
 
-<script>
 // ============================================
 // الحدث الرئيسي عند تحميل الصفحة
 // ============================================
 document.addEventListener("DOMContentLoaded", function() {
-  initLanguage();
-  initNavbar();
-  initAccordions();
-  initModals();
-  initLanguageDropdown();
-  initDownloadButtons();
-  let qualityOptions = document.getElementById("qualityOptions");
-  if (qualityOptions) qualityOptions.style.display = "none";
+initLanguage();
+initNavbar();
+initAccordions();
+initModals();
+initLanguageDropdown();
+initDownloadButtons();
+let qualityOptions = document.getElementById("qualityOptions");
+if (qualityOptions) qualityOptions.style.display = "none";
 });
 </script>
-
-<script>
-// ============================================
-// ترجمة تلقائية - تحافظ على شكل الموقع وزر اللغة
-// ============================================
-document.addEventListener("DOMContentLoaded", function() {
-  var userLang = (navigator.language || navigator.userLanguage).toLowerCase().substring(0, 2);
-  
-  // فقط اللغات غير العربية
-  if (userLang !== 'ar') {
-    var translations = {
-      en: {
-        title: "Download TikTok Videos Without Watermark 2026 - TikVultix",
-        h1: "Download TikTok Videos Without Watermark 2026 - TikVultix",
-        subtitle: "Paste TikTok video link and click download -- HD quality, fast, no watermark.",
-        placeholder: "Paste TikTok link here",
-        btnVideo: "Download Video",
-        btnStory: "Download Story",
-        btnMp3: "Download MP3"
-      },
-      fr: {
-        title: "Télécharger des vidéos TikTok sans filigrane 2026 - TikVultix",
-        h1: "Télécharger des vidéos TikTok sans filigrane 2026 - TikVultix",
-        subtitle: "Collez le lien TikTok et cliquez sur télécharger -- qualité HD, rapide, sans filigrane.",
-        placeholder: "Collez le lien TikTok ici",
-        btnVideo: "Télécharger Vidéo",
-        btnStory: "Télécharger Story",
-        btnMp3: "Télécharger MP3"
-      }
-    };
-    
-    var t = translations[userLang] || translations.en;
-    
-    document.title = t.title;
-    var h1 = document.querySelector('h1');
-    if (h1) h1.innerText = t.h1;
-    var subtitle = document.querySelector('.subtitle');
-    if (subtitle) subtitle.innerText = t.subtitle;
-    var input = document.getElementById('videoUrl');
-    if (input) input.placeholder = t.placeholder;
-    var btns = document.querySelectorAll('.buttons-container button span');
-    if (btns.length >= 3) {
-      btns[0].innerText = t.btnVideo;
-      btns[1].innerText = t.btnStory;
-      btns[2].innerText = t.btnMp3;
-    }
-  }
-});
-</script>
-
 </body>
 </html>                                                                                               
-
 
