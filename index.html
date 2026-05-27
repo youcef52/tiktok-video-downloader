@@ -1630,6 +1630,24 @@ if (nav) nav.classList.add("show");
 }
 
 // ============================================
+// تحديث روابط الفوتر حسب اللغة
+// ============================================
+function updateFooterLinks() {
+  let prefix = currentLanguage.toLowerCase() === 'ar' ? 'ar' : 'en';
+  let links = document.querySelectorAll('footer a[data-link]');
+  for (let i = 0; i < links.length; i++) {
+    let page = links[i].getAttribute('data-link');
+    links[i].href = '/' + prefix + '-' + page + '.html';
+  }
+}
+
+let oldChangeLanguage = changeLanguage;
+changeLanguage = function(lang) {
+  oldChangeLanguage(lang);
+  updateFooterLinks();
+};
+
+// ============================================
 // الحدث الرئيسي عند تحميل الصفحة
 // ============================================
 document.addEventListener("DOMContentLoaded", function() {
@@ -1646,6 +1664,7 @@ initAccordions();
 initModals();
 initLanguageDropdown();
 initDownloadButtons();
+updateFooterLinks();
 let qualityOptions = document.getElementById("qualityOptions");
 if (qualityOptions) qualityOptions.style.display = "none";
 });
