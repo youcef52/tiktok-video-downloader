@@ -1479,34 +1479,45 @@ resultDiv.innerHTML = '<div class="error-result"><div class="result-header"><i c
 }
 
 async function downloadStory() {
-let url = document.getElementById("videoUrl").value.trim();
-let t = translations[currentLanguage];
-if (!url) { showAlert("alert-enter-url"); return; }
-if (!url.includes("tiktok.com")) { showAlert("alert-invalid-url"); return; }
-let resultDiv = document.getElementById("result");
-resultDiv.innerHTML = '<div class="loading-state"><div class="spinner" aria-label="جاري التحميل"></div><p>' + (t["story-loading"] || "جاري تحميل القصة...") + '</p></div>';
-resultDiv.style.display = "block";
-try {
-let res = await fetch("https://www.tikwm.com/api/?url=" + encodeURIComponent(url));
-let data = await res.json();
-if (data.code === 0 && data.data) {
-let response = await fetch(data.data.play);
-let blob = await response.blob();
-let blobUrl = URL.createObjectURL(blob);
-let link = document.createElement("a");
-link.href = blobUrl;
-link.download = "tiktok_story_" + Date.now() + ".mp4";
-document.body.appendChild(link);
-link.click();
-document.body.removeChild(link);
-setTimeout(function() { URL.revokeObjectURL(blobUrl); }, 100);
-resultDiv.innerHTML = '<div class="success-result"><div class="result-header"><i class="fa-solid fa-circle-check" aria-hidden="true"></i><h3>' + (t["alert-success"] || "تم التحميل بنجاح!") + '</h3></div></div>';
-showAlert("alert-success");
-setTimeout(function() { resultDiv.style.display = "none"; }, 3000);
-} else { throw new Error(); }
-} catch (error) {
-resultDiv.innerHTML = '<div class="error-result"><div class="result-header"><i class="fa-solid fa-circle-xmark" aria-hidden="true"></i><h3>' + (t["error-down"] || "خطأ في التحميل") + '</h3></div></div>';
-}
+  const url = document.getElementById("videoUrl").value.trim();
+  const t = translations[currentLanguage];
+  
+  if (!url) { showAlert("alert-enter-url"); return; }
+  if (!url.includes("tiktok.com")) { showAlert("alert-invalid-url"); return; }
+  
+  const resultDiv = document.getElementById("result");
+  resultDiv.innerHTML = '<div class="loading-state"><div class="spinner"></div><p>' + (t["story-loading"] || "جاري تحميل القصة...") + '</p></div>';
+  resultDiv.style.display = "block";
+  
+  try {
+    const response = await fetch("https://www.tikwm.com/api/?url=" + encodeURIComponent(url));
+    const data = await response.json();
+    
+    if (data.code === 0 && data.data) {
+      const videoUrl = data.data.play || data.data.hdplay || data.data.wmplay;
+      
+      if (!videoUrl) throw new Error("No video URL found");
+      
+      const videoResponse = await fetch(videoUrl);
+      const blob = await videoResponse.blob();
+      const blobUrl = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = blobUrl;
+      link.download = "tiktok_story_" + Date.now() + ".mp4";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      setTimeout(() => URL.revokeObjectURL(blobUrl), 100);
+      
+      resultDiv.innerHTML = '<div class="success-result"><div class="result-header"><i class="fa-solid fa-circle-check"></i><h3>' + (t["alert-success"] || "تم التحميل بنجاح!") + '</h3></div></div>';
+      showAlert("alert-success");
+      setTimeout(() => { resultDiv.style.display = "none"; }, 3000);
+    } else {
+      throw new Error(data.msg || "Failed to fetch story");
+    }
+  } catch (error) {
+    resultDiv.innerHTML = '<div class="error-result"><div class="result-header"><i class="fa-solid fa-circle-xmark"></i><h3>' + (t["error-down"] || "خطأ في التحميل") + '</h3></div><p>' + error.message + '</p></div>';
+  }
 }
 
 // ============================================
