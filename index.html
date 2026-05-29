@@ -2209,6 +2209,11 @@ changeLanguage = function(lang) {
 // ============================================
 document.addEventListener("DOMContentLoaded", function() {
 
+const pathLang = window.location.pathname.split('/')[1]?.toUpperCase();
+if (pathLang && translations[pathLang]) {
+  localStorage.setItem('selectedLanguage', pathLang);
+}
+
 if (!localStorage.getItem("selectedLanguage")) {
   const lang = (navigator.language || "ar").toUpperCase().split("-")[0];
   const supported = ["AR","EN","FR","ZH","IT","DE","PT","TR","ES","JA","KO","HI","RU"];
@@ -2228,4 +2233,3 @@ if (qualityOptions) qualityOptions.style.display = "none";
 </script>
 </body>
 </html>
-
