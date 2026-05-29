@@ -2222,10 +2222,14 @@ if (!localStorage.getItem("selectedLanguage")) {
 
 initLanguage();
 
-const currentPath = window.location.pathname;
+const currentPath = window.location.pathname.replace(/\/$/, '');
 const canonicalLink = document.querySelector('link[rel="canonical"]');
-if (canonicalLink && currentPath !== '/') {
-  canonicalLink.href = 'https://tikvultix.com' + currentPath;
+if (canonicalLink) {
+  if (currentPath && currentPath !== '') {
+    canonicalLink.href = 'https://tikvultix.com' + currentPath;
+  } else {
+    canonicalLink.href = 'https://tikvultix.com/';
+  }
 }
 
 initNavbar();
