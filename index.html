@@ -2210,7 +2210,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 if (!localStorage.getItem("selectedLanguage")) {
   const lang = (navigator.language || "ar").toUpperCase().split("-")[0];
-  const supported = ["AR","EN","FR","ZH","IT","DE","PT","TR"];
+  const supported = ["AR","EN","FR","ZH","IT","DE","PT","TR","ES","JA","KO","HI","RU"];
   localStorage.setItem("selectedLanguage", supported.includes(lang) ? lang : "EN");
 }
 
