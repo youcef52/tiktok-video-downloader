@@ -21,6 +21,11 @@
 <link rel="alternate" hreflang="de" href="https://tikvultix.com/">
 <link rel="alternate" hreflang="pt" href="https://tikvultix.com/">
 <link rel="alternate" hreflang="tr" href="https://tikvultix.com/">
+<link rel="alternate" hreflang="es" href="https://tikvultix.com/">
+<link rel="alternate" hreflang="ja" href="https://tikvultix.com/">
+<link rel="alternate" hreflang="ko" href="https://tikvultix.com/">
+<link rel="alternate" hreflang="hi" href="https://tikvultix.com/">
+<link rel="alternate" hreflang="ru" href="https://tikvultix.com/">
 <link rel="alternate" hreflang="x-default" href="https://tikvultix.com/">
 <!-- Primary SEO Meta Tags -->
 <meta name="google-site-verification" content="syoTnxQRsHgTeV6ZgExN2u10QICMOA-_2PAmTEbC6os">
@@ -137,6 +142,11 @@ html{background-color:#0a0818}body,nav,nav .logo{display:flex}#download-section:
 <div data-lang="DE" role="menuitem" tabindex="0"><span aria-label="علم ألمانيا">🇩🇪</span> Deutsch</div>
 <div data-lang="PT" role="menuitem" tabindex="0"><span aria-label="علم البرتغال">🇵🇹</span> Português</div>
 <div data-lang="TR" role="menuitem" tabindex="0"><span aria-label="علم تركيا">🇹🇷</span> Türkçe</div>
+<div data-lang="ES" role="menuitem" tabindex="0"><span aria-label="علم إسبانيا">🇪🇸</span> Español</div>
+<div data-lang="JA" role="menuitem" tabindex="0"><span aria-label="علم اليابان">🇯🇵</span> 日本語</div>
+<div data-lang="KO" role="menuitem" tabindex="0"><span aria-label="علم كوريا">🇰🇷</span> 한국어</div>
+<div data-lang="HI" role="menuitem" tabindex="0"><span aria-label="علم الهند">🇮🇳</span> हिन्दी</div>
+<div data-lang="RU" role="menuitem" tabindex="0"><span aria-label="علم روسيا">🇷🇺</span> Русский</div>
 </div>
 </div>
 </nav>
@@ -1258,7 +1268,7 @@ function changeLanguage(lang) {
 currentLanguage = lang;
 localStorage.setItem("selectedLanguage", lang);
 let langBtn = document.getElementById("langBtn");
-let langNames = { AR: "🌐 AR", EN: "🌐 EN", FR: "🌐 FR", ZH: "🌐 中文", IT: "🌐 IT", DE: "🌐 DE", PT: "🌐 PT", TR: "🌐 TR" };
+let langNames = { AR: "🌐 AR", EN: "🌐 EN", FR: "🌐 FR", ZH: "🌐 中文", IT: "🌐 IT", DE: "🌐 DE", PT: "🌐 PT", TR: "🌐 TR", ES: "🌐 ES", JA: "🌐 日本語", KO: "🌐 한국어", HI: "🌐 हिन्दी", RU: "🌐 RU" };
 if (langBtn) langBtn.textContent = langNames[lang] || "🌐 AR";
 updateAllTexts();
 let langMenu = document.getElementById("langMenu");
