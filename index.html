@@ -2221,6 +2221,13 @@ if (!localStorage.getItem("selectedLanguage")) {
 }
 
 initLanguage();
+
+const currentPath = window.location.pathname;
+const canonicalLink = document.querySelector('link[rel="canonical"]');
+if (canonicalLink && currentPath !== '/') {
+  canonicalLink.href = 'https://tikvultix.com' + currentPath;
+}
+
 initNavbar();
 initAccordions();
 initModals();
