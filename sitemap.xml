@@ -1,108 +1,146 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <!-- الصفحة الرئيسية (8 لغات) -->
+  <!-- الصفحة الرئيسية -->
   <url>
     <loc>https://tikvultix.com/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-30</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
-  
+
   <!-- عن الموقع -->
   <url>
-    <loc>https://tikvultix.com/ar-about.html</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://tikvultix.com/ar-about</loc>
+    <lastmod>2026-05-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://tikvultix.com/en-about.html</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://tikvultix.com/en-about</loc>
+    <lastmod>2026-05-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
-  
+
   <!-- سياسة الخصوصية -->
   <url>
-    <loc>https://tikvultix.com/ar-privacy.html</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://tikvultix.com/ar-privacy</loc>
+    <lastmod>2026-05-30</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://tikvultix.com/en-privacy.html</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://tikvultix.com/en-privacy</loc>
+    <lastmod>2026-05-30</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
-  
+
   <!-- شروط الخدمة -->
   <url>
-    <loc>https://tikvultix.com/ar-terms.html</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://tikvultix.com/ar-terms</loc>
+    <lastmod>2026-05-30</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://tikvultix.com/en-terms.html</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://tikvultix.com/en-terms</loc>
+    <lastmod>2026-05-30</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
-  
-  <!-- دليل الاندرويد -->
+
+  <!-- دليل الأندرويد -->
   <url>
-    <loc>https://tikvultix.com/ar-android.html</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://tikvultix.com/ar-android</loc>
+    <lastmod>2026-05-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://tikvultix.com/en-android.html</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://tikvultix.com/en-android</loc>
+    <lastmod>2026-05-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
-  
-  <!-- دليل الايفون -->
+
+  <!-- دليل الآيفون -->
   <url>
-    <loc>https://tikvultix.com/ar-iphone.html</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://tikvultix.com/ar-iphone</loc>
+    <lastmod>2026-05-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://tikvultix.com/en-iphone.html</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://tikvultix.com/en-iphone</loc>
+    <lastmod>2026-05-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
-  
+
   <!-- تحميل MP3 -->
   <url>
-    <loc>https://tikvultix.com/ar-mp3.html</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://tikvultix.com/ar-mp3</loc>
+    <lastmod>2026-05-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://tikvultix.com/en-mp3.html</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://tikvultix.com/en-mp3</loc>
+    <lastmod>2026-05-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
-  
-  <!-- تحميل قصص تيك توك -->
+
+  <!-- تحميل القصص -->
   <url>
-    <loc>https://tikvultix.com/ar-story.html</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://tikvultix.com/ar-story</loc>
+    <lastmod>2026-05-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://tikvultix.com/en-story.html</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://tikvultix.com/en-story</loc>
+    <lastmod>2026-05-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+  </url>
+
+  <!-- صفحات البدائل -->
+  <url>
+    <loc>https://tikvultix.com/snaptik-alternative-ar</loc>
+    <lastmod>2026-05-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://tikvultix.com/snaptik-alternative-en</loc>
+    <lastmod>2026-05-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://tikvultix.com/ssstik-alternative-ar</loc>
+    <lastmod>2026-05-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://tikvultix.com/ssstik-alternative-en</loc>
+    <lastmod>2026-05-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://tikvultix.com/tiktok-downloader-ar</loc>
+    <lastmod>2026-05-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://tikvultix.com/tiktok-downloader-en</loc>
+    <lastmod>2026-05-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
   </url>
 </urlset>
