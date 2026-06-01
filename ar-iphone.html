@@ -60,6 +60,50 @@ body{
   margin:0 auto;padding:40px 20px;max-width:800px;
 }
 
+/* ===== شريط علوي أنيق ===== */
+.top-nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 30px;
+  padding: 6px 0;
+}
+.top-nav a {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: none;
+  color: #fff;
+  transition: all 0.3s ease;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+.top-nav a:hover {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  border-color: transparent;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.25);
+}
+.top-nav a span {
+  font-size: 14px;
+  line-height: 1;
+}
+.pro-nav a:nth-child(1) { background: linear-gradient(135deg, #667eea, #764ba2); }
+.pro-nav a:nth-child(2) { background: linear-gradient(135deg, #4facfe, #00f2fe); }
+.pro-nav a:nth-child(3) { background: linear-gradient(135deg, #f093fb, #f5576c); }
+.pro-nav a:nth-child(4) { background: linear-gradient(135deg, #43e97b, #38f9d7); }
+.pro-nav a:nth-child(5) { background: linear-gradient(135deg, #fa709a, #fee140); }
+.pro-nav a span {
+  font-size: 16px;
+  line-height: 1;
+}
+
 h1{background:linear-gradient(135deg,#f093fb,#f5576c);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-size:clamp(24px,4vw,36px);margin-bottom:10px;text-align:center;line-height:1.3}
 .subtitle{text-align:center;color:#8b85a8;font-size:15px;margin-bottom:35px}
 h2{color:#667eea;font-size:22px;margin:35px 0 15px;text-align:right;border-right:3px solid #667eea;padding-right:12px}
@@ -73,31 +117,26 @@ p{color:#b8c5d6;font-size:16px;line-height:2;text-align:right;margin:0 0 15px}
 .feat-title{color:#fff;font-size:14px;font-weight:700;margin-bottom:4px}
 .feat-desc{color:#8b85a8;font-size:12px;line-height:1.6}
 
-.devices{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin:20px 0}
-.device-badge{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:12px;text-align:center;font-size:13px;color:#b8c5d6;transition:border-color .3s}
-.device-badge:hover{border-color:#667eea}
-.device-badge strong{display:block;color:#fff;font-size:14px;margin-bottom:4px}
-
 .steps{display:flex;flex-direction:column;gap:12px;margin:20px 0}
 .step{display:flex;align-items:flex-start;gap:14px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:16px}
 .step-num{min-width:36px;height:36px;background:linear-gradient(135deg,#667eea,#764ba2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:15px;flex-shrink:0}
 .step-content h4{color:#fff;font-size:15px;font-weight:700;margin:0 0 4px}
 .step-content p{color:#8b85a8;font-size:13px;margin:0;line-height:1.6}
 
-.ios-cards{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:20px 0}
-.ios-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:18px}
-.ios-card h4{color:#f093fb;font-size:15px;font-weight:700;margin:0 0 10px}
-.ios-card p{font-size:13px;color:#b8c5d6;margin:0;line-height:1.7}
-.ios-card .tag{display:inline-block;background:rgba(102,126,234,.2);color:#667eea;font-size:11px;padding:2px 8px;border-radius:6px;margin-bottom:8px}
+.quality-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:20px 0}
+.quality-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:18px;text-align:center;transition:border-color .3s,background .3s}
+.quality-card:hover{border-color:#667eea;background:rgba(102,126,234,.08)}
+.quality-card.best{border-color:rgba(102,126,234,.4);background:rgba(102,126,234,.06)}
+.quality-badge{display:inline-block;font-size:20px;font-weight:800;color:#fff;margin-bottom:6px}
+.quality-label{color:#667eea;font-size:12px;font-weight:700;margin-bottom:6px}
+.quality-desc{color:#8b85a8;font-size:12px;line-height:1.5}
+.best-tag{display:inline-block;background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;font-size:10px;padding:2px 8px;border-radius:6px;margin-bottom:6px}
 
-.tip{background:rgba(96,165,250,.08);border:1px solid rgba(96,165,250,.2);border-radius:12px;padding:16px 18px;margin:20px 0;color:#93c5fd;font-size:14px;line-height:1.8}
-.warn{background:rgba(249,168,212,.08);border:1px solid rgba(249,168,212,.2);border-radius:12px;padding:16px 18px;margin:20px 0;color:#f9a8d4;font-size:14px;line-height:1.8}
-.success{background:rgba(74,222,128,.07);border:1px solid rgba(74,222,128,.2);border-radius:12px;padding:16px 18px;margin:20px 0;color:#4ade80;font-size:14px;line-height:1.8}
-
-.faq{border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:18px;margin:12px 0;text-align:right;transition:border-color .3s}
-.faq:hover{border-color:rgba(102,126,234,.5)}
-.faq h3{color:#f093fb;font-size:16px;margin:0 0 8px}
-.faq p{font-size:14px;margin:0;color:#b8c5d6}
+.uses-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin:20px 0}
+.use-card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:18px}
+.use-icon{font-size:24px;margin-bottom:8px}
+.use-title{color:#fff;font-size:14px;font-weight:700;margin-bottom:6px}
+.use-desc{color:#8b85a8;font-size:13px;line-height:1.6}
 
 .compare-table{width:100%;border-collapse:collapse;margin:20px 0;font-size:14px}
 .compare-table th{background:rgba(102,126,234,.15);color:#667eea;padding:12px;text-align:right;border:1px solid rgba(255,255,255,.08)}
@@ -106,11 +145,19 @@ p{color:#b8c5d6;font-size:16px;line-height:2;text-align:right;margin:0 0 15px}
 .yes{color:#4ade80;font-weight:700}
 .no{color:#f87171;font-weight:700}
 
-.extras-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin:20px 0}
-.extra-card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:18px}
-.extra-card .extra-icon{font-size:28px;margin-bottom:10px}
-.extra-card h4{color:#fff;font-size:15px;font-weight:700;margin:0 0 8px}
-.extra-card p{color:#8b85a8;font-size:13px;margin:0;line-height:1.7}
+.tip{background:rgba(96,165,250,.08);border:1px solid rgba(96,165,250,.2);border-radius:12px;padding:16px 18px;margin:20px 0;color:#93c5fd;font-size:14px;line-height:1.8}
+.warn{background:rgba(249,168,212,.08);border:1px solid rgba(249,168,212,.2);border-radius:12px;padding:16px 18px;margin:20px 0;color:#f9a8d4;font-size:14px;line-height:1.8}
+.success{background:rgba(74,222,128,.07);border:1px solid rgba(74,222,128,.2);border-radius:12px;padding:16px 18px;margin:20px 0;color:#4ade80;font-size:14px;line-height:1.8}
+
+.device-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:20px 0}
+.device-card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:18px}
+.device-card h4{color:#fff;font-size:15px;font-weight:700;margin:0 0 10px;display:flex;align-items:center;gap:8px}
+.device-card ul{margin:0;padding-right:18px;color:#8b85a8;font-size:13px;line-height:2}
+
+.faq{border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:18px;margin:12px 0;text-align:right;transition:border-color .3s}
+.faq:hover{border-color:rgba(102,126,234,.5)}
+.faq h3{color:#f093fb;font-size:16px;margin:0 0 8px}
+.faq p{font-size:14px;margin:0;color:#b8c5d6}
 
 .btn-main{display:block;margin:30px auto;width:fit-content;background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;padding:15px 35px;border-radius:14px;text-decoration:none;font-weight:700;font-size:17px;text-align:center;box-shadow:0 8px 25px rgba(102,126,234,.35);transition:transform .2s,box-shadow .2s}
 .btn-main:hover{transform:translateY(-2px);box-shadow:0 12px 35px rgba(102,126,234,.5)}
@@ -118,12 +165,21 @@ p{color:#b8c5d6;font-size:16px;line-height:2;text-align:right;margin:0 0 15px}
 hr{border-color:rgba(255,255,255,.1);margin:50px 0}
 
 @media(max-width:500px){
-  .ios-cards{grid-template-columns:1fr}
-  .devices{grid-template-columns:1fr 1fr}
-  .extras-grid{grid-template-columns:1fr}
+  .quality-grid{grid-template-columns:1fr}
+  .device-grid{grid-template-columns:1fr}
+  .features{grid-template-columns:1fr 1fr}
   h1{font-size:22px}
 }
 </style>
+
+<!-- شريط تنقل احترافي -->
+<nav class="top-nav">
+  <a href="/"><span>🏠</span> الرئيسية</a>
+  <a href="/ar-android.html"><span>🤖</span> أندرويد</a>
+  <a href="/ar-iphone.html"><span>📱</span> آيفون</a>
+  <a href="/ar-mp3.html"><span>🎵</span> MP3</a>
+  <a href="/ar-story.html"><span>📸</span> الستوري</a>
+</nav>
 </head>
 <body>
 
