@@ -57,32 +57,39 @@ body{
   margin:0 auto;padding:40px 20px;max-width:800px;
 }
 
-/* ===== شريط تنقل صغير متلاصق ===== */
-.pro-nav {
+/* ===== شريط علوي أنيق ===== */
+.top-nav {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 0;
-  padding: 0;
-  margin-bottom: 30px;
-  border-radius: 12px;
-  overflow: hidden;
-}
-.pro-nav a {
-  display: flex;
   align-items: center;
-  gap: 5px;
-  padding: 8px 16px;
-  font-size: 13px;
+  gap: 6px;
+  margin-bottom: 30px;
+  padding: 6px 0;
+}
+.top-nav a {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 12px;
   font-weight: 600;
   text-decoration: none;
   color: #fff;
   transition: all 0.3s ease;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
-.pro-nav a:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-  z-index: 1;
+.top-nav a:hover {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  border-color: transparent;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.25);
+}
+.top-nav a span {
+  font-size: 14px;
+  line-height: 1;
 }
 .pro-nav a:nth-child(1) { background: linear-gradient(135deg, #667eea, #764ba2); }
 .pro-nav a:nth-child(2) { background: linear-gradient(135deg, #4facfe, #00f2fe); }
