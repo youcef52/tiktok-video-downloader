@@ -2232,6 +2232,10 @@ document.addEventListener('click', function(e) {
     e.preventDefault();
     let page = link.getAttribute('data-page');
     let prefix = currentLanguage.toLowerCase();
+    let supported = ["ar", "en"];
+    if (!supported.includes(prefix)) {
+      prefix = "en";
+    }
     window.location.href = '/' + prefix + '/' + page + '.html';
   }
 });
