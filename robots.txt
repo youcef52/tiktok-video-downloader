@@ -1,4 +1,3 @@
 User-agent: *
 Allow: /
-Disallow: /*.html$
 Sitemap: https://tikvultix.com/sitemap.xml
