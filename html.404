@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>الصفحة غير موجودة - TikVultix</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family:'Cairo',system-ui,sans-serif;
+  background:radial-gradient(circle at 20% 50%,rgba(120,119,198,.15) 0,transparent 50%),
+    radial-gradient(circle at 80% 60%,rgba(249,168,212,.08) 0,transparent 50%),
+    radial-gradient(circle at 40% 20%,rgba(96,165,250,.1) 0,transparent 50%),
+    linear-gradient(135deg,#0f0c29 0,#0a0818 100%);
+  color:#fff;min-height:100vh;display:flex;justify-content:center;
+  align-items:center;text-align:center;padding:20px;
+}
+h1{font-size:80px;background:linear-gradient(135deg,#667eea,#764ba2);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:20px}
+p{color:#b8c5d6;font-size:18px;margin-bottom:30px}
+a{color:#667eea;text-decoration:none;font-size:16px;font-weight:600;
+  padding:12px 25px;border:1px solid #667eea;border-radius:12px}
+a:hover{background:#667eea;color:#fff}
+</style>
+</head>
+<body>
+<div>
+<h1>404</h1>
+<p>الصفحة غير موجودة</p>
+<a href="/">⬅ العودة للرئيسية</a>
+</div>
+</body>
+</html>
