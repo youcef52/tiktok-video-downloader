@@ -623,11 +623,17 @@ async function downloadStory() {
     const data = await response.json();
     
     if (data.code === 0 && data.data) {
-      const videoUrl = data.data.play || data.data.hdplay || data.data.wmplay;
+      let downloadUrl = null;
       
-      if (!videoUrl) throw new Error("No video URL found");
+      if (data.data.images && data.data.images.length > 0) {
+        downloadUrl = data.data.images[0];
+      } else {
+        downloadUrl = data.data.hdplay || data.data.play || data.data.wmplay;
+      }
       
-      const videoResponse = await fetch(videoUrl);
+      if (!downloadUrl) throw new Error("No URL found");
+      
+      const videoResponse = await fetch(downloadUrl);
       const blob = await videoResponse.blob();
       const blobUrl = URL.createObjectURL(blob);
       const link = document.createElement("a");
@@ -642,7 +648,7 @@ async function downloadStory() {
       showAlert("alert-success");
       setTimeout(() => { resultDiv.style.display = "none"; }, 3000);
     } else {
-      throw new Error(data.msg || "Failed to fetch story");
+      throw new Error(data.msg || "Failed");
     }
   } catch (error) {
     resultDiv.innerHTML = '<div class="error-result"><div class="result-header"><i class="fa-solid fa-circle-xmark"></i><h3>' + t["error-down"] + '</h3></div><p>' + error.message + '</p></div>';
