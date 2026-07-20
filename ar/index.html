@@ -542,7 +542,7 @@ try {
 let resultDiv = document.getElementById("result");
 resultDiv.innerHTML = '<div class="loading-state"><div class="spinner" aria-label="جاري التحميل"></div><p>' + t["loading-opt"] + '</p></div>';
 resultDiv.style.display = "block";
-let response = await fetch(CONFIG.VIDEO_API + encodeURIComponent(url));
+let response = await fetch(CONFIG.API_URL + encodeURIComponent(url));
 let data = await response.json();
 if (data.code === 0 && data.data) {
 currentVideoData = data.data;
@@ -609,67 +609,46 @@ resultDiv.innerHTML = '<div class="error-result"><div class="result-header"><i c
 }
 
 async function downloadStory() {
-    const url = document.getElementById("videoUrl").value.trim();
-
-    if (!url) {
-        showAlert("alert-enter-url");
-        return;
+  const url = document.getElementById("videoUrl").value.trim();
+  
+  if (!url) { showAlert("alert-enter-url"); return; }
+  if (!url.includes("tiktok.com")) { showAlert("alert-invalid-url"); return; }
+  
+  const resultDiv = document.getElementById("result");
+  resultDiv.innerHTML = '<div class="loading-state"><div class="spinner"></div><p>' + t["story-loading"] + '</p></div>';
+  resultDiv.style.display = "block";
+  
+  try {
+    const response = await fetch(CONFIG.API_URL + encodeURIComponent(url));
+    const data = await response.json();
+    
+    if (data.code === 0 && data.data) {
+      const videoUrl = data.data.play || data.data.hdplay || data.data.wmplay;
+      
+      if (!videoUrl) throw new Error("No video URL found");
+      
+      const videoResponse = await fetch(videoUrl);
+      const blob = await videoResponse.blob();
+      const blobUrl = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = blobUrl;
+      link.download = "tiktok_story_" + Date.now() + ".mp4";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      setTimeout(() => URL.revokeObjectURL(blobUrl), 100);
+      
+      resultDiv.innerHTML = '<div class="success-result"><div class="result-header"><i class="fa-solid fa-circle-check"></i><h3>' + t["alert-success"] + '</h3></div></div>';
+      showAlert("alert-success");
+      setTimeout(() => { resultDiv.style.display = "none"; }, 3000);
+    } else {
+      throw new Error(data.msg || "Failed to fetch story");
     }
-
-    if (!url.includes("tiktok.com")) {
-        showAlert("alert-invalid-url");
-        return;
-    }
-
-    const resultDiv = document.getElementById("result");
-    resultDiv.innerHTML = '<div class="loading-state"><div class="spinner"></div><p>' + t["story-loading"] + '</p></div>';
-    resultDiv.style.display = "block";
-
-    try {
-        const response = await fetch(CONFIG.STORY_API + encodeURIComponent(url), {
-            method: "GET",
-            headers: {
-                "x-rapidapi-key": "9566976240msh6325a85f8c97e41p122233jsn9c5cda8cfe9a",
-                "x-rapidapi-host": "tiktok-download-video-no-watermark.p.rapidapi.com"
-            }
-        });
-
-        const data = await response.json();
-
-        if (data.code === 0 && data.data) {
-            let downloadUrl = data.data.hdplay || data.data.play || data.data.wmplay;
-
-            if (data.data.images && data.data.images.length > 0) {
-                downloadUrl = data.data.images[0];
-            }
-
-            if (!downloadUrl) {
-                throw new Error("No URL found");
-            }
-
-            const videoResponse = await fetch(downloadUrl);
-            const blob = await videoResponse.blob();
-            const blobUrl = URL.createObjectURL(blob);
-
-            const link = document.createElement("a");
-            link.href = blobUrl;
-            link.download = "tiktok_story_" + Date.now() + ".mp4";
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-
-            URL.revokeObjectURL(blobUrl);
-
-            resultDiv.innerHTML = '<div class="success-result"><div class="result-header"><i class="fa-solid fa-circle-check"></i><h3>' + t["alert-success"] + '</h3></div></div>';
-
-        } else {
-            throw new Error(data.msg || "Failed");
-        }
-
-    } catch (error) {
-        resultDiv.innerHTML = '<div class="error-result"><div class="result-header"><i class="fa-solid fa-circle-xmark"></i><h3>' + t["error-down"] + '</h3></div><p>' + error.message + '</p></div>';
-    }
+  } catch (error) {
+    resultDiv.innerHTML = '<div class="error-result"><div class="result-header"><i class="fa-solid fa-circle-xmark"></i><h3>' + t["error-down"] + '</h3></div><p>' + error.message + '</p></div>';
+  }
 }
+
 // ============================================
 // تشغيل الأكوارديون (FAQ)
 // ============================================
@@ -799,3 +778,4 @@ if (qualityOptions) qualityOptions.style.display = "none";
 </script>
 </body>
                                                                                                                                                    </html>
+
