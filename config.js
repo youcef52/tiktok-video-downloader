@@ -1,4 +1,4 @@
 const CONFIG = {
     VIDEO_API: "https://www.tikwm.com/api/?url=",
-    STORY_API: "https://tiktok-api15.p.rapidapi.com/index/Tiktok/story?unique_id="
+    STORY_API: "https://tiktok-download-video-no-watermark.p.rapidapi.com/tiktok/info?url="
 };
