@@ -619,45 +619,49 @@ async function downloadStory() {
   resultDiv.style.display = "block";
   
   try {
-    const response = await fetch(CONFIG.API_URL + encodeURIComponent(url));
-    const data = await response.json();
-    
-    if (data.code === 0 && data.data) {
-      // للقصص نستخدم images أو video
-      let downloadUrl = null;
-      
-      // إذا كان محتوى صور (photo/story)
-      if (data.data.images && data.data.images.length > 0) {
-        downloadUrl = data.data.images[0];
-      } else {
-        // فيديو عادي
-        downloadUrl = data.data.hdplay || data.data.play || data.data.wmplay;
-      }
-      
-      if (!downloadUrl) throw new Error("No URL found");
-      
-      const videoResponse = await fetch(downloadUrl);
-      const blob = await videoResponse.blob();
-      const blobUrl = URL.createObjectURL(blob);
-      const link = document.createElement("a");
-      link.href = blobUrl;
-      link.download = "tiktok_story_" + Date.now() + ".mp4";
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      setTimeout(() => URL.revokeObjectURL(blobUrl), 100);
-      
-      resultDiv.innerHTML = '<div class="success-result"><div class="result-header"><i class="fa-solid fa-circle-check"></i><h3>' + t["alert-success"] + '</h3></div></div>';
-      showAlert("alert-success");
-      setTimeout(() => { resultDiv.style.display = "none"; }, 3000);
-    } else {
-      throw new Error(data.msg || "Failed");
-    }
-  } catch (error) {
-    resultDiv.innerHTML = '<div class="error-result"><div class="result-header"><i class="fa-solid fa-circle-xmark"></i><h3>' + t["error-down"] + '</h3></div><p>' + error.message + '</p></div>';
-  }
-}
+    const response = await fetch(CONFIG.STORY_API + encodeURIComponent(url), {
+        method: "GET",
+        headers: {
+            "x-rapidapi-key": "9566976240msh6325a85f8c97e41p122233jsn9c5cda8cfe9a",
+            "x-rapidapi-host": "tiktok-download-video-no-watermark.p.rapidapi.com"
+        }
+    });
 
+    const data = await response.json();
+
+    if (data.code === 0 && data.data) {
+        let downloadUrl = null;
+
+        if (data.data.images && data.data.images.length > 0) {
+            downloadUrl = data.data.images[0];
+        } else {
+            downloadUrl = data.data.hdplay || data.data.play || data.data.wmplay;
+        }
+
+        if (!downloadUrl) throw new Error("No URL found");
+
+        const videoResponse = await fetch(downloadUrl);
+        const blob = await videoResponse.blob();
+        const blobUrl = URL.createObjectURL(blob);
+
+        const link = document.createElement("a");
+        link.href = blobUrl;
+        link.download = "tiktok_story_" + Date.now() + ".mp4";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+
+        setTimeout(() => URL.revokeObjectURL(blobUrl), 100);
+
+        resultDiv.innerHTML = '<div class="success-result"><div class="result-header"><i class="fa-solid fa-circle-check"></i><h3>' + t["alert-success"] + '</h3></div></div>';
+        showAlert("alert-success");
+        setTimeout(() => { resultDiv.style.display = "none"; }, 3000);
+    } else {
+        throw new Error(data.msg || "Failed");
+    }
+} catch (error) {
+    resultDiv.innerHTML = '<div class="error-result"><div class="result-header"><i class="fa-solid fa-circle-xmark"></i><h3>' + t["error-down"] + '</h3></div><p>' + error.message + '</p></div>';
+}
 // ============================================
 // تشغيل الأكوارديون (FAQ)
 // ============================================
