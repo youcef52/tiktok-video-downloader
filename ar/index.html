@@ -610,7 +610,6 @@ resultDiv.innerHTML = '<div class="error-result"><div class="result-header"><i c
 
 async function downloadStory() {
   const url = document.getElementById("videoUrl").value.trim();
-  
   if (!url) { showAlert("alert-enter-url"); return; }
   if (!url.includes("tiktok.com")) { showAlert("alert-invalid-url"); return; }
   
@@ -623,17 +622,10 @@ async function downloadStory() {
     const data = await response.json();
     
     if (data.code === 0 && data.data) {
-      let downloadUrl = null;
+      const videoUrl = data.data.play || data.data.hdplay || data.data.wmplay;
+      if (!videoUrl) throw new Error("No video URL found");
       
-      if (data.data.images && data.data.images.length > 0) {
-        downloadUrl = data.data.images[0];
-      } else {
-        downloadUrl = data.data.hdplay || data.data.play || data.data.wmplay;
-      }
-      
-      if (!downloadUrl) throw new Error("No URL found");
-      
-      const videoResponse = await fetch(downloadUrl);
+      const videoResponse = await fetch(videoUrl);
       const blob = await videoResponse.blob();
       const blobUrl = URL.createObjectURL(blob);
       const link = document.createElement("a");
