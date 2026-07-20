@@ -610,6 +610,7 @@ resultDiv.innerHTML = '<div class="error-result"><div class="result-header"><i c
 
 async function downloadStory() {
   const url = document.getElementById("videoUrl").value.trim();
+  
   if (!url) { showAlert("alert-enter-url"); return; }
   if (!url.includes("tiktok.com")) { showAlert("alert-invalid-url"); return; }
   
@@ -618,16 +619,18 @@ async function downloadStory() {
   resultDiv.style.display = "block";
   
   try {
-    // استخدم TikWM للستوري
-    const response = await fetch(CONFIG.VIDEO_API + encodeURIComponent(url));
+    const response = await fetch(CONFIG.API_URL + encodeURIComponent(url));
     const data = await response.json();
     
     if (data.code === 0 && data.data) {
+      // للقصص نستخدم images أو video
       let downloadUrl = null;
       
+      // إذا كان محتوى صور (photo/story)
       if (data.data.images && data.data.images.length > 0) {
         downloadUrl = data.data.images[0];
       } else {
+        // فيديو عادي
         downloadUrl = data.data.hdplay || data.data.play || data.data.wmplay;
       }
       
@@ -653,7 +656,7 @@ async function downloadStory() {
   } catch (error) {
     resultDiv.innerHTML = '<div class="error-result"><div class="result-header"><i class="fa-solid fa-circle-xmark"></i><h3>' + t["error-down"] + '</h3></div><p>' + error.message + '</p></div>';
   }
-  }
+}
 
 // ============================================
 // تشغيل الأكوارديون (FAQ)
