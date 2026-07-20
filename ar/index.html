@@ -542,7 +542,7 @@ try {
 let resultDiv = document.getElementById("result");
 resultDiv.innerHTML = '<div class="loading-state"><div class="spinner" aria-label="جاري التحميل"></div><p>' + t["loading-opt"] + '</p></div>';
 resultDiv.style.display = "block";
-let response = await fetch(CONFIG.API_URL + encodeURIComponent(url));
+let response = await fetch(CONFIG.VIDEO_API + encodeURIComponent(url));
 let data = await response.json();
 if (data.code === 0 && data.data) {
 currentVideoData = data.data;
