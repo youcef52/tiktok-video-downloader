@@ -611,39 +611,45 @@ resultDiv.innerHTML = '<div class="error-result"><div class="result-header"><i c
 async function downloadStory() {
   const url = document.getElementById("videoUrl").value.trim();
   if (!url) { showAlert("alert-enter-url"); return; }
-  if (!url.includes("tiktok.com")) { showAlert("alert-invalid-url"); return; }
+  
+  const username = url.split('@')[1]?.split('/')[0];
+  if (!username) { showAlert("alert-invalid-url"); return; }
   
   const resultDiv = document.getElementById("result");
-  resultDiv.innerHTML = '<div class="loading-state"><div class="spinner"></div><p>' + t["story-loading"] + '</p></div>';
+  resultDiv.innerHTML = '<div class="loading-state"><div class="spinner"></div><p>جاري تحميل القصة...</p></div>';
   resultDiv.style.display = "block";
   
   try {
-    const response = await fetch(CONFIG.API_URL + encodeURIComponent(url));
+    const response = await fetch(CONFIG.API_URL + username, {
+      headers: {
+        'x-rapidapi-host': 'tiktok-api15.p.rapidapi.com',
+        'x-rapidapi-key': '9566976240msh6325a85f8c97e41p122233jsn9c5cda8cfe9a'
+      }
+    });
     const data = await response.json();
     
-    if (data.code === 0 && data.data) {
-      const videoUrl = data.data.play || data.data.hdplay || data.data.wmplay;
-      if (!videoUrl) throw new Error("No video URL found");
+    if (data.code === 0 && data.data?.videos?.length > 0) {
+      const story = data.data.videos[data.data.videos.length - 1];
+      let downloadUrl = story.images?.[0] || story.play;
       
-      const videoResponse = await fetch(videoUrl);
+      const videoResponse = await fetch(downloadUrl);
       const blob = await videoResponse.blob();
       const blobUrl = URL.createObjectURL(blob);
       const link = document.createElement("a");
       link.href = blobUrl;
-      link.download = "tiktok_story_" + Date.now() + ".mp4";
+      link.download = "tiktok_story_" + Date.now() + (story.images ? ".jpg" : ".mp4");
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
       setTimeout(() => URL.revokeObjectURL(blobUrl), 100);
       
-      resultDiv.innerHTML = '<div class="success-result"><div class="result-header"><i class="fa-solid fa-circle-check"></i><h3>' + t["alert-success"] + '</h3></div></div>';
+      resultDiv.innerHTML = '<div class="success-result">تم تحميل القصة!</div>';
       showAlert("alert-success");
-      setTimeout(() => { resultDiv.style.display = "none"; }, 3000);
     } else {
-      throw new Error(data.msg || "Failed");
+      throw new Error("No story found");
     }
   } catch (error) {
-    resultDiv.innerHTML = '<div class="error-result"><div class="result-header"><i class="fa-solid fa-circle-xmark"></i><h3>' + t["error-down"] + '</h3></div><p>' + error.message + '</p></div>';
+    resultDiv.innerHTML = '<div class="error-result">خطأ في تحميل القصة</div>';
   }
 }
 
